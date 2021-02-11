@@ -2,6 +2,9 @@ rm(list=ls())
 
 require(phytools)
 require(RColorBrewer)
+require(png)
+
+
 
 ### Read in average morphology data from .csv ###
 morpho<-read.csv("Tyrannus_data.csv", row.names=2)
@@ -85,13 +88,6 @@ body_scores_trim_df$otu<-factor(sapply(strsplit(rownames(body_scores_trim_df),"[
 body_scores_split_trim<-split(body_scores_trim_df, body_scores_trim_df$otu)
 body_scores_trim_avg<-t(sapply(body_scores_split_trim,function(x) c(mean(na.omit(x[,1])),mean(na.omit(x[,2])))))
 
-#I don't think we do the phylANOVA on the trimmed dataset, and some extra code will be needed to match them to the right OTU bc there are 6 fewer OTUs in body_scores_trim_avg
-# View(bill_scores_avg)
-# body_scores_trim_avg<-as.data.frame(body_scores_trim_avg)
-# morpho$Body_trim_PC1<-body_scores_trim_avg$V1
-# morpho$BillPC2<-bill_scores_avg$V2
-# View(morpho)
-
 write.csv(morpho, file="Tyrannus morphology + PCA avg.csv")
 
 ### Bring in cv summary dataset 
@@ -168,19 +164,27 @@ coldf$pch<-pch_vec
 
 mig<-read.csv("Tyrannus_subspecies_MigrationStrategies.csv", row.names = 1)
 coldf2<-merge(coldf, mig, by=0)
-pch2<-c(21,22,23)[as.numeric(coldf2$Strategy)]
+rownames(coldf)<-coldf$Row.names
+coldf$Row.names<-NULL
 
-coldf2$pch2<-c(21,22,23)[as.numeric(coldf2$Strategy)]
+coldf$Strategy<-factor(coldf$Strategy,levels=c("sedentary","partial","migratory")) #Convert to a factor
+
+### Use outline to indicate migratory strategy, no outline = non migratory, dashed= partial, complete = migrant ###
+coldf$outlinelwd<-c(0.5,1.5,2.5)[as.numeric(coldf$Strategy)]
+coldf$outlinecolor<-c("gray70","gray40","black")[as.numeric(coldf$Strategy)]
+
+### Fix pch 3 and 4 so they plot correctly on phylogeny ###
+coldf$outlinecolor[coldf$pch %in% c(3,4)]<-coldf$col[coldf$pch %in% c(3,4)]
+coldf$col[coldf$pch %in% c(3,4)]<-NA
 
 png(file="Tyrannus_phylogenetic_PCA.png",width=6.5,height=5.5,units="in",res=500)
 
 layout(matrix(c(1,1,1,2,3,4),nrow=3),widths=c(2.25,1))
 layout.show(n=4)
 
-par(mar=c(2,0,0,14))
+par(mar=c(2,0.5,0,14))
 
 plot(phy,cex=0.8,show.tip.label=F)
-phy$edge[,2][phy$edge[,2]<=Ntip(phy)]
 
 par(xpd=NA)
 
@@ -190,51 +194,103 @@ format_tl<-gsub("Tyrannus","T.",format_tl)
 
 text(x=rep(5.2,Ntip(phy)),y=1:Ntip(phy),label=format_tl,adj=c(0,0.5),font=3)
 
-#text(x=rep(4.8,Ntip(phy)),y=1:Ntip(phy),label=morpho[phy$tip.label,]$Strategy,cex=1,pch=22)
-
-#points(x=rep(4.8,Ntip(phy)),y=1:Ntip(phy),bg=coldf2[phy$tip.label,]$col,levels=c("sedentary","partial","migratory"),cex=1.75,pch=c(21,22,23)[as.numeric(coldf2[phy$tip.label,]$Strategy)])
-
-points(x=rep(4.8,Ntip(phy)),y=1:Ntip(phy),bg=c("white","gray","black")[factor(morpho[phy$tip.label,]$Strategy,levels=c("sedentary","partial","migratory"))],cex=1.75,pch=22)
-points(x=rep(5.05,Ntip(phy)),y=1:Ntip(phy), pch=c(21,22,23)[as.numeric(coldf2[phy$tip.label,]$Strategy)],bg=coldf2[phy$tip.label,]$col,cex=1.75)
+points(x=rep(4.95,Ntip(phy)),y=1:Ntip(phy),cex=2,pch=coldf[phy$tip.label,]$pch,bg=coldf[phy$tip.label,]$col, col=coldf[phy$tip.label,]$outlinecolor,lwd=coldf[phy$tip.label,]$outlinelwd,lty=3)
 
 ### Time axis ###
 axisPhylo(1)
 text(x=5.1,y=-0.95,label="mya",cex=1,pch=22)
 
+### Add legend ###
+table(coldf$Strategy)#Counts for each migratory strategy, used in legend
+points(x=rep(0.25,3),y=c(1,2,3),pch=21,bg="gray85",lwd=c(0.5,1.5,2.5),col=c("gray70","gray40","black"),cex=2)
+text(x=rep(0.5,3),y=c(1,2,3),label=c("sedentary (15)","partial migrant (5)","migratory (8)"),adj=c(0,0.5))
+
+### Add figure label ###
+text(x=par("usr")[1]+diff(c(par("usr")[1],par("usr")[2]))*0.05,y=par("usr")[4]-diff(c(par("usr")[3],par("usr")[4]))*0.05,label=LETTERS[1],font=2,cex=1.5)
+
+### PCA Panel plots ###
 par(mar=c(2.75,2.75,1.5,1.5))
 
-plot(bill_scores_df[,1],bill_scores_df[,2],bg=paste0(coldf[bill_scores_df$otu,]$col,"90"),col= paste0(coldf[bill_scores_df$otu,]$col,90),pch= coldf[bill_scores_df$otu,]$pch,axes=F,xlab="",ylab="")
-points(bill_scores_avg[,1], bill_scores_avg[,2],pch=coldf$pch,col="black",bg=paste0(coldf$col,95),cex=2)
+plot(bill_scores_df[,1],bill_scores_df[,2],bg=gsub("NA60",NA,paste0(coldf[bill_scores_df$otu,]$col,"60")),col= gsub("NA60","#663399",paste0(coldf[bill_scores_df$otu,]$col,"60")),pch= coldf[bill_scores_df$otu,]$pch,axes=F,xlab="",ylab="")
+
+#points(bill_scores_avg[,1], bill_scores_avg[,2],pch=21,cex=2)
+
+points(bill_scores_avg[,1], bill_scores_avg[,2],pch=coldf[rownames(bill_scores_avg),]$pch,bg= coldf[rownames(bill_scores_avg),]$col,col=coldf[rownames(bill_scores_avg),]$outlinecolor,cex=2,lwd=coldf$outlinelwd)
+
+img1<-readPNG("T_savana.png")
+img2<-readPNG("T_caudifasciatus.png")
+img3<-readPNG("T_crassirostris.png")
+img4<-readPNG("T_cubensis_BOW.png")
+
+#specify the position of the image through bottom-left and top-right coords
+rasterImage(img1,-7,-3.25,-2,-1.5)
+rasterImage(img2, -3.5,1.75,0.5,3)
+rasterImage(img3, 9,-3.5,13,-2)
+rasterImage(img4, 10,1,15,2.5)
 box()
 title(main="Bill PPCA")
 
-axis(1,mgp=c(0,0.25,0),tck=-0.025,cex.axis=0.75)
-axis(2,mgp=c(0,0.25,0),tck=-0.025,cex.axis=0.75)
+axis(1,mgp=c(0,0,0),tck=-0.025,cex.axis=0.45)
+axis(2,mgp=c(0,0.2,0),tck=-0.025,cex.axis=0.45)
+
+mtext(at=-2, text=paste0("short, narrow, shallow"), side=1, line=0.5, cex=0.45)
+mtext(at=11, text=paste0("long, wide, deep"), side=1, line=0.5, cex=0.45)
+mtext(at=1.75, text=paste0("long, narrow, shallow"), side=2, line=0.7, cex=0.45)
+mtext(at=-2.75, text=paste0("short, wide, deep"), side=2, line=0.7, cex=0.45)
+
 mtext(text=paste0("PC1 (",round(100*(diag(bill_pca$Eval)[1]/sum(diag(bill_pca$Eval))),2),"%)"),side=1,line=1.3,cex=0.55)
 mtext(text=paste0("PC2 (",round(100*(diag(bill_pca$Eval)[2]/sum(diag(bill_pca$Eval))),2),"%)"),side=2,line=1.3,cex=0.55)
 
-plot(body_scores_df[,1],body_scores_df[,2],bg=paste0(coldf[body_scores_df$otu,]$col,"90"),col= paste0(coldf[body_scores_df$otu,]$col,90),pch= coldf[body_scores_df$otu,]$pch,axes=F,xlab="",ylab="")
+text(x=par("usr")[1]+diff(c(par("usr")[1],par("usr")[2]))*0.075,y=par("usr")[4]-diff(c(par("usr")[3],par("usr")[4]))*0.1,label=LETTERS[2],font=2,cex=1.5)
+
+### Feather PPCA All data ###
+plot(body_scores_df[,1],body_scores_df[,2],bg=gsub("NA60",NA,paste0(coldf[body_scores_df$otu,]$col,"60")),col= gsub("NA60","#663399",paste0(coldf[body_scores_df$otu,]$col,"60")),pch= coldf[body_scores_df$otu,]$pch,axes=F,xlab="",ylab="")
+
+box()
 title(main="Feather PPCA")
 
-points(body_scores_avg[,1], body_scores_avg[,2],pch=coldf$pch,col="black",bg=paste0(coldf$col,95),cex=2)
-box()
+points(body_scores_avg[,1], body_scores_avg[,2],pch=coldf[rownames(body_scores_avg),]$pch,bg= coldf[rownames(body_scores_avg),]$col,col=coldf[rownames(body_scores_avg),]$outlinecolor,cex=2,lwd=coldf$outlinelwd)
+
 axis(1,mgp=c(0,0.25,0),tck=-0.025,cex.axis=0.75)
 axis(2,mgp=c(0,0.25,0),tck=-0.025,cex.axis=0.75)
 mtext(text=paste0("PC1 (",round(100*(diag(body_pca$Eval)[1]/sum(diag(body_pca$Eval))),2),"%)"),side=1,line=1.3,cex=0.55)
 mtext(text=paste0("PC2 (",round(100*(diag(body_pca$Eval)[2]/sum(diag(body_pca$Eval))),2),"%)"),side=2,line=1.3,cex=0.55)
 
+## Figure panel label ###
+text(x=par("usr")[1]+diff(c(par("usr")[1],par("usr")[2]))*0.075,y=par("usr")[4]-diff(c(par("usr")[3],par("usr")[4]))*0.1,label=LETTERS[3],font=2,cex=1.5)
+
+### add rectangle to indicate zoom for panel D ###
+rect(xleft= 24.5844,ybottom=-28.90985,xright= 60.3054,ytop= 16.40121,lty=3) ### see range body scores avg 2 below to set these properly
+
+### Feather PPCA Zoomed in ###
 body_scores_df2<-subset(body_scores_df, !(otu=="Tyrannus_forficatus"|otu=="Tyrannus_savana_circumdatus"|otu=="Tyrannus_savana_savana"|otu=="Tyrannus_savana_monachus_CA"|otu=="Tyrannus_savana_monachus_SA"|otu=="Tyrannus_savana_sanctaemartae"))
-                                          
-plot(body_scores_df2[,1],body_scores_df2[,2],bg=paste0(coldf[body_scores_df2$otu,]$col,"90"),col= paste0(coldf[body_scores_df2$otu,]$col,90),pch= coldf[body_scores_df2$otu,]$pch,axes=F,xlab="",ylab="", xlim=c(20,65), ylim=c(-30,20))
-title(main="Feather PPCA zoomed")
+
+plot(body_scores_df2[,1],body_scores_df2[,2],bg=gsub("NA60",NA,paste0(coldf[body_scores_df2$otu,]$col,"60")),col= gsub("NA60","#663399",paste0(coldf[body_scores_df2$otu,]$col,"60")),pch= coldf[body_scores_df2$otu,]$pch,axes=F,xlab="",ylab="")
+
+box()
+title(main="Feather PPCA zoomed in")
 
 body_scores_avg2<-body_scores_avg[-c(15,20,21,22,23,24),] 
+range(na.omit(body_scores_df2[,1])) #Use these values to draw box in Feather PPCA plot 2 for zooming in
+range(na.omit(body_scores_df2[,2])) #Use these values to draw box in Feather PPCA plot 2 for zooming in
 
-points(body_scores_avg2[,1], body_scores_avg2[,2],pch=coldf$pch,col="black",bg=paste0(coldf$col,95),cex=2)
-box()
-axis(1,mgp=c(0,0.25,0),tck=-0.025,cex.axis=0.75)
-axis(2,mgp=c(0,0.25,0),tck=-0.025,cex.axis=0.75)
+points(body_scores_avg2[,1], body_scores_avg2[,2],pch=coldf[rownames(body_scores_avg2),]$pch,bg= coldf[rownames(body_scores_avg2),]$col,col=coldf[rownames(body_scores_avg2),]$outlinecolor,cex=2,lwd=coldf[rownames(body_scores_avg2),]$outlinelwd)
+
+rasterImage(img2, 55,3,61.5,13)
+rasterImage(img3, 46.5,-30,53,-20)
+
+axis(1,mgp=c(0,0,0),tck=-0.025,cex.axis=0.45)
+axis(2,mgp=c(0,0.25,0),tck=-0.025,cex.axis=0.45)
+
+mtext(at=27.5, text=paste0("long feathers"), side=1, line=0.5, cex=0.45)
+mtext(at=57.5, text=paste0("short feathers"), side=1, line=0.5, cex=0.45)
+mtext(at=-25, text=paste0("long feathers"), side=2, line=0.7, cex=0.45)
+mtext(at=7.75, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)
+
 mtext(text=paste0("PC1 (",round(100*(diag(body_pca$Eval)[1]/sum(diag(body_pca$Eval))),2),"%)"),side=1,line=1.3,cex=0.55)
 mtext(text=paste0("PC2 (",round(100*(diag(body_pca$Eval)[2]/sum(diag(body_pca$Eval))),2),"%)"),side=2,line=1.3,cex=0.55)
+
+## Figure panel label ###
+text(x=par("usr")[1]+diff(c(par("usr")[1],par("usr")[2]))*0.075,y=par("usr")[4]-diff(c(par("usr")[3],par("usr")[4]))*0.1,label=LETTERS[4],font=2,cex=1.5)
 
 dev.off()
