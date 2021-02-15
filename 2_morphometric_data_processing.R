@@ -56,8 +56,8 @@ morpho_split<-split(morpho,morpho$tip.label)
 names(morpho_split)<-gsub(" ","_",names(morpho_split))
 names(morpho_split) 
 
-phy$tip.label[!phy$tip.label %in% names(morpho_split)]
-names(morpho_split)[! names(morpho_split) %in% phy$tip.label]
+phy$tip.label[!phy$tip.label %in% names(morpho_split)] #Check that this returns "character(0)"
+names(morpho_split)[! names(morpho_split) %in% phy$tip.label] #Check that this also returns "character(0)"
 
 ### Create summary output df for data frame
 morpho_trim<-lapply(morpho_split,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Average", "WC.Average", "Tail", "Tarsus.Average")])
@@ -98,7 +98,6 @@ migratory_data<-read.csv("Tyrannus_subspecies_MigrationStrategies.csv",row.names
 migratory_data[rownames(Tyrannus_OTU_averages),]
 Tyrannus_data<-merge(Tyrannus_OTU_averages, migratory_data, by=0)
 write.csv(Tyrannus_data, file="Tyrannus_data.csv")
-
 
 ### Write out .csv file with coefficient of variation for each OTU to be used in further analyses
 cv_summary<-otu_cv_df

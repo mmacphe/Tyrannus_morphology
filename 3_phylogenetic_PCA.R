@@ -4,7 +4,8 @@ require(phytools)
 require(RColorBrewer)
 require(png)
 
-
+### Set source directory to the folder this file came from within RStudio
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 ### Read in average morphology data from .csv ###
 morpho<-read.csv("Tyrannus_data.csv", row.names=2)
