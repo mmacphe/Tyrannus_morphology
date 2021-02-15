@@ -2,6 +2,9 @@ rm(list=ls())
 
 require(phytools)
 
+### Set source directory to the folder this file came from within RStudio
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
 ### Read in morphological data set
 Tyrannus_voucher_table <- read.csv("Tyrannus_voucher_table.csv")
 morpho<-Tyrannus_voucher_table
@@ -29,13 +32,18 @@ phy<-read.tree("Tyrannus_phylogeny.tre")
 
 ### Match morphometric data to names in phylogeny 
 morpho<-morpho[!morpho$Species=="",]
-morpho<-morpho[!is.na(morpho$Species),]
 
 morpho$subspecies[is.na(morpho$subspecies)]<-""
-morpho$subspecies<-trimws(morpho$subspecies)
+morpho$subspecies<-trimws(morpho$subspecies) #removes leading/trailing whitespace
+morpho$Species<-trimws(morpho$Species)
 
+morpho$Species<-gsub(" ","_",paste(morpho$Species))
 morpho$tip.label<-gsub(" ","_",paste(morpho$Species,morpho$subspecies,sep="_"))
 morpho$tip.label[morpho$subspecies==""]<-morpho$Species[morpho$subspecies==""]
+
+names(table(morpho$tip.label))
+
+phy$tip.label[!phy$tip.label %in% morpho$tip.label] #Check that returns "character(0)"
 
 ### Save morpho as a .csv ###
 write.csv(morpho, file="Tyrannus morphology data.csv")

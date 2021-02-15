@@ -2,6 +2,9 @@ rm(list=ls())
 
 require("phytools")
 
+### Set source directory to the folder this file came from within RStudio
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
 ### Bring in base phylogeny ###
 tyrannus_base<-read.tree("MacPherson_Tyrannus_base.tre")
 
