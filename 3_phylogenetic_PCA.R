@@ -8,10 +8,10 @@ require(png)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 ### Read in average morphology data from .csv ###
-morpho<-read.csv("Tyrannus_data.csv", row.names=2)
+morpho<-read.csv('./Output Files/Tyrannus_data.csv', row.names=2)
 
 ### Read in phylogeny 
-phy<-read.tree("Tyrannus_phylogeny.tre")
+phy<-read.tree('./Output Files/Tyrannus_phylogeny.tre')
 
 ### Check that tree$tip.label is the same as morpho
 phy$tip.label[!phy$tip.label %in% rownames(morpho)]
@@ -21,7 +21,7 @@ bill_pca<-phyl.pca(phy,morpho[,2:4],method="lambda")
 bill_pca
 
 ### Bring in morphology data set for all individuals to add points onto figure
-morpho_whole<-read.csv("Tyrannus morphology data.csv", row.names = 1)
+morpho_whole<-read.csv('./Output Files/Tyrannus morphology data.csv', row.names = 1)
 
 ### Match tip.labels with phylogeny tip.labels ###
 morpho_whole$tip.label
@@ -89,10 +89,11 @@ body_scores_trim_df$otu<-factor(sapply(strsplit(rownames(body_scores_trim_df),"[
 body_scores_split_trim<-split(body_scores_trim_df, body_scores_trim_df$otu)
 body_scores_trim_avg<-t(sapply(body_scores_split_trim,function(x) c(mean(na.omit(x[,1])),mean(na.omit(x[,2])))))
 
+### Write.csv of morpho that includes all OTUs ###
 write.csv(morpho, file="Tyrannus morphology + PCA avg.csv")
 
 ### Bring in cv summary dataset 
-cv_summary<-read.csv("cv_summary_table.csv", row.names = 2)
+cv_summary<-read.csv('./Output Files/cv_summary_table.csv', row.names = 2)
 
 ### Coefficient of Variation (CV) Bill Phylogenetic PCA ###
 CVbill_pca<-phyl.pca(phy,cv_summary[,2:4],method="lambda")
@@ -165,10 +166,10 @@ coldf$pch<-pch_vec
 
 mig<-read.csv("Tyrannus_subspecies_MigrationStrategies.csv", row.names = 1)
 coldf2<-merge(coldf, mig, by=0)
-rownames(coldf)<-coldf$Row.names
+rownames(coldf)<-coldf2$Row.names
 coldf$Row.names<-NULL
 
-coldf$Strategy<-factor(coldf$Strategy,levels=c("sedentary","partial","migratory")) #Convert to a factor
+coldf$Strategy<-factor(coldf2$Strategy,levels=c("sedentary","partial","migratory")) #Convert to a factor
 
 ### Use outline to indicate migratory strategy, no outline = non migratory, dashed= partial, complete = migrant ###
 coldf$outlinelwd<-c(0.5,1.5,2.5)[as.numeric(coldf$Strategy)]
@@ -213,8 +214,6 @@ text(x=par("usr")[1]+diff(c(par("usr")[1],par("usr")[2]))*0.05,y=par("usr")[4]-d
 par(mar=c(2.75,2.75,1.5,1.5))
 
 plot(bill_scores_df[,1],bill_scores_df[,2],bg=gsub("NA60",NA,paste0(coldf[bill_scores_df$otu,]$col,"60")),col= gsub("NA60","#663399",paste0(coldf[bill_scores_df$otu,]$col,"60")),pch= coldf[bill_scores_df$otu,]$pch,axes=F,xlab="",ylab="")
-
-#points(bill_scores_avg[,1], bill_scores_avg[,2],pch=21,cex=2)
 
 points(bill_scores_avg[,1], bill_scores_avg[,2],pch=coldf[rownames(bill_scores_avg),]$pch,bg= coldf[rownames(bill_scores_avg),]$col,col=coldf[rownames(bill_scores_avg),]$outlinecolor,cex=2,lwd=coldf$outlinelwd)
 
