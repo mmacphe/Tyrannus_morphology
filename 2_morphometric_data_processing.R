@@ -28,7 +28,7 @@ table(morpho$Sex)
 morpho<-morpho[-grep("unknown",morpho$subspecies),]
 
 ### Read in phylogeny 
-phy<-read.tree("Tyrannus_phylogeny.tre")
+phy<-read.tree('./Output Files/Tyrannus_phylogeny.tre')
 
 ### Match morphometric data to names in phylogeny 
 morpho<-morpho[!morpho$Species=="",]
