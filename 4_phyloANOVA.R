@@ -2,6 +2,9 @@ rm(list=ls())
 
 require(phytools)
 
+### Set source directory to the folder this file came from within RStudio
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
 phy<-read.tree('./Output Files/Tyrannus_phylogeny.tre')
 
 ### Bring in morphology dataset with average morphology values for each OTU and PC scores
@@ -55,11 +58,8 @@ sink()
 ### Conduct the phylogenetic ANOVA for PC scores that are not size-corrected ###
 phy$tip.label[!phy$tip.label %in% rownames(otu_avg)]
 response_var2<-colnames(otu_avg)[c(11,12,13,14)]
-#migration<-otu_avg$Strategy
-#names(migration)<-rownames(otu_avg)
 
 phylANOVA_PCoutput<-list() 
-#Question: How to label y? (the tip.labels so that it doesn't assume same order as tree$tip.label)
 for(i in 1:length(response_var2)){
   print(paste0("Character ",i," -- ",response_var2[i]))#Report character
   character_of_interest<-otu_avg[,response_var2[i]] #Extract character of interest (coi)
@@ -82,7 +82,7 @@ for(i in 1:length(phylANOVA_PCoutput)){
 sink()
 
 ### Repeat for CV data: Bring in cv_summary_table_v4
-otu_cv_avg<-read.csv('./Output Files/cv_summary_v5.csv', row.names = 1) 
+otu_cv_avg<-read.csv('./Output Files/cv_summary.csv', row.names = 1) 
 species<-rownames(otu_cv_avg)
 otu_cv_avg<-cbind(species,otu_cv_avg)
 View(otu_cv_avg)
