@@ -260,7 +260,7 @@ mtext(text=paste0("PC2 (",round(100*(diag(body_pca$Eval)[2]/sum(diag(body_pca$Ev
 text(x=par("usr")[1]+diff(c(par("usr")[1],par("usr")[2]))*0.075,y=par("usr")[4]-diff(c(par("usr")[3],par("usr")[4]))*0.1,label=LETTERS[3],font=2,cex=1.5)
 
 ### add rectangle to indicate zoom for panel D ###
-rect(xleft= 24.5844,ybottom=-28.90985,xright= 60.3054,ytop= 16.40121,lty=3) ### see range body scores avg 2 below to set these properly
+rect(xleft= 22.49359,ybottom=-29.45303,xright= 58.11388,ytop= 18.04108,lty=3) ### see range body scores avg 2 below to set these properly
 
 ### Feather PPCA Zoomed in ###
 body_scores_df2<-subset(body_scores_df, !(otu=="Tyrannus_forficatus"|otu=="Tyrannus_savana_circumdatus"|otu=="Tyrannus_savana_savana"|otu=="Tyrannus_savana_monachus_CA"|otu=="Tyrannus_savana_monachus_SA"|otu=="Tyrannus_savana_sanctaemartae"))
