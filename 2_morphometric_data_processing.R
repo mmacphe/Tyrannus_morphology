@@ -6,23 +6,7 @@ require(phytools)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 ### Read in morphological data set
-Tyrannus_voucher_table <- read.csv("Tyrannus_voucher_table.csv")
-morpho<-Tyrannus_voucher_table
-
-### Standardize notation for Age column
-morpho<-morpho[!morpho$Age=="",]
-morpho$Age[morpho$Age=="SecondYear"]<-"Adult"
-names(table(morpho$Age))
-
-### Remove young birds and unknown age birds from analyses
-morpho<-morpho[!(morpho$Age=="Nestling"),]
-morpho<-morpho[!(morpho$Age=="Fledgling"),]
-morpho<-morpho[!(morpho$Age=="HatchYear"),]
-morpho<-morpho[!(morpho$Age=="Juvenile"),]
-morpho<-morpho[!(morpho$Age=="Unknown"),]
-names(table(morpho$Age))
-table(morpho$Age)
-table(morpho$Sex)
+morpho <- read.csv("Tyrannus_voucher_table.csv")
 
 ### remove individuals with unknown subspecies ID ### Note: This does not remove species that lack subspecies, only individuals that were not identified to the lowest taxonomic division
 morpho<-morpho[-grep("unknown",morpho$subspecies),]
