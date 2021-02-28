@@ -8,8 +8,22 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 ### Read in morphological data set
 morpho <- read.csv("Tyrannus_voucher_table.csv")
 
-### remove individuals with unknown subspecies ID ### Note: This does not remove species that lack subspecies, only individuals that were not identified to the lowest taxonomic division
-morpho<-morpho[-grep("unknown",morpho$subspecies),]
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#morpho<-read.csv('./Output Files/Voucher_Table_Females.csv')
+#OR
+#morpho<-read.csv('./Output Files/Voucher_Table_Males.csv')
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
+### Remove individuals with unknown subspecies ID 
+### Note: This does not remove species that lack subspecies, only individuals that were not identified to the lowest taxonomic division
+morpho<-morpho[-grep("unknown",morpho$subspecies),] #do not run this for sex-specific analyses
 
 ### Read in phylogeny 
 phy<-read.tree('./Output Files/Tyrannus_phylogeny.tre')
@@ -31,6 +45,19 @@ phy$tip.label[!phy$tip.label %in% morpho$tip.label] #Check that returns "charact
 
 ### Save morpho as a .csv ###
 write.csv(morpho, file="Tyrannus morphology data.csv")
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines to write out the data file, then proceed.
+#write.csv(morpho, file="Tyrannus morphology data_Females.csv")
+#OR
+#write.csv(morpho, file="Tyrannus morphology data_Males.csv")
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
 
 ### Split the morphology data sets up into categories by tip.label
 morpho$tip.label
@@ -72,6 +99,19 @@ colnames(morphology_summary)<-colnames(otu_avg_df)
 rownames(morphology_summary)<-names(morpho_split)
 write.csv(morphology_summary,file="morphology_summary_table.csv")
 
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines to write out the data file, then proceed.
+#write.csv(morphology_summary, file="morphology_summary_table_Females.csv")
+#OR
+#write.csv(morpho, file="morphology_summary_table_Males.csv")
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
 ### Write out .csv file just with the mean for each OTU to be used in further analyses
 Tyrannus_OTU_averages<-data.frame(matrix(paste(round(otu_avg_df,2)),ncol=ncol(otu_avg_df)))
 colnames(Tyrannus_OTU_averages)<-colnames(otu_avg_df)
@@ -83,6 +123,19 @@ migratory_data[rownames(Tyrannus_OTU_averages),]
 Tyrannus_data<-merge(Tyrannus_OTU_averages, migratory_data, by=0)
 write.csv(Tyrannus_data, file="Tyrannus_data.csv")
 
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines to write out the data file, then proceed.
+#write.csv(Tyrannus_data, file="Tyrannus_data_Females.csv")
+#OR
+#write.csv(Tyrannus_data, file="Tyrannus_data_Males.csv")
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
 ### Write out .csv file with coefficient of variation for each OTU to be used in further analyses
 cv_summary<-otu_cv_df
 rownames(cv_summary)<-names(morpho_split)
@@ -90,3 +143,16 @@ cv_summary<-as.data.frame(cv_summary)
 migratory_data[rownames(cv_summary),]
 CV_data<-merge(cv_summary, migratory_data, by=0)
 write.csv(CV_data, file = "cv_summary_table.csv")
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines to write out the data file, then proceed.
+#write.csv(CV_data, file="cv_summary_table_Females.csv")
+#OR
+write.csv(morpho, file="cv_summary_table_Males.csv")
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
