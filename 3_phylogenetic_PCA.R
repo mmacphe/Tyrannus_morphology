@@ -17,7 +17,7 @@ morpho<-read.csv('./Output Files/Tyrannus_data.csv', row.names=2)
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #morpho<-read.csv('./Output Files/Tyrannus_data_Females.csv', row.names=2)
 #OR
-morpho<-read.csv('./Output Files/Tyrannus_data_Males.csv', row.names=2)
+#morpho<-read.csv('./Output Files/Tyrannus_data_Males.csv', row.names=2)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -43,7 +43,7 @@ morpho_whole<-read.csv('./Output Files/Tyrannus morphology data.csv', row.names 
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #morpho_whole<-read.csv('./Output Files/Tyrannus morphology data_Females.csv', row.names=1)
 #OR
-morpho_whole<-read.csv('./Output Files/Tyrannus morphology data_Males.csv', row.names=1)
+#morpho_whole<-read.csv('./Output Files/Tyrannus morphology data_Males.csv', row.names=1)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -125,7 +125,7 @@ write.csv(morpho, file="Tyrannus morphology + PCA avg.csv")
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #write.csv(morpho, file="Tyrannus morphology + PCA avg_Females.csv")
 #OR
-write.csv(morpho, file="Tyrannus morphology + PCA avg_Males.csv")
+#write.csv(morpho, file="Tyrannus morphology + PCA avg_Males.csv")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -141,7 +141,7 @@ cv_summary<-read.csv('./Output Files/cv_summary_table.csv', row.names = 2)
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #cv_summary<-read.csv('./Output Files/cv_summary_table_Females.csv', row.names = 2)
 #OR
-cv_summary<-read.csv('./Output Files/cv_summary_table_Males.csv', row.names = 2)
+#cv_summary<-read.csv('./Output Files/cv_summary_table_Males.csv', row.names = 2)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -200,7 +200,7 @@ write.csv(cv_summary, file="cv_summary.csv")
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #write.csv(cv_summary, file="cv_summary_Females.csv")
 #OR
-write.csv(cv_summary, file="cv_summary_Males.csv")
+#write.csv(cv_summary, file="cv_summary_Males.csv")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -266,7 +266,7 @@ png(file="Tyrannus_phylogenetic_PCA.png",width=6.5,height=5.5,units="in",res=500
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #png(file="Tyrannus_phylogenetic_PCA_Females.png",width=6.5,height=5.5,units="in",res=500)
 #OR
-png(file="Tyrannus_phylogenetic_PCA_Males.png",width=6.5,height=5.5,units="in",res=500)
+#png(file="Tyrannus_phylogenetic_PCA_Males.png",width=6.5,height=5.5,units="in",res=500)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -351,7 +351,7 @@ rect(xleft= 22.49359,ybottom=-29.45303,xright= 58.11388,ytop= 18.04108,lty=3) ##
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #rect(xleft= 10.82210,ybottom=-30.90492,xright= 43.81162,ytop= 11.84217,lty=3) ### see range body scores avg 2 below to set these properly
 #OR
-rect(xleft= 28.43172,ybottom=-27.89040,xright= 64.27720,ytop= 19.31986,lty=3) ### see range body scores avg 2 below to set these properly
+#rect(xleft= 28.43172,ybottom=-27.89040,xright= 64.27720,ytop= 19.31986,lty=3) ### see range body scores avg 2 below to set these properly
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
