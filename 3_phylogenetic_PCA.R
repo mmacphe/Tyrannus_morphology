@@ -10,6 +10,19 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 ### Read in average morphology data from .csv ###
 morpho<-read.csv('./Output Files/Tyrannus_data.csv', row.names=2)
 
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#morpho<-read.csv('./Output Files/Tyrannus_data_Females.csv', row.names=2)
+#OR
+#morpho<-read.csv('./Output Files/Tyrannus_data_Males.csv', row.names=2)
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
 ### Read in phylogeny 
 phy<-read.tree('./Output Files/Tyrannus_phylogeny.tre')
 
@@ -22,6 +35,19 @@ bill_pca
 
 ### Bring in morphology data set for all individuals to add points onto figure
 morpho_whole<-read.csv('./Output Files/Tyrannus morphology data.csv', row.names = 1)
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#morpho_whole<-read.csv('./Output Files/Tyrannus morphology data_Females.csv', row.names=1)
+#OR
+#morpho_whole<-read.csv('./Output Files/Tyrannus morphology data_Males.csv', row.names=1)
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
 
 ### Match tip.labels with phylogeny tip.labels ###
 morpho_whole$tip.label
@@ -92,11 +118,49 @@ body_scores_trim_avg<-t(sapply(body_scores_split_trim,function(x) c(mean(na.omit
 ### Write.csv of morpho that includes all OTUs ###
 write.csv(morpho, file="Tyrannus morphology + PCA avg.csv")
 
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#write.csv(morpho, file="Tyrannus morphology + PCA avg_Females.csv")
+#OR
+#write.csv(morpho, file="Tyrannus morphology + PCA avg_Males.csv")
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
 ### Bring in cv summary dataset 
 cv_summary<-read.csv('./Output Files/cv_summary_table.csv', row.names = 2)
 
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#cv_summary<-read.csv('./Output Files/cv_summary_table_Females.csv', row.names = 2)
+#OR
+#cv_summary<-read.csv('./Output Files/cv_summary_table_Males.csv', row.names = 2)
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
 ### Coefficient of Variation (CV) Bill Phylogenetic PCA ###
 CVbill_pca<-phyl.pca(phy,cv_summary[,2:4],method="lambda")
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#### NOT SURE NEEDED: CVbill_pca<-phyl.pca(phy,na.omit(cv_summary[,2:4]),method="lambda")
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
 CVbill_pca
 
 CVbill_mat<-matrix(as.numeric(as.matrix(do.call(rbind, lapply(morpho_trim,function(x) x[,1:3])))),nrow=nrow(do.call(rbind,morpho_trim))) 
@@ -113,6 +177,20 @@ cv_summary$CVBillPC2<-CVbill_scores_cv$V2
 
 ### CV Flight Feather Phylogenetic PCA ###
 CVbody_pca<-phyl.pca(phy,cv_summary[,6:8],method="lambda")
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#CVbody_pca<-phyl.pca(phy,na.omit(cv_summary[,6:8]),method="lambda") #there is a missing value in the tail column
+#OR
+#cv_summary<-read.csv('./Output Files/cv_summary_table_Males.csv', row.names = 2)
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
 CVbody_pca
 
 CVbody_mat<-matrix(as.numeric(as.matrix(do.call(rbind, lapply(morpho_trim,function(x) x[,5:7])))),nrow=nrow(do.call(rbind,morpho_trim))) 
@@ -128,6 +206,20 @@ cv_summary$CVBodyPC1<-CVbody_scores_cv$V1
 cv_summary$CVBodyPC2<-CVbody_scores_cv$V2
 
 write.csv(cv_summary, file="cv_summary.csv")
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#write.csv(cv_summary, file="cv_summary_Females.csv")
+#OR
+#cv_summary<-read.csv('./Output Files/cv_summary_table_Males.csv', row.names = 2)
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
 
 ### CV Body PCA without T. forficatus or T. savana bc their tails are so long ###
 phy_trim<-drop.tip(phy,c(grep("forficatus",phy$tip.label),grep("savana",phy$tip.label)))
@@ -180,6 +272,19 @@ coldf$outlinecolor[coldf$pch %in% c(3,4)]<-coldf$col[coldf$pch %in% c(3,4)]
 coldf$col[coldf$pch %in% c(3,4)]<-NA
 
 png(file="Tyrannus_phylogenetic_PCA.png",width=6.5,height=5.5,units="in",res=500)
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#png(file="Tyrannus_phylogenetic_PCA_Females.png",width=6.5,height=5.5,units="in",res=500)
+#OR
+#cv_summary<-read.csv('./Output Files/cv_summary_table_Males.csv', row.names = 2)
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
 
 layout(matrix(c(1,1,1,2,3,4),nrow=3),widths=c(2.25,1))
 layout.show(n=4)
@@ -260,7 +365,23 @@ mtext(text=paste0("PC2 (",round(100*(diag(body_pca$Eval)[2]/sum(diag(body_pca$Ev
 text(x=par("usr")[1]+diff(c(par("usr")[1],par("usr")[2]))*0.075,y=par("usr")[4]-diff(c(par("usr")[3],par("usr")[4]))*0.1,label=LETTERS[3],font=2,cex=1.5)
 
 ### add rectangle to indicate zoom for panel D ###
+range(na.omit(body_scores_df2[,1])) #Use these values to draw box in Feather PPCA plot 2 for zooming in
+range(na.omit(body_scores_df2[,2])) #Use these values to draw box in Feather PPCA plot 2 for zooming in
 rect(xleft= 22.49359,ybottom=-29.45303,xright= 58.11388,ytop= 18.04108,lty=3) ### see range body scores avg 2 below to set these properly
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#rect(xleft= 10.82210,ybottom=-30.90492,xright= 43.81162,ytop= 11.84217,lty=3) ### see range body scores avg 2 below to set these properly
+#OR
+#cv_summary<-read.csv('./Output Files/cv_summary_table_Males.csv', row.names = 2)
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
 
 ### Feather PPCA Zoomed in ###
 body_scores_df2<-subset(body_scores_df, !(otu=="Tyrannus_forficatus"|otu=="Tyrannus_savana_circumdatus"|otu=="Tyrannus_savana_savana"|otu=="Tyrannus_savana_monachus_CA"|otu=="Tyrannus_savana_monachus_SA"|otu=="Tyrannus_savana_sanctaemartae"))
@@ -271,8 +392,6 @@ box()
 title(main="Feather PPCA zoomed in")
 
 body_scores_avg2<-body_scores_avg[-c(15,20,21,22,23,24),] 
-range(na.omit(body_scores_df2[,1])) #Use these values to draw box in Feather PPCA plot 2 for zooming in
-range(na.omit(body_scores_df2[,2])) #Use these values to draw box in Feather PPCA plot 2 for zooming in
 
 points(body_scores_avg2[,1], body_scores_avg2[,2],pch=coldf[rownames(body_scores_avg2),]$pch,bg= coldf[rownames(body_scores_avg2),]$col,col=coldf[rownames(body_scores_avg2),]$outlinecolor,cex=2,lwd=coldf[rownames(body_scores_avg2),]$outlinelwd)
 

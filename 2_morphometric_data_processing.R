@@ -13,7 +13,7 @@ morpho <- read.csv("Tyrannus_voucher_table.csv")
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
-#morpho<-read.csv('./Output Files/Voucher_Table_Females.csv')
+morpho<-read.csv('./Output Files/Voucher_Table_Females.csv')
 #OR
 #morpho<-read.csv('./Output Files/Voucher_Table_Males.csv')
 
@@ -151,7 +151,7 @@ write.csv(CV_data, file = "cv_summary_table.csv")
 #Note: If assessing sexes separately, use one of the following lines to write out the data file, then proceed.
 #write.csv(CV_data, file="cv_summary_table_Females.csv")
 #OR
-write.csv(morpho, file="cv_summary_table_Males.csv")
+#write.csv(morpho, file="cv_summary_table_Males.csv")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
