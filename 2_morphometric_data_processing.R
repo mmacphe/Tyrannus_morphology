@@ -13,7 +13,7 @@ morpho <- read.csv("Tyrannus_voucher_table.csv")
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
-morpho<-read.csv('./Output Files/Voucher_Table_Females.csv')
+#morpho<-read.csv('./Output Files/Voucher_Table_Females.csv')
 #OR
 #morpho<-read.csv('./Output Files/Voucher_Table_Males.csv')
 
@@ -23,6 +23,7 @@ morpho<-read.csv('./Output Files/Voucher_Table_Females.csv')
 
 ### Remove individuals with unknown subspecies ID 
 ### Note: This does not remove species that lack subspecies, only individuals that were not identified to the lowest taxonomic division
+names(table(morpho$subspecies)) #run following line of code if there are "unknown" subspecies
 morpho<-morpho[-grep("unknown",morpho$subspecies),] #do not run this for sex-specific analyses
 
 ### Read in phylogeny 
