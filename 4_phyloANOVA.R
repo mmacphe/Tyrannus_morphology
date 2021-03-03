@@ -243,3 +243,35 @@ sink()
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
 ###END/\/\/\/\/\/\/\/\/\/\/\###
+
+### Build residuals dataframe for a figure that is size and phylogeny corrected
+phyl_resid<-as.data.frame(phyl.resid_output$BL.Average,row.names = phy$tip.label)
+phyl_resid$BL<-phyl_resid$resid
+phyl_resid2<-as.data.frame(phyl.resid_output$BW.Average, row.names=phy$tip.label)
+phyl_resid$BW<-phyl_resid2$resid
+phyl_resid3<-as.data.frame(phyl.resid_output$BD.Average, row.names=phy$tip.label)
+phyl_resid$BD<-phyl_resid3$resid
+phyl_resid4<-as.data.frame(phyl.resid_output$Kipp.s.Average, row.names=phy$tip.label)
+phyl_resid$KI<-phyl_resid4$resid
+phyl_resid5<-as.data.frame(phyl.resid_output$WC.Average, row.names=phy$tip.label)
+phyl_resid$WC<-phyl_resid5$resid
+phyl_resid6<-as.data.frame(phyl.resid_output$Tail, row.names=phy$tip.label)
+phyl_resid$TL<-phyl_resid6$resid
+
+residuals<-merge(phyl_resid, migration, by=0, row.names=TRUE) #the taxonomic order can be checked visually by comparin residuals to phyl.resid_output$ coi
+residuals$migration<-residuals$y
+
+write.csv(residuals, "phylANOVA_tarsus-corrected_residuals.csv")
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#write.csv(residuals, "phylANOVA_tarsus-corrected_residuals_Females.csv")
+### OR
+#write.csv(residuals, "phylANOVA_tarsus-corrected_residuals_Males.csv")
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
