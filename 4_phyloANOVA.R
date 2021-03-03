@@ -14,10 +14,10 @@ otu_avg<-read.csv('./Output Files/Tyrannus morphology + PCA avg.csv', row.names 
 ###########################
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
-#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+### Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #otu_avg<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Females.csv', row.names = 1)
-#OR
-#morpho<-read.csv('./Output Files/Tyrannus_data_Males.csv', row.names=2)
+### OR
+#otu_avg<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Males.csv', row.names = 1)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -42,11 +42,11 @@ otu_avg$Tarsus.Average <-as.numeric(otu_avg$Tarsus.Average)
 tarsus.length<-otu_avg$Tarsus.Average
 names(tarsus.length)<-rownames(otu_avg)
 
-#Create empty list to store output of each for loop iteration
+### Create empty list to store output of each for loop iteration
 phyl.resid_output<-list()
 phylANOVA_output<-list() 
 
-#Conduct the phylogenetic ANOVA he following code works without assuming y is the same order as tree$tip.label
+### Conduct the phylogenetic ANOVA he following code works without assuming y is the same order as tree$tip.label
 for(i in 1:length(response_var)){
 	print(paste0("Character ",i," -- ",response_var[i]))#Report character
 	character_of_interest<-otu_avg[,response_var[i]] #Extract character of interest (coi)
@@ -65,9 +65,9 @@ sink("phylANOVA_output.txt")
 ###########################
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
-#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
-sink("phylANOVA_output_Females.txt")
-#OR
+### Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#sink("phylANOVA_output_Females.txt")
+### OR
 #sink("phylANOVA_output_Males.txt")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
@@ -104,9 +104,9 @@ sink("phylANOVA_output_PCscores.txt")
 ###########################
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
-#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
-sink("phylANOVA_output_PCscores_Females.txt")
-#OR
+### Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#sink("phylANOVA_output_PCscores_Females.txt")
+### OR
 #sink("phylANOVA_output_PCscores_Males.txt")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
@@ -129,9 +129,9 @@ otu_cv_avg<-read.csv('./Output Files/cv_summary.csv', row.names = 1)
 ###########################
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
-#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
-otu_cv_avg<-read.csv('./Output Files/cv_summary_Females.csv', row.names = 1) 
-#OR
+### Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#otu_cv_avg<-read.csv('./Output Files/cv_summary_Females.csv', row.names = 1) 
+### OR
 #otu_cv_avg<-read.csv('./Output Files/cv_summary_Males.csv', row.names = 1) 
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
@@ -151,10 +151,8 @@ response_var3<-colnames(otu_cv_avg)[c(3,4,5,6,7,8,9,11,12,13,14)]
 ###########################
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
-#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
-response_var3<-colnames(otu_cv_avg)[c(3,4,5,6,7,8,11,12,13,14)] #run anova for tails separately (see below) for females bc T. s sanctamartae has NA
-#OR
-#otu_cv_avg<-read.csv('./Output Files/cv_summary_Males.csv', row.names = 1) 
+### Note: If assessing females, use one of the following lines of code instead of the above line, then proceed.
+#response_var3<-colnames(otu_cv_avg)[c(3,4,5,6,7,8,11,12,13,14)] #run anova for tails separately (see below) for females bc T. s sanctamartae has NA
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -185,8 +183,8 @@ sink("phylANOVA_cv_output.txt")
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
-sink("phylANOVA_cv_output_Females.txt")
-#OR
+#sink("phylANOVA_cv_output_Females.txt")
+### OR
 #sink("phylANOVA_cv_output_Males.txt")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
@@ -208,39 +206,39 @@ sink()
 
 #Note: Run the following code in addition to conduct phylANOVA on tail length in females.
 ### Tail for females 
-response_var4<-colnames(otu_cv_avg)[c(9)]
+#response_var4<-colnames(otu_cv_avg)[c(9)]
 
 ### Set up predictor variable for phylANOVA ###
-migration<-otu_cv_avg$Strategy
-names(migration)<-rownames(otu_cv_avg)
+#migration<-otu_cv_avg$Strategy
+#names(migration)<-rownames(otu_cv_avg)
 
-#Create empty list to store output of each for loop iteration
-phylANOVA_CVoutput<-list() 
+### Create empty list to store output of each for loop iteration
+#phylANOVA_CVoutput<-list() 
 
-#remove two species with no variation in tail
-phy_trim<-drop.tip(phy,c(grep("sanctaemartae",phy$tip.label)))
+### Remove species with no variation in tail
+#phy_trim<-drop.tip(phy,c(grep("sanctaemartae",phy$tip.label)))
 
 ### Conduct the phylogenetic ANOVA on coefficients of variation ###
-for(i in 1:length(response_var4)){
-  print(paste0("Character ",i," -- ",response_var4[i]))#Report character
-  character_of_interest<-otu_cv_avg[,response_var4[i]] #Extract character of interest (coi)
-  names(character_of_interest)<-rownames(otu_cv_avg) #Add names to vector of coi
-  phylANOVA_CVoutput[[i]]<-phylANOVA(phy_trim, migration, y=character_of_interest)
-}
+#for(i in 1:length(response_var4)){
+#  print(paste0("Character ",i," -- ",response_var4[i]))#Report character
+#  character_of_interest<-otu_cv_avg[,response_var4[i]] #Extract character of interest (coi)
+#  names(character_of_interest)<-rownames(otu_cv_avg) #Add names to vector of coi
+#  phylANOVA_CVoutput[[i]]<-phylANOVA(phy_trim, migration, y=character_of_interest)
+#}
 
-names(phylANOVA_CVoutput)<-response_var4
+#names(phylANOVA_CVoutput)<-response_var4
 
 ### Write out output ###
-sink("phylANOVA_cv_output_Females_tail.txt")
+#sink("phylANOVA_cv_output_Females_tail.txt")
 
-for(i in 1:length(phylANOVA_CVoutput)){
-  cat(paste0("Character ",i," -- ",response_var4[i]))
-  cat("\n\n")
-  print(phylANOVA_CVoutput[[i]])
-  cat("#############")
-  cat("\n\n")
-}
-sink()
+#for(i in 1:length(phylANOVA_CVoutput)){
+#  cat(paste0("Character ",i," -- ",response_var4[i]))
+#  cat("\n\n")
+#  print(phylANOVA_CVoutput[[i]])
+#  cat("#############")
+#  cat("\n\n")
+#}
+#sink()
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
