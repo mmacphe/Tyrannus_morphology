@@ -1,6 +1,10 @@
 rm(list=ls())
 
-require(phytools)
+require(ggplot2)
+require(tidyr)
+require(cowplot)
+require(gridExtra)
+require(gridGraphics)
 
 ### Set source directory to the folder this file came from within RStudio
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
@@ -27,156 +31,67 @@ residuals<-read.csv('./Output Files/phylANOVA_tarsus-corrected_residuals.csv', r
 ###########################
 ###END/\/\/\/\/\/\/\/\/\/\/\###
 
-### Box plots of phenotypic characters (not size-corrected i.e., outputs of phylresid) ###
-add_label_legend <- function(pos = "topleft", label, ...) {
-    legend(pos, label, bty = "n", ...)
-}
+### Box plots of phenotypic characters ###
+### Make the series of boxplots showing residuals of morphometrics
+png(file="Phenotype Residuals.png",width=7,height=5.5,units="in",res=500)
 
-png(file="Phenotypes and Variation1.png",width=7,height=5.5,units="in",res=500)
+responsevariable.labs<-c("Bill Length", "Bill Width", "Bill Depth", "Kipp's Index", "Wing Cord", "Tail Length")
+names(responsevariable.labs)<- c("BL", "BW", "BD", "KI", "WC", "TL")
 
-par(mfrow=c(4,3),mar = c(3, 5, 0.5, 0.1))
-for(i in 1:12) {
-  boxplot(otu_avg$WC.Average~migration, data=otu_avg, axes=FALSE, ylab="Wing Cord (mm)")
-  axis(2)
-  add_label_legend("topright", paste0("(a)"))
-  
-  boxplot(otu_avg$Kipp.s.Average~migration, data=otu_avg, axes=FALSE, ylab="Kipp's Index (mm)", xlab="")
-  axis(2)
-  add_label_legend("topright", paste0("(b)"))
-  
-  boxplot(otu_avg$Tail~migration, data=otu_avg, axes=FALSE, ylab="Tail Length (mm)")
-  axis(2)
-  add_label_legend("topright", paste0("(c)"))
-  
-  boxplot(otu_avg$BL.Average~migration, data=otu_avg, axes=FALSE, ylab="Bill Length (mm)")
-  axis(2)
-  add_label_legend("topright", paste0("(d)"))
-  
-  boxplot(otu_avg$BW.Average~migration, data=otu_avg, axes=FALSE, ylab="Bill Width (mm)")
-  axis(2)
-  add_label_legend("topright", paste0("(e)"))
-  
-  boxplot(otu_avg$BD.Average~migration, data=otu_avg, axes=FALSE, ylab="Bill Depth (mm)")
-  axis(2)
-  add_label_legend("topright", paste0("(f)"))
-  
-  boxplot(otu_cv_avg$WC.Average~migration, data=otu_cv_avg, axes=FALSE, ylab="Wing Cord Variation")
-  axis(2)
-  add_label_legend("topright", paste0("(g)"))
-  
-  boxplot(otu_cv_avg$Kipp.s.Average~migration, data=otu_cv_avg, axes=FALSE, ylab="Kipp's Index Variation")
-  axis(2)
-  add_label_legend("topright", paste0("(h)"))
-  
-  boxplot(otu_cv_avg$Tail~migration, data=otu_cv_avg, axes=FALSE, ylab="Tail Length Variation")
-  axis(2)
-  add_label_legend("topright", paste0("(i)"))
-  
-  boxplot(otu_cv_avg$BL.Average~migration, data=otu_cv_avg, axes=FALSE, ylab="Bill Length Variation")
-  axis(2)
-  axis(1, at=1:3, labels=c("migratory","partial","sedentary"), tick=FALSE)
-  add_label_legend("topright", paste0("(j)"))
-  
-  boxplot(otu_cv_avg$BW.Average~migration, data=otu_cv_avg, axes=FALSE, ylab="Bill Width Variation")
-  axis(2)
-  axis(1,at=1:3, labels=c("migratory","partial","sedentary"), tick=FALSE)
-  add_label_legend("topright", paste0("(k)"))
-  
-  boxplot(otu_cv_avg$BD.Average~migration, data=otu_cv_avg, axes=FALSE, ylab="Bill Depth Variation")
-  axis(2)
-  axis(1, at=1:3, labels=c("migratory","partial","sedentary"), tick=FALSE)
-  add_label_legend("topright", paste0("(", letters[i], ")"))
-}
+p<-residuals %>%
+  pivot_longer(BL:TL, names_to = "responsevariable", values_to = "residuals") %>%
+  ggplot(aes(y=residuals, x=migration)) +
+  geom_boxplot() +
+  facet_wrap(vars(responsevariable), ncol=3, labeller=labeller(responsevariable = responsevariable.labs)) +
+  background_grid(major="none", minor="none") +
+  panel_border() +
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) +
+  labs(y= "Residuals") 
+
+draw_plot(plot, x = 0, y = 0, width = 1, height = 1)
+ggdraw() +  
+  draw_plot(p,0,0,1,1) +
+  draw_plot_label(c("A", "B", "C", "D", "E", "F"), c(0.075,0.385,0.69,0.075,0.385,0.69), c(0.99,0.99,0.99,0.50,0.50,0.50), size=15)
 dev.off()
 
-png(file="Phenotypes_Residuals_Variation.png", width=7, height=10, units="in", res=500)
-par(mfrow=c(6,3),mar = c(0.4, 5, 0.7, 0.1))
-for(i in 1:18) {
-  boxplot(otu_avg$WC.Average~migration, data=otu_avg, axes=FALSE, ylab="Wing Cord")
-  axis(2)
-  mtext(at=c(2), text="Phenotype (mm)", side=3, line=-0.5, cex=0.65)
-  add_label_legend("topleft", paste0("A"))
-  
-  boxplot(residuals$WC~migration, data=residuals, axes=FALSE, ylab="")
-  axis(2)
-  mtext(at=2, text="Residuals", side=3, line=-0.5, cex=0.65)
-  add_label_legend("topleft", paste0("B"))
-  
-  boxplot(otu_cv_avg$WC.Average~migration, data=otu_cv_avg, axes=FALSE, ylab="")
-  axis(2)
-  mtext(at=2, text="Variation", side=3, line=-0.5, cex=0.65)
-  add_label_legend("topleft", paste0("C"))
-  
-  
-  boxplot(otu_avg$Kipp.s.Average~migration, data=otu_avg, axes=FALSE, ylab="Kipp's Index", xlab="")
-  axis(2)
-  add_label_legend("topleft", paste0("D"))
-  
-  boxplot(residuals$KI~migration, data=residuals, axes=FALSE, ylab="", xlab="")
-  axis(2)
-  add_label_legend("topleft", paste0("E"))
-  
-  boxplot(otu_cv_avg$Kipp.s.Average~migration, data=otu_cv_avg, axes=FALSE, ylab="")
-  axis(2)
-  add_label_legend("topleft", paste0("F"))
-  
-  boxplot(otu_avg$Tail~migration, data=otu_avg, axes=FALSE, ylab="Tail Length")
-  axis(2)
-  add_label_legend("topleft", paste0("G"))
-  
-  boxplot(residuals$TL~migration, data=residuals, axes=FALSE, ylab="")
-  axis(2)
-  add_label_legend("topleft", paste0("H"))
-  
-  boxplot(otu_cv_avg$Tail~migration, data=otu_cv_avg, axes=FALSE, ylab="")
-  axis(2)
-  add_label_legend("topleft", paste0("I"))
-  
-  boxplot(otu_avg$BL.Average~migration, data=otu_avg, axes=FALSE, ylab="Bill Length")
-  axis(2)
-  add_label_legend("topleft", paste0("J"))
-  
-  boxplot(residuals$BL~migration, data=residuals, axes=FALSE, ylab="")
-  axis(2)
-  add_label_legend("topleft", paste0("K"))
-  
-  boxplot(otu_cv_avg$BL.Average~migration, data=otu_cv_avg, axes=FALSE, ylab="")
-  axis(2)
-  add_label_legend("topleft", paste0("L"))
-  
-  boxplot(otu_avg$BW.Average~migration, data=otu_avg, axes=FALSE, ylab="Bill Width")
-  axis(2)
-  add_label_legend("topleft", paste0("M"))
-  
-  boxplot(residuals$BW~migration, data=residuals, axes=FALSE, ylab="")
-  axis(2)
-  add_label_legend("topleft", paste0("N"))
-  
-  boxplot(otu_cv_avg$BW.Average~migration, data=otu_cv_avg, axes=FALSE, ylab="")
-  axis(2)
-  add_label_legend("topleft", paste0("O"))
-  
-  boxplot(otu_avg$BD.Average~migration, data=otu_avg, axes=FALSE, ylab="Bill Depth")
-  axis(2)
-  axis(1, tick=FALSE)
-  mtext(at=c(1:3), text=c("migratory", "partial", "sedentary"), side=1, line=-0.55, cex=0.65)
-  add_label_legend("topleft", paste0("P"))
-  
-  boxplot(residuals$BD~migration, data=residuals, axes=FALSE, ylab="")
-  axis(2)
-  axis(1, tick=FALSE)
-  mtext(at=c(1:3), text=c("migratory", "partial", "sedentary"), side=1, line=-0.55, cex=0.65)
-  add_label_legend("topleft", paste0("Q"))
-  
-  boxplot(otu_cv_avg$BD.Average~migration, data=otu_cv_avg, axes=FALSE, ylab="")
-  axis(2)
-  axis(1, tick=FALSE)
-  mtext(at=c(1:3), text=c("migratory", "partial", "sedentary"), side=1, line=-0.55, cex=0.65) 
-  add_label_legend("topleft", paste0("", LETTERS[i], ""))
- }
+### Make the box plots of variation in morphometrics
+png(file="Phenotype Variation.png",width=7,height=5.5,units="in",res=500)
+otu_cv_avg<-subset(otu_cv_avg, select=-c(Tarsus.Average)) #Remove tarsus from the df to be able to call BL:TL below
+
+responsevariable.labs<-c("Bill Length", "Bill Width", "Bill Depth", "Kipp's Index", "Wing Cord", "Tail Length")
+names(responsevariable.labs)<- c("BL.Average", "BW.Average", "BD.Average", "Kipp.s.Average", "WC.Average", "Tail")
+
+p<-otu_cv_avg %>%
+  pivot_longer(BL.Average:Tail, names_to="responsevariable", values_to = "variation") %>% 
+  ggplot(aes(y=variation, x=Strategy)) +
+  geom_boxplot() +
+  facet_wrap(vars(responsevariable), ncol=3, labeller=labeller(responsevariable = responsevariable.labs)) +
+  background_grid(major="none", minor="none") +
+  panel_border() +
+  labs(x="Migration Strategy", y= "Variation")
+
+draw_plot(plot, x = 0, y = 0, width = 1, height = 1)
+ggdraw() +  
+  draw_plot(p,0,0,1,1) +
+  draw_plot_label(c("G", "H", "I", "J", "K", "L"), c(0.075,0.385,0.69,0.075,0.385,0.69), c(0.99,0.99,0.99,0.53,0.53,0.53), size=15)
 dev.off()
 
+### Build a single figure from the two .pngs above
+require(png)
+
+png(file="Phenotype Residuals and Variation.png", width=7, height=5.5, units = "in", res=500)
+rl<-lapply(list("./Output Files/Phenotype Residuals.png", "./Output Files/Phenotype Variation.png"), png::readPNG)
+gl<-lapply(rl, grid::rasterGrob)
+do.call(gridExtra::grid.arrange, gl)
+
+dev.off()
+
+### Build boxplots of PPCA scores
 png(file="PPC scores boxplots.png",width=7,height=5.5,units="in",res=500)
+
+
 par(mfrow=c(2,2),mar = c(3, 5, 0.5, 0.1))
 for(i in 1:4) {
   boxplot(otu_avg$BillPC1~migration, data=otu_avg, axes=FALSE, ylab="Bill PPC1")
