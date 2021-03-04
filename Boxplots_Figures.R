@@ -32,6 +32,7 @@ residuals<-read.csv('./Output Files/phylANOVA_tarsus-corrected_residuals.csv', r
 ###END/\/\/\/\/\/\/\/\/\/\/\###
 
 ### Box plots of phenotypic characters ###
+# Add letters across the top to show that there are no differences between migratory strategies
 ### Make the series of boxplots showing residuals of morphometrics
 png(file="Phenotype Residuals.png",width=7,height=5.5,units="in",res=500)
 
@@ -89,40 +90,24 @@ do.call(gridExtra::grid.arrange, gl)
 dev.off()
 
 ### Build boxplots of PPCA scores
+# Add letters across the top to show that there are no differences between migratory strategies
+#Q: How to plot with individual y axes instead of all the same scale across PCs?
 png(file="PPC scores boxplots.png",width=7,height=5.5,units="in",res=500)
 
+responsevariable.labs<-c("Bill PPC1", "Bill PPC2", "Feather PPC1", "Feather PPC2")
+names(responsevariable.labs)<- c("BillPC1", "BillPC2", "BodyPC1", "BodyPC2")
 
-par(mfrow=c(2,2),mar = c(3, 5, 0.5, 0.1))
-for(i in 1:4) {
-  boxplot(otu_avg$BillPC1~migration, data=otu_avg, axes=FALSE, ylab="Bill PPC1")
-  axis(2)
-  add_label_legend("topright", paste0("A"))
-  
-  boxplot(otu_avg$BillPC2~migration, data=otu_avg, axes=FALSE, ylab="Bill PPC2")
-  axis(2)
-  text(x=2, y=2.71, "______________", cex=1.8)
-  text(x=2, y=2.50, "p=0.035", cex=0.8)
-  add_label_legend("topright", paste0("B"))
-  
-  boxplot(otu_avg$BodyPC1~migration, data=otu_avg, axes=FALSE, ylab="Body PPC1")
-  axis(2)
-  axis(1, at=1:3, labels=c("migratory","partial","sedentary"), tick=FALSE)
-  add_label_legend("topright", paste0("C"))
-  
-  boxplot(otu_avg$BodyPC2~migration, data=otu_avg, axes=FALSE, ylab="Body PPC2")
-  axis(2)
-  axis(1, at=1:3, labels=c("migratory","partial","sedentary"), tick=FALSE)
-  add_label_legend("topright", paste0("D"))
-}
+p<-otu_avg %>%
+  pivot_longer(BillPC1:BodyPC2, names_to="responsevariable", values_to = "value") %>% 
+  ggplot(aes(y=value, x=Strategy)) +
+  geom_boxplot() +
+  facet_wrap(vars(responsevariable), ncol=2, labeller=labeller(responsevariable = responsevariable.labs)) +
+  background_grid(major="none", minor="none") +
+  panel_border() +
+  labs(x="Migration Strategy", y= "PPC Scores")
+
+draw_plot(plot, x = 0, y = 0, width = 1, height = 1)
+ggdraw() +  
+  draw_plot(p,0,0,1,1) +
+  draw_plot_label(c("A", "B", "C", "D"), c(0,0.5,0,0.5), c(1,0.5,1,0.5), size=15)
 dev.off()
-
-### Trying to plot residuals
-par(mfrow=c(4,3))
-par(mar=c(2,3,0.5,0.5))
-for(i in 1:length(phyl.resid_output)){
- 	coi_bp<-data.frame(migration,phyl.resid_output[[i]]$resid)
- 	coi_bp$migration<-factor(coi_bp$migration,levels=c("S","P","M"))
- 	colnames(coi_bp)[2]<-response_var[i]
- 	boxplot(formula(paste0(response_var[i],"~migration")),data=coi_bp)
- }
-# 
