@@ -267,7 +267,7 @@ write.csv(residuals, "phylANOVA_tarsus-corrected_residuals.csv")
 ###########################
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
-#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+### Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #write.csv(residuals, "phylANOVA_tarsus-corrected_residuals_Females.csv")
 ### OR
 #write.csv(residuals, "phylANOVA_tarsus-corrected_residuals_Males.csv")
