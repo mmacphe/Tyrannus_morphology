@@ -54,7 +54,14 @@ p<-residuals %>%
 draw_plot(plot, x = 0, y = 0, width = 1, height = 1)
 ggdraw() +  
   draw_plot(p,0,0,1,1) +
-  draw_plot_label(c("A", "B", "C", "D", "E", "F"), c(0.075,0.385,0.69,0.075,0.385,0.69), c(0.99,0.99,0.99,0.50,0.50,0.50), size=15)
+  draw_plot_label(c("A", "B", "C", "D", "E", "F"), c(0.075,0.385,0.69,0.075,0.385,0.69), c(0.99,0.99,0.99,0.50,0.50,0.50), size=15) +
+  draw_plot_label(c("A", "A", "A"), c(0.12, 0.22, 0.31), c(0.945, 0.945, 0.945), size=7) + #label within plot A
+  draw_plot_label(c("A", "A", "A"), c(0.43, 0.522, 0.617), c(0.945, 0.945, 0.945), size=7) + #label within plot B
+  draw_plot_label(c("A", "A", "A"), c(0.73, 0.826, 0.924), c(0.945, 0.945, 0.945), size=7) + #label within plot C
+  draw_plot_label(c("A", "A", "A"), c(0.12,0.22, 0.31), c(0.455, 0.455, 0.455), size=7) + #label within plot D
+  draw_plot_label(c("A", "A", "A"), c(0.43, 0.522, 0.617), c(0.455, 0.455, 0.455), size=7) + #label within plot E
+  draw_plot_label(c("A", "A", "A"), c(0.73, 0.826, 0.924), c(0.455, 0.455, 0.455), size=7) #label within plot F
+  
 dev.off()
 
 ### Make the box plots of variation in morphometrics
@@ -76,7 +83,14 @@ p<-otu_cv_avg %>%
 draw_plot(plot, x = 0, y = 0, width = 1, height = 1)
 ggdraw() +  
   draw_plot(p,0,0,1,1) +
-  draw_plot_label(c("G", "H", "I", "J", "K", "L"), c(0.075,0.385,0.69,0.075,0.385,0.69), c(0.99,0.99,0.99,0.53,0.53,0.53), size=15)
+  draw_plot_label(c("G", "H", "I", "J", "K", "L"), c(0.075,0.385,0.69,0.075,0.385,0.69), c(0.99,0.99,0.99,0.53,0.53,0.53), size=15) +
+  draw_plot_label(c("A", "A", "A"), c(0.12, 0.22, 0.31), c(0.945, 0.945, 0.945), size=7) + #label within plot G
+  draw_plot_label(c("A", "A", "A"), c(0.4262, 0.522, 0.614), c(0.945, 0.945, 0.945), size=7) + #label within plot H
+  draw_plot_label(c("A", "A", "A"), c(0.73, 0.826, 0.924), c(0.945, 0.945, 0.945), size=7) + #label within plot I
+  draw_plot_label(c("A", "A", "A"), c(0.12,0.22, 0.31), c(0.487, 0.487, 0.487), size=7) + #label within plot J
+  draw_plot_label(c("A", "A", "A"), c(0.4262, 0.522, 0.614), c(0.487, 0.487, 0.487), size=7) + #label within plot K
+  draw_plot_label(c("A", "A", "A"), c(0.73, 0.826, 0.924), c(0.487, 0.487, 0.487), size=7) #label within plot L
+
 dev.off()
 
 ### Build a single figure from the two .pngs above
