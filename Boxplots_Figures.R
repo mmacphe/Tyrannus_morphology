@@ -91,7 +91,6 @@ dev.off()
 
 ### Build boxplots of PPCA scores
 # Add letters across the top to show that there are no differences between migratory strategies
-#Q: How to plot with individual y axes instead of all the same scale across PCs?
 png(file="PPC scores boxplots.png",width=7,height=5.5,units="in",res=500)
 
 responsevariable.labs<-c("Bill PPC1", "Bill PPC2", "Feather PPC1", "Feather PPC2")
@@ -101,7 +100,7 @@ p<-otu_avg %>%
   pivot_longer(BillPC1:BodyPC2, names_to="responsevariable", values_to = "value") %>% 
   ggplot(aes(y=value, x=Strategy)) +
   geom_boxplot() +
-  facet_wrap(vars(responsevariable), ncol=2, labeller=labeller(responsevariable = responsevariable.labs)) +
+  facet_wrap(vars(responsevariable), ncol=2, labeller=labeller(responsevariable = responsevariable.labs), scales="free") +
   background_grid(major="none", minor="none") +
   panel_border() +
   labs(x="Migration Strategy", y= "PPC Scores")
@@ -109,5 +108,10 @@ p<-otu_avg %>%
 draw_plot(plot, x = 0, y = 0, width = 1, height = 1)
 ggdraw() +  
   draw_plot(p,0,0,1,1) +
-  draw_plot_label(c("A", "B", "C", "D"), c(0,0.5,0,0.5), c(1,0.5,1,0.5), size=15)
+  draw_plot_label(c("A", "B", "C", "D"), c(0.085,0.565,0.085,0.565), c(0.99,0.99,0.51,0.51), size=15) + #main plot identifiers 
+  draw_plot_label(c("A", "A", "A"), c(0.156, 0.29, 0.422), c(0.946, 0.946, 0.946), size=7) + #letters for plot A
+  draw_plot_label(c("A", "AB", "B"), c(0.635, 0.766, 0.9), c(0.946, 0.946, 0.946), size=7) + #letters for plot B
+  draw_plot_label(c("A", "A", "A"), c(0.156, 0.29, 0.422), c(0.4715, 0.4715, 0.4715), size=7) + #letters for plot C
+  draw_plot_label(c("A", "A", "A"), c(0.635, 0.766, 0.9), c(0.4715, 0.4715, 0.4715), size=7) #letters for plot D
+
 dev.off()
