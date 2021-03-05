@@ -32,7 +32,6 @@ residuals<-read.csv('./Output Files/phylANOVA_tarsus-corrected_residuals.csv', r
 ###END/\/\/\/\/\/\/\/\/\/\/\###
 
 ### Box plots of phenotypic characters ###
-# Add letters across the top to show that there are no differences between migratory strategies
 ### Make the series of boxplots showing residuals of morphometrics
 png(file="Phenotype Residuals.png",width=7,height=5.5,units="in",res=500)
 
@@ -104,7 +103,6 @@ do.call(gridExtra::grid.arrange, gl)
 dev.off()
 
 ### Build boxplots of PPCA scores
-# Add letters across the top to show that there are no differences between migratory strategies
 png(file="PPC scores boxplots.png",width=7,height=5.5,units="in",res=500)
 
 responsevariable.labs<-c("Bill PPC1", "Bill PPC2", "Feather PPC1", "Feather PPC2")
