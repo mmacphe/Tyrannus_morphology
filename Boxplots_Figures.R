@@ -40,11 +40,12 @@ names(responsevariable.labs)<- c("BL", "BW", "BD", "KI", "WC", "TL")
 
 p<-residuals %>%
   pivot_longer(BL:TL, names_to = "responsevariable", values_to = "residuals") %>%
-  ggplot(aes(y=residuals, x=migration)) +
+  ggplot(aes(y=residuals, x=migration, scale_fill_manual(values=c("gray70","gray40","black")))) + #the greys are not appearing
   geom_boxplot() +
   facet_wrap(vars(responsevariable), ncol=3, labeller=labeller(responsevariable = responsevariable.labs)) +
-  background_grid(major="none", minor="none") +
   panel_border() +
+  theme_bw() +
+  theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank()) +
   theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +
