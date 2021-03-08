@@ -73,11 +73,12 @@ names(responsevariable.labs)<- c("BL.Average", "BW.Average", "BD.Average", "Kipp
 
 p<-otu_cv_avg %>%
   pivot_longer(BL.Average:Tail, names_to="responsevariable", values_to = "variation") %>% 
-  ggplot(aes(y=variation, x=Strategy)) +
+  ggplot(aes(y=variation, x=Strategy, scale_fill_manual(values=c("gray70","gray40","black")))) +
   geom_boxplot() +
   facet_wrap(vars(responsevariable), ncol=3, labeller=labeller(responsevariable = responsevariable.labs)) +
-  background_grid(major="none", minor="none") +
   panel_border() +
+  theme_bw() +
+  theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank()) +
   labs(x="Migration Strategy", y= "Variation")
 
 draw_plot(plot, x = 0, y = 0, width = 1, height = 1)
@@ -111,11 +112,12 @@ names(responsevariable.labs)<- c("BillPC1", "BillPC2", "BodyPC1", "BodyPC2")
 
 p<-otu_avg %>%
   pivot_longer(BillPC1:BodyPC2, names_to="responsevariable", values_to = "value") %>% 
-  ggplot(aes(y=value, x=Strategy)) +
+  ggplot(aes(y=value, x=Strategy, scale_fill_manual(values=c("gray70","gray40","black")))) +
   geom_boxplot() +
   facet_wrap(vars(responsevariable), ncol=2, labeller=labeller(responsevariable = responsevariable.labs), scales="free") +
-  background_grid(major="none", minor="none") +
   panel_border() +
+  theme_bw() +
+  theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank()) +
   labs(x="Migration Strategy", y= "PPC Scores")
 
 draw_plot(plot, x = 0, y = 0, width = 1, height = 1)
