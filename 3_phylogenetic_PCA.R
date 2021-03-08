@@ -222,6 +222,51 @@ CVbody_scores_trim_df$otu<-factor(sapply(strsplit(rownames(CVbody_scores_trim_df
 CVbody_scores_split_trim<-split(CVbody_scores_trim_df, CVbody_scores_trim_df$otu)
 CVbody_scores_trim_cv<-t(sapply(CVbody_scores_split_trim,function(x) c(mean(na.omit(x[,1])),mean(na.omit(x[,2])))))
 
+### Build Ancestral State Reconstruction objects for phylogeny in figure
+is.binary(phy)
+phy<-multi2di(phy) #resolve polytomies
+is.binary(phy)
+
+### Migration strategy
+### Load the dataset to save as a factor (continuous var as vector below)
+Tyrannus.data<-read.csv('./Output Files/Tyrannus morphology + PCA avg.csv', row.names = 1)
+species<-rownames(Tyrannus.data)
+Tyrannus.data<-cbind(species,Tyrannus.data)
+
+### Check that tree$tip.label is the same as otu_avg
+phy$tip.label[!phy$tip.label %in% Tyrannus.data$species] #should return: charactor(0)
+
+### Use diversitree, the mk-n model to reconstruct marginal ancestral states
+require(diversitree)
+
+Migration<-factor(Tyrannus.data$Strategy)
+names(Migration)<-rownames(Tyrannus.data)
+
+#Change character to numeric, because this is the format diversitree accepts
+char1<-as.numeric(Migration)
+names(char1)<-names(Migration)
+
+#Create mkn model. Use equal probabilites for all states at the root
+lik.mn<-make.mkn(phy,char1,k=3, control=list(root=ROOT.EQUI))
+#Look at the different parameters of the model
+argnames(lik.mn)
+#Create model using constraints. 1=migratory, 2=partial, 3=sedentary. q12 is the transition rate from 1 to 2, and ~ indicates equivalency. 
+lik.mkn.base<-constrain(lik.mn, q21~q13, q23~q32, q12~q31)
+#Create a starting point for the search
+p.mkn<-starting.point.musse(phy,3)
+#Fit the model
+fit.mkn<-find.mle(lik.mkn.base,p.mkn[argnames(lik.mkn.base)])
+#Model parameters
+fit.mkn[1:2]
+#Export marginal ancestral reconstruction at the notes of the tree
+st<-t(asr.marginal(lik.mkn.base,coef(fit.mkn)))
+
+BillPC2<-Tyrannus.data$BillPC2
+names(BillPC2)<- rownames(Tyrannus.data)
+View(BillPC2)
+
+obj<-contMap(phy, BillPC2)
+
 ### Build a figure to show PPCA results next to the phylogeny ###
 ## Set up color labels ##
 coldf<-data.frame(row.names=sort(phy$tip.label),col=rep(NA,Ntip(phy)),pch=rep(NA,Ntip(phy)))
@@ -277,7 +322,10 @@ layout.show(n=4)
 
 par(mar=c(2,0.5,0,14))
 
-plot(phy,cex=0.8,show.tip.label=F)
+plot(obj, ftype="off", mar=c(3,0,0,13), legend=0.7*max(nodeHeights(phy), fsize=c(0.7,0.9)))
+
+co<-c("black","gray40","gray70") #Vector of colours for migration strategy
+nodelabels(pie=st, piecol=co, cex=1.5, col="gray32") #plot the probabilities of each state at each node
 
 par(xpd=NA)
 
@@ -291,7 +339,7 @@ points(x=rep(4.95,Ntip(phy)),y=1:Ntip(phy),cex=2,pch=coldf[phy$tip.label,]$pch,b
 
 ### Time axis ###
 axisPhylo(1)
-text(x=5.1,y=-0.95,label="mya",cex=1,pch=22)
+text(x=4.7,y=-2.5,label="mya",cex=1,pch=22)
 
 ### Add legend ###
 table(coldf$Strategy)#Counts for each migratory strategy, used in legend
