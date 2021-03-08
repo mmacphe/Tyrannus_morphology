@@ -33,6 +33,9 @@ phy$tip.label[!phy$tip.label %in% rownames(morpho)]
 bill_pca<-phyl.pca(phy,morpho[,2:4],method="lambda")
 bill_pca
 
+### Find the % variance explained by each eigenvector 
+diag(bill_pca$Eval)/sum(bill_pca$Eval)*100
+
 ### Bring in morphology data set for all individuals to add points onto figure
 morpho_whole<-read.csv('./Output Files/Tyrannus morphology data.csv', row.names = 1)
 
@@ -88,6 +91,9 @@ morpho$BillPC2<-bill_scores_avg$V2
 body_pca<-phyl.pca(phy,morpho[,6:8],method="lambda")
 body_pca
 
+### Find the % variance explained by each eigenvector 
+diag(body_pca$Eval)/sum(body_pca$Eval)*100
+
 body_mat<-matrix(as.numeric(as.matrix(do.call(rbind, lapply(morpho_trim,function(x) x[,5:7])))),nrow=nrow(do.call(rbind,morpho_trim))) 
 body_scores<-phytools:::scores(body_pca,newdata=body_mat)
 rownames(body_scores)<-rownames(do.call(rbind, lapply(morpho_trim,function(x) x[,5:7])))
@@ -105,6 +111,9 @@ phy_trim<-drop.tip(phy,c(grep("forficatus",phy$tip.label),grep("savana",phy$tip.
 otu_avg_trim<-morpho[rownames(morpho) %in% phy_trim$tip.label,]
 body_pca_trim<-phyl.pca(phy_trim,otu_avg_trim[,6:8],method="lambda")
 body_pca_trim
+
+### Find the % variance explained by each eigenvector 
+diag(body_pca_trim$Eval)/sum(body_pca_trim$Eval)*100
 
 body_mat_trim<-matrix(as.numeric(as.matrix(do.call(rbind, lapply(morpho_trim[-c(grep("forficatus",names(morpho_trim)),grep("savana",names(morpho_trim)))],function(x) x[,5:7])))),nrow=nrow(do.call(rbind,morpho_trim[-c(grep("forficatus",names(morpho_trim)),grep("savana",names(morpho_trim)))]))) 
 
@@ -151,6 +160,9 @@ cv_summary<-read.csv('./Output Files/cv_summary_table.csv', row.names = 2)
 CVbill_pca<-phyl.pca(phy,cv_summary[,2:4],method="lambda")
 CVbill_pca
 
+### Find the % variance explained by each eigenvector 
+diag(CVbill_pca$Eval)/sum(CVbill_pca$Eval)*100
+
 CVbill_mat<-matrix(as.numeric(as.matrix(do.call(rbind, lapply(morpho_trim,function(x) x[,1:3])))),nrow=nrow(do.call(rbind,morpho_trim))) 
 CVbill_scores<-phytools:::scores(CVbill_pca,newdata=CVbill_mat)
 rownames(CVbill_scores)<-rownames(do.call(rbind, lapply(morpho_trim,function(x) x[,1:3])))
@@ -178,6 +190,9 @@ CVbody_pca<-phyl.pca(phy,cv_summary[,6:8],method="lambda")
 ###END/\/\/\/\/\/\/\/\/\/\/\###
 
 CVbody_pca
+
+### Find the % variance explained by each eigenvector 
+diag(CVbody_pca$Eval)/sum(CVbody_pca$Eval)*100
 
 CVbody_mat<-matrix(as.numeric(as.matrix(do.call(rbind, lapply(morpho_trim,function(x) x[,5:7])))),nrow=nrow(do.call(rbind,morpho_trim))) 
 CVbody_scores<-phytools:::scores(CVbody_pca,newdata=CVbody_mat)
@@ -212,6 +227,9 @@ phy_trim<-drop.tip(phy,c(grep("forficatus",phy$tip.label),grep("savana",phy$tip.
 otu_cv_trim<-cv_summary[rownames(cv_summary) %in% phy_trim$tip.label,]
 CVbody_pca_trim<-phyl.pca(phy_trim,otu_cv_trim[,6:8],method="lambda")
 CVbody_pca_trim
+
+### Find the % variance explained by each eigenvector 
+diag(CVbody_pca_trim$Eval)/sum(CVbody_pca_trim$Eval)*100
 
 CVbody_mat_trim<-matrix(as.numeric(as.matrix(do.call(rbind, lapply(morpho_trim[-c(grep("forficatus",names(morpho_trim)),grep("savana",names(morpho_trim)))],function(x) x[,5:7])))),nrow=nrow(do.call(rbind,morpho_trim[-c(grep("forficatus",names(morpho_trim)),grep("savana",names(morpho_trim)))]))) 
 
