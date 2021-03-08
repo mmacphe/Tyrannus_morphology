@@ -410,8 +410,14 @@ title(main="Feather PPCA")
 
 points(body_scores_avg[,1], body_scores_avg[,2],pch=coldf[rownames(body_scores_avg),]$pch,bg= coldf[rownames(body_scores_avg),]$col,col=coldf[rownames(body_scores_avg),]$outlinecolor,cex=2,lwd=coldf$outlinelwd)
 
-axis(1,mgp=c(0,0.25,0),tck=-0.025,cex.axis=0.75)
-axis(2,mgp=c(0,0.25,0),tck=-0.025,cex.axis=0.75)
+axis(1,mgp=c(0,0.25,0),tck=-0.025,cex.axis=0.45)
+axis(2,mgp=c(0,0.25,0),tck=-0.025,cex.axis=0.45)
+
+mtext(at=-160, text=paste0("long feathers"), side=1, line=0.7, cex=0.45)
+mtext(at=50, text=paste0("short feathers"), side=1, line=0.7, cex=0.45)
+mtext(at=-25, text=paste0("long feathers"), side=2, line=0.7, cex=0.45)
+mtext(at=10, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)
+
 mtext(text=paste0("PC1 (",round(100*(diag(body_pca$Eval)[1]/sum(diag(body_pca$Eval))),2),"%)"),side=1,line=1.3,cex=0.55)
 mtext(text=paste0("PC2 (",round(100*(diag(body_pca$Eval)[2]/sum(diag(body_pca$Eval))),2),"%)"),side=2,line=1.3,cex=0.55)
 
