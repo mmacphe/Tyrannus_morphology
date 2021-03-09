@@ -112,8 +112,9 @@ names(responsevariable.labs)<- c("BillPC1", "BillPC2", "BodyPC1", "BodyPC2")
 
 p<-otu_avg %>%
   pivot_longer(BillPC1:BodyPC2, names_to="responsevariable", values_to = "value") %>% 
-  ggplot(aes(y=value, x=Strategy, scale_fill_manual(values=c("gray70","gray40","black")))) +
-  geom_boxplot() +
+  ggplot(aes(y=value, x=Strategy)) +
+  #scale_fill_manual(values=c("gray70","gray40","black")) +
+  #scale_y_continuous(expand=c(0,0.1)) +
   facet_wrap(vars(responsevariable), ncol=2, labeller=labeller(responsevariable = responsevariable.labs), scales="free") +
   panel_border() +
   theme_bw() +
