@@ -115,21 +115,21 @@ names(responsevariable.labs)<- c("BillPC1", "BillPC2", "BodyPC1", "BodyPC2")
 p<-otu_avg %>%
   pivot_longer(BillPC1:BodyPC2, names_to="responsevariable", values_to = "value") %>% 
   ggplot(aes(y=value, x=Strategy)) +
-  #scale_fill_manual(values=c("gray70","gray40","black")) +
-  #scale_y_continuous(expand=c(0,0.1)) +
-  facet_wrap(vars(responsevariable), ncol=2, labeller=labeller(responsevariable = responsevariable.labs), scales="free") +
+  geom_boxplot() +
+  facet_wrap(vars(responsevariable), ncol=2, labeller=labeller(responsevariable = responsevariable.labs), scales="free_y") +
   panel_border() +
   theme_bw() +
   theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank()) +
+  scale_y_continuous(expand=c(0.05,3)) +
   labs(x="Migration Strategy", y= "PPC Scores")
 
 draw_plot(plot, x = 0, y = 0, width = 1, height = 1)
 ggdraw() +  
   draw_plot(p,0,0,1,1) +
-  draw_plot_label(c("A", "B", "C", "D"), c(0.085,0.565,0.085,0.565), c(0.99,0.99,0.51,0.51), size=15) + #main plot identifiers 
-  draw_plot_label(c("A", "A", "A"), c(0.156, 0.29, 0.422), c(0.946, 0.946, 0.946), size=7) + #letters for plot A
-  draw_plot_label(c("A", "AB", "B"), c(0.635, 0.766, 0.9), c(0.946, 0.946, 0.946), size=7) + #letters for plot B
-  draw_plot_label(c("A", "A", "A"), c(0.156, 0.29, 0.422), c(0.4715, 0.4715, 0.4715), size=7) + #letters for plot C
-  draw_plot_label(c("A", "A", "A"), c(0.635, 0.766, 0.9), c(0.4715, 0.4715, 0.4715), size=7) #letters for plot D
+  draw_plot_label(c("A", "B", "C", "D"), c(0.085,0.565,0.085,0.565), c(0.99,0.99,0.53,0.53), size=15) + #main plot identifiers 
+  draw_plot_label(c("A", "A", "A"), c(0.156, 0.287, 0.420), c(0.946, 0.946, 0.946), size=8) + #letters for plot A
+  draw_plot_label(c("A", "AB", "B"), c(0.635, 0.766, 0.9), c(0.946, 0.946, 0.946), size=8) + #letters for plot B
+  draw_plot_label(c("A", "A", "A"), c(0.156, 0.287, 0.420), c(0.487, 0.487, 0.487), size=8) + #letters for plot C
+  draw_plot_label(c("A", "A", "A"), c(0.635, 0.766, 0.9), c(0.487, 0.487, 0.487), size=8) #letters for plot D
 
 dev.off()
