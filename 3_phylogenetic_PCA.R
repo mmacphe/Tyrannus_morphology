@@ -284,6 +284,8 @@ names(BillPC2)<- rownames(Tyrannus.data)
 View(BillPC2)
 
 obj<-contMap(phy, BillPC2)
+n<-length(obj$cols) #get the length of the color ramp
+obj$cols[1:n]<-grey(0:(n-1)/(n-1)) #change the color ramp to a grey scale
 
 ### Build a figure to show PPCA results next to the phylogeny ###
 ## Set up color labels ##
