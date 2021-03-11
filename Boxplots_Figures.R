@@ -38,10 +38,12 @@ png(file="Phenotype Residuals.png",width=7,height=5.5,units="in",res=500)
 responsevariable.labs<-c("Bill Length", "Bill Width", "Bill Depth", "Kipp's Index", "Wing Cord", "Tail Length")
 names(responsevariable.labs)<- c("BL", "BW", "BD", "KI", "WC", "TL")
 
+col<-c("black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70")
+
 p<-residuals %>%
   pivot_longer(BL:TL, names_to = "responsevariable", values_to = "residuals") %>%
-  ggplot(aes(y=residuals, x=migration, scale_fill_manual(values=c("gray70","gray40","black")))) + #the greys are not appearing
-  geom_boxplot() +
+  ggplot(aes(y=residuals, x=migration)) + 
+  geom_boxplot(color=col) +
   facet_wrap(vars(responsevariable), ncol=3, labeller=labeller(responsevariable = responsevariable.labs)) +
   panel_border() +
   theme_bw() +
@@ -69,13 +71,15 @@ dev.off()
 png(file="Phenotype Variation.png",width=7,height=5.5,units="in",res=500)
 otu_cv_avg<-subset(otu_cv_avg, select=-c(Tarsus.Average)) #Remove tarsus from the df to be able to call BL:TL below
 
+col<-c("black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70")
+
 responsevariable.labs<-c("Bill Length", "Bill Width", "Bill Depth", "Kipp's Index", "Wing Cord", "Tail Length")
 names(responsevariable.labs)<- c("BL.Average", "BW.Average", "BD.Average", "Kipp.s.Average", "WC.Average", "Tail")
 
 p<-otu_cv_avg %>%
   pivot_longer(BL.Average:Tail, names_to="responsevariable", values_to = "variation") %>% 
   ggplot(aes(y=variation, x=Strategy, scale_fill_manual(values=c("gray70","gray40","black")))) +
-  geom_boxplot() +
+  geom_boxplot(color=col) +
   facet_wrap(vars(responsevariable), ncol=3, labeller=labeller(responsevariable = responsevariable.labs)) +
   panel_border() +
   theme_bw() +
@@ -112,10 +116,12 @@ png(file="PPC scores boxplots.png",width=7,height=5.5,units="in",res=500)
 responsevariable.labs<-c("Bill PPC1", "Bill PPC2", "Feather PPC1", "Feather PPC2")
 names(responsevariable.labs)<- c("BillPC1", "BillPC2", "BodyPC1", "BodyPC2")
 
+col<-c("black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70")
+
 p<-otu_avg %>%
   pivot_longer(BillPC1:BodyPC2, names_to="responsevariable", values_to = "value") %>% 
   ggplot(aes(y=value, x=Strategy)) +
-  geom_boxplot() +
+  geom_boxplot(color=col) +
   facet_wrap(vars(responsevariable), ncol=2, labeller=labeller(responsevariable = responsevariable.labs), scales="free_y") +
   panel_border() +
   theme_bw() +
