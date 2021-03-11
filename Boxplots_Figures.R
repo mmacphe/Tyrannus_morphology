@@ -35,6 +35,19 @@ residuals<-read.csv('./Output Files/phylANOVA_tarsus-corrected_residuals.csv', r
 ### Make the series of boxplots showing residuals of morphometrics
 png(file="Phenotype Residuals.png",width=7,height=5.5,units="in",res=500)
 
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+### Note: If assessing sexes separately, use the following lines of code instead of the above 3 lines, then proceed.
+#png(file="Phenotype Residuals_Females.png",width=7,height=5.5,units="in",res=500)
+### OR
+#png(file="Phenotype Residuals_Males.png",width=7,height=5.5,units="in",res=500)
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
 responsevariable.labs<-c("Bill Length", "Bill Width", "Bill Depth", "Kipp's Index", "Wing Cord", "Tail Length")
 names(responsevariable.labs)<- c("BL", "BW", "BD", "KI", "WC", "TL")
 
@@ -69,6 +82,20 @@ dev.off()
 
 ### Make the box plots of variation in morphometrics
 png(file="Phenotype Variation.png",width=7,height=5.5,units="in",res=500)
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+### Note: If assessing sexes separately, use the following lines of code instead of the above 3 lines, then proceed.
+#png(file="Phenotype Variation_Females.png",width=7,height=5.5,units="in",res=500)
+### OR
+#png(file="Phenotype Variation_Males.png",width=7,height=5.5,units="in",res=500)
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
 otu_cv_avg<-subset(otu_cv_avg, select=-c(Tarsus.Average)) #Remove tarsus from the df to be able to call BL:TL below
 
 col<-c("black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70")
@@ -104,7 +131,35 @@ dev.off()
 require(png)
 
 png(file="Phenotype Residuals and Variation.png", width=7, height=5.5, units = "in", res=500)
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+### Note: If assessing sexes separately, use the following lines of code instead of the above 3 lines, then proceed.
+#png(file="Phenotype Residuals and Variation_Females.png", width=7, height=5.5, units = "in", res=500)
+### OR
+#png(file="Phenotype Residuals and Variation_Males.png", width=7, height=5.5, units = "in", res=500)
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
 rl<-lapply(list("./Output Files/Phenotype Residuals.png", "./Output Files/Phenotype Variation.png"), png::readPNG)
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+### Note: If assessing sexes separately, use the following lines of code instead of the above 3 lines, then proceed.
+#rl<-lapply(list("./Output Files/Phenotype Residuals_Females.png", "./Output Files/Phenotype Variation_Females.png"), png::readPNG)
+### OR
+#rl<-lapply(list("./Output Files/Phenotype Residuals_Males.png", "./Output Files/Phenotype Variation_Males.png"), png::readPNG)
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
 gl<-lapply(rl, grid::rasterGrob)
 do.call(gridExtra::grid.arrange, gl)
 
@@ -112,6 +167,19 @@ dev.off()
 
 ### Build boxplots of PPCA scores
 png(file="PPC scores boxplots.png",width=7,height=5.5,units="in",res=500)
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+### Note: If assessing sexes separately, use the following lines of code instead of the above 3 lines, then proceed.
+png(file="PPC scores boxplots_Females.png",width=7,height=5.5,units="in",res=500)
+### OR
+#png(file="PPC scores boxplots_Males.png",width=7,height=5.5,units="in",res=500)
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
 
 responsevariable.labs<-c("Bill PPC1", "Bill PPC2", "Feather PPC1", "Feather PPC2")
 names(responsevariable.labs)<- c("BillPC1", "BillPC2", "BodyPC1", "BodyPC2")
