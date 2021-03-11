@@ -248,6 +248,20 @@ is.binary(phy)
 ### Migration strategy
 ### Load the dataset to save as a factor (continuous var as vector below)
 Tyrannus.data<-read.csv('./Output Files/Tyrannus morphology + PCA avg.csv', row.names = 1)
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#Tyrannus.data<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Females.csv', row.names = 1)
+#OR
+#Tyrannus.data<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Males.csv', row.names = 1)
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
 species<-rownames(Tyrannus.data)
 Tyrannus.data<-cbind(species,Tyrannus.data)
 
@@ -386,6 +400,7 @@ rasterImage(img1,-7,-3.25,-2,-1.5)
 rasterImage(img2, -3.5,1.75,0.5,3)
 rasterImage(img3, 9,-3.5,13,-2)
 rasterImage(img4, 10,1,15,2.5)
+
 box()
 title(main="Bill PPCA")
 
@@ -396,6 +411,22 @@ mtext(at=-2, text=paste0("short, narrow, shallow"), side=1, line=0.5, cex=0.45)
 mtext(at=11, text=paste0("long, wide, deep"), side=1, line=0.5, cex=0.45)
 mtext(at=1.75, text=paste0("long, narrow, shallow"), side=2, line=0.7, cex=0.45)
 mtext(at=-2.75, text=paste0("short, wide, deep"), side=2, line=0.7, cex=0.45)
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above lines, then proceed.
+#mtext(at=-4, text=paste0("short, narrow, shallow"), side=1, line=0.5, cex=0.45)
+#mtext(at=11, text=paste0("long, wide, deep"), side=1, line=0.5, cex=0.45)
+#mtext(at=1.75, text=paste0("long, narrow, shallow"), side=2, line=0.7, cex=0.45)
+#mtext(at=-2, text=paste0("short, wide, deep"), side=2, line=0.7, cex=0.45)
+#OR
+#rect(xleft= 28.43172,ybottom=-27.89040,xright= 64.27720,ytop= 19.31986,lty=3) ### see range body scores avg 2 below to set these properly
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
 
 mtext(text=paste0("PC1 (",round(100*(diag(bill_pca$Eval)[1]/sum(diag(bill_pca$Eval))),2),"%)"),side=1,line=1.3,cex=0.55)
 mtext(text=paste0("PC2 (",round(100*(diag(bill_pca$Eval)[2]/sum(diag(bill_pca$Eval))),2),"%)"),side=2,line=1.3,cex=0.55)
@@ -438,6 +469,22 @@ mtext(at=50, text=paste0("short feathers"), side=1, line=0.7, cex=0.45)
 mtext(at=-25, text=paste0("long feathers"), side=2, line=0.7, cex=0.45)
 mtext(at=10, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)
 
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above lines, then proceed.
+#mtext(at=-125, text=paste0("long feathers"), side=1, line=0.7, cex=0.45)
+#mtext(at=25, text=paste0("short feathers"), side=1, line=0.7, cex=0.45)
+#mtext(at=-25, text=paste0("long feathers"), side=2, line=0.7, cex=0.45)
+#mtext(at=10, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)#OR
+#OR
+#rect(xleft= 28.43172,ybottom=-27.89040,xright= 64.27720,ytop= 19.31986,lty=3) ### see range body scores avg 2 below to set these properly
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
 mtext(text=paste0("PC1 (",round(100*(diag(body_pca$Eval)[1]/sum(diag(body_pca$Eval))),2),"%)"),side=1,line=1.3,cex=0.55)
 mtext(text=paste0("PC2 (",round(100*(diag(body_pca$Eval)[2]/sum(diag(body_pca$Eval))),2),"%)"),side=2,line=1.3,cex=0.55)
 
@@ -464,6 +511,22 @@ mtext(at=27.5, text=paste0("long feathers"), side=1, line=0.5, cex=0.45)
 mtext(at=57.5, text=paste0("short feathers"), side=1, line=0.5, cex=0.45)
 mtext(at=-25, text=paste0("long feathers"), side=2, line=0.7, cex=0.45)
 mtext(at=7.75, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above lines, then proceed.
+#mtext(at=14, text=paste0("long feathers"), side=1, line=0.5, cex=0.45)
+#mtext(at=40, text=paste0("short feathers"), side=1, line=0.5, cex=0.45)
+#mtext(at=-25, text=paste0("long feathers"), side=2, line=0.7, cex=0.45)
+#mtext(at=5, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)
+#OR
+#rect(xleft= 28.43172,ybottom=-27.89040,xright= 64.27720,ytop= 19.31986,lty=3) ### see range body scores avg 2 below to set these properly
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
 
 mtext(text=paste0("PC1 (",round(100*(diag(body_pca$Eval)[1]/sum(diag(body_pca$Eval))),2),"%)"),side=1,line=1.3,cex=0.55)
 mtext(text=paste0("PC2 (",round(100*(diag(body_pca$Eval)[2]/sum(diag(body_pca$Eval))),2),"%)"),side=2,line=1.3,cex=0.55)
