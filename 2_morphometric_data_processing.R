@@ -107,7 +107,7 @@ write.csv(morphology_summary,file="morphology_summary_table.csv")
 #Note: If assessing sexes separately, use one of the following lines to write out the data file, then proceed.
 #write.csv(morphology_summary, file="morphology_summary_table_Females.csv")
 #OR
-#write.csv(morpho, file="morphology_summary_table_Males.csv")
+#write.csv(morphology_summary, file="morphology_summary_table_Males.csv")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
