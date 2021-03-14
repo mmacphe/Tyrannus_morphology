@@ -390,6 +390,7 @@ plot(bill_scores_df[,1],bill_scores_df[,2],bg=gsub("NA60",NA,paste0(coldf[bill_s
 
 points(bill_scores_avg[,1], bill_scores_avg[,2],pch=coldf[rownames(bill_scores_avg),]$pch,bg= coldf[rownames(bill_scores_avg),]$col,col=coldf[rownames(bill_scores_avg),]$outlinecolor,cex=2,lwd=coldf$outlinelwd)
 
+### Do not add these to the sex-specific .png's ###
 img1<-readPNG("T_savana.png")
 img2<-readPNG("T_caudifasciatus.png")
 img3<-readPNG("T_crassirostris.png")
@@ -422,7 +423,10 @@ mtext(at=-2.75, text=paste0("short, wide, deep"), side=2, line=0.7, cex=0.45)
 #mtext(at=1.75, text=paste0("long, narrow, shallow"), side=2, line=0.7, cex=0.45)
 #mtext(at=-2, text=paste0("short, wide, deep"), side=2, line=0.7, cex=0.45)
 #OR
-#rect(xleft= 28.43172,ybottom=-27.89040,xright= 64.27720,ytop= 19.31986,lty=3) ### see range body scores avg 2 below to set these properly
+#mtext(at=-3, text=paste0("short, narrow, shallow"), side=1, line=0.5, cex=0.45)
+#mtext(at=11, text=paste0("long, wide, deep"), side=1, line=0.5, cex=0.45)
+#mtext(at=1.75, text=paste0("long, narrow, shallow"), side=2, line=0.7, cex=0.45)
+#mtext(at=-2.75, text=paste0("short, wide, deep"), side=2, line=0.7, cex=0.45)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -479,7 +483,10 @@ mtext(at=10, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)
 #mtext(at=-25, text=paste0("long feathers"), side=2, line=0.7, cex=0.45)
 #mtext(at=10, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)#OR
 #OR
-#rect(xleft= 28.43172,ybottom=-27.89040,xright= 64.27720,ytop= 19.31986,lty=3) ### see range body scores avg 2 below to set these properly
+#mtext(at=-160, text=paste0("long feathers"), side=1, line=0.7, cex=0.45)
+#mtext(at=50, text=paste0("short feathers"), side=1, line=0.7, cex=0.45)
+#mtext(at=-25, text=paste0("long feathers"), side=2, line=0.7, cex=0.45)
+#mtext(at=10, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -501,6 +508,7 @@ body_scores_avg2<-body_scores_avg[-c(15,20,21,22,23,24),]
 
 points(body_scores_avg2[,1], body_scores_avg2[,2],pch=coldf[rownames(body_scores_avg2),]$pch,bg= coldf[rownames(body_scores_avg2),]$col,col=coldf[rownames(body_scores_avg2),]$outlinecolor,cex=2,lwd=coldf[rownames(body_scores_avg2),]$outlinelwd)
 
+### Do not add these to the sex-specific .png's ###
 rasterImage(img2, 55,3,61.5,13)
 rasterImage(img3, 46.5,-30,53,-20)
 
@@ -522,7 +530,10 @@ mtext(at=7.75, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)
 #mtext(at=-25, text=paste0("long feathers"), side=2, line=0.7, cex=0.45)
 #mtext(at=5, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)
 #OR
-#rect(xleft= 28.43172,ybottom=-27.89040,xright= 64.27720,ytop= 19.31986,lty=3) ### see range body scores avg 2 below to set these properly
+#mtext(at=32.5, text=paste0("long feathers"), side=1, line=0.5, cex=0.45)
+#mtext(at=57.5, text=paste0("short feathers"), side=1, line=0.5, cex=0.45)
+#mtext(at=-25, text=paste0("long wings, short tails"), side=2, line=0.7, cex=0.45)
+#mtext(at=7.75, text=paste0("short wings, long tails"), side=2, line=0.7, cex=0.45)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
