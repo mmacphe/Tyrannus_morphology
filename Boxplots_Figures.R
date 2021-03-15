@@ -77,6 +77,27 @@ ggdraw() +
   draw_plot_label(c("A", "B", "B"), c(0.115,0.20, 0.285), c(0.455, 0.455, 0.455), size=8) + #label within plot D
   draw_plot_label(c("A", "A", "A"), c(0.43, 0.522, 0.607), c(0.455, 0.455, 0.455), size=8) + #label within plot E
   draw_plot_label(c("A", "AB", "B"), c(0.755, 0.83, 0.926), c(0.455, 0.455, 0.455), size=8) #label within plot F
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+### Note: If assessing sexes separately, use the following lines of code instead of the above 3 lines, then proceed.
+#ggdraw() +  
+#  draw_plot(p,0,0,1,1) +
+#  draw_plot_label(c("A", "B", "C", "D", "E", "F"), c(0.075,0.395,0.715,0.075,0.395,0.715), c(0.99,0.99,0.99,0.50,0.50,0.50), size=15) +
+#  draw_plot_label(c("A", "A", "A"), c(0.115, 0.20, 0.285), c(0.945, 0.945, 0.945), size=8) + #label within plot A
+#  draw_plot_label(c("A", "A", "A"), c(0.43, 0.522, 0.607), c(0.945, 0.945, 0.945), size=8) + #label within plot B
+#  draw_plot_label(c("A", "A", "A"), c(0.755, 0.84, 0.926), c(0.945, 0.945, 0.945), size=8) + #label within plot C
+#  draw_plot_label(c("A", "AB", "B"), c(0.115,0.20, 0.285), c(0.455, 0.455, 0.455), size=8) + #label within plot D
+#  draw_plot_label(c("A", "A", "A"), c(0.43, 0.522, 0.607), c(0.455, 0.455, 0.455), size=8) + #label within plot E
+#  draw_plot_label(c("A", "AB", "B"), c(0.755, 0.83, 0.926), c(0.455, 0.455, 0.455), size=8) #label within plot F
+### OR
+
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
   
 dev.off()
 
