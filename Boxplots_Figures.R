@@ -57,26 +57,26 @@ p<-residuals %>%
   pivot_longer(BL:TL, names_to = "responsevariable", values_to = "residuals") %>%
   ggplot(aes(y=residuals, x=migration)) + 
   geom_boxplot(color=col) +
-  facet_wrap(vars(responsevariable), ncol=3, labeller=labeller(responsevariable = responsevariable.labs)) +
+  facet_wrap(vars(responsevariable), ncol=3, labeller=labeller(responsevariable = responsevariable.labs),scales="free_y") +
   panel_border() +
   theme_bw() +
   theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank()) +
   theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +
-  scale_y_continuous(expand=c(0,0.5)) +
+  scale_y_continuous(expand=c(0.02,6)) +
   labs(y= "Residuals") 
 
 draw_plot(plot, x = 0, y = 0, width = 1, height = 1)
 ggdraw() +  
   draw_plot(p,0,0,1,1) +
-  draw_plot_label(c("A", "B", "C", "D", "E", "F"), c(0.075,0.385,0.69,0.075,0.385,0.69), c(0.99,0.99,0.99,0.50,0.50,0.50), size=15) +
-  draw_plot_label(c("A", "A", "A"), c(0.12, 0.22, 0.31), c(0.945, 0.945, 0.945), size=8) + #label within plot A
-  draw_plot_label(c("A", "A", "A"), c(0.43, 0.522, 0.617), c(0.945, 0.945, 0.945), size=8) + #label within plot B
-  draw_plot_label(c("A", "A", "A"), c(0.73, 0.826, 0.924), c(0.945, 0.945, 0.945), size=8) + #label within plot C
-  draw_plot_label(c("A", "A", "A"), c(0.12,0.22, 0.31), c(0.455, 0.455, 0.455), size=8) + #label within plot D
-  draw_plot_label(c("A", "A", "A"), c(0.43, 0.522, 0.617), c(0.455, 0.455, 0.455), size=8) + #label within plot E
-  draw_plot_label(c("A", "A", "A"), c(0.73, 0.826, 0.924), c(0.455, 0.455, 0.455), size=8) #label within plot F
+  draw_plot_label(c("A", "B", "C", "D", "E", "F"), c(0.075,0.395,0.715,0.075,0.395,0.715), c(0.99,0.99,0.99,0.50,0.50,0.50), size=15) +
+  draw_plot_label(c("A", "A", "A"), c(0.115, 0.20, 0.285), c(0.945, 0.945, 0.945), size=8) + #label within plot A
+  draw_plot_label(c("A", "A", "A"), c(0.43, 0.522, 0.607), c(0.945, 0.945, 0.945), size=8) + #label within plot B
+  draw_plot_label(c("A", "A", "A"), c(0.755, 0.84, 0.926), c(0.945, 0.945, 0.945), size=8) + #label within plot C
+  draw_plot_label(c("A", "B", "B"), c(0.115,0.20, 0.285), c(0.455, 0.455, 0.455), size=8) + #label within plot D
+  draw_plot_label(c("A", "A", "A"), c(0.43, 0.522, 0.607), c(0.455, 0.455, 0.455), size=8) + #label within plot E
+  draw_plot_label(c("A", "AB", "B"), c(0.755, 0.83, 0.926), c(0.455, 0.455, 0.455), size=8) #label within plot F
   
 dev.off()
 
@@ -173,7 +173,7 @@ png(file="PPC scores boxplots.png",width=7,height=5.5,units="in",res=500)
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 ### Note: If assessing sexes separately, use the following lines of code instead of the above 3 lines, then proceed.
-png(file="PPC scores boxplots_Females.png",width=7,height=5.5,units="in",res=500)
+#png(file="PPC scores boxplots_Females.png",width=7,height=5.5,units="in",res=500)
 ### OR
 #png(file="PPC scores boxplots_Males.png",width=7,height=5.5,units="in",res=500)
 
@@ -202,7 +202,7 @@ ggdraw() +
   draw_plot(p,0,0,1,1) +
   draw_plot_label(c("A", "B", "C", "D"), c(0.085,0.565,0.085,0.565), c(0.99,0.99,0.53,0.53), size=15) + #main plot identifiers 
   draw_plot_label(c("A", "A", "A"), c(0.156, 0.287, 0.420), c(0.946, 0.946, 0.946), size=8) + #letters for plot A
-  draw_plot_label(c("A", "AB", "B"), c(0.635, 0.766, 0.9), c(0.946, 0.946, 0.946), size=8) + #letters for plot B
+  draw_plot_label(c("A", "A", "B"), c(0.635, 0.766, 0.9), c(0.946, 0.946, 0.946), size=8) + #letters for plot B
   draw_plot_label(c("A", "A", "A"), c(0.156, 0.287, 0.420), c(0.487, 0.487, 0.487), size=8) + #letters for plot C
   draw_plot_label(c("A", "A", "A"), c(0.635, 0.766, 0.9), c(0.487, 0.487, 0.487), size=8) #letters for plot D
 
