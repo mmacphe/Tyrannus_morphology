@@ -92,8 +92,6 @@ ggdraw() +
 #  draw_plot_label(c("A", "AB", "B"), c(0.115,0.20, 0.285), c(0.455, 0.455, 0.455), size=8) + #label within plot D
 #  draw_plot_label(c("A", "A", "A"), c(0.43, 0.522, 0.607), c(0.455, 0.455, 0.455), size=8) + #label within plot E
 #  draw_plot_label(c("A", "AB", "B"), c(0.755, 0.83, 0.926), c(0.455, 0.455, 0.455), size=8) #label within plot F
-### OR
-
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -226,5 +224,22 @@ ggdraw() +
   draw_plot_label(c("A", "A", "B"), c(0.635, 0.766, 0.9), c(0.946, 0.946, 0.946), size=8) + #letters for plot B
   draw_plot_label(c("A", "A", "A"), c(0.156, 0.287, 0.420), c(0.487, 0.487, 0.487), size=8) + #letters for plot C
   draw_plot_label(c("A", "A", "A"), c(0.635, 0.766, 0.9), c(0.487, 0.487, 0.487), size=8) #letters for plot D
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+### Note: If assessing females separately, use the following lines of code instead of the above 3 lines, then proceed.
+ggdraw() +  
+  draw_plot(p,0,0,1,1) +
+  draw_plot_label(c("A", "B", "C", "D"), c(0.085,0.565,0.085,0.565), c(0.99,0.99,0.53,0.53), size=15) + #main plot identifiers 
+  draw_plot_label(c("A", "A", "A"), c(0.156, 0.287, 0.420), c(0.946, 0.946, 0.946), size=8) + #letters for plot A
+  draw_plot_label(c("A", "AB", "B"), c(0.635, 0.766, 0.9), c(0.946, 0.946, 0.946), size=8) + #letters for plot B
+  draw_plot_label(c("A", "A", "A"), c(0.156, 0.287, 0.420), c(0.487, 0.487, 0.487), size=8) + #letters for plot C
+  draw_plot_label(c("A", "A", "A"), c(0.635, 0.766, 0.9), c(0.487, 0.487, 0.487), size=8) #letters for plot D
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
 
 dev.off()
