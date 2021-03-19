@@ -42,7 +42,7 @@ This code creates the following code as outputs: [phylANOVA_output.txt](https://
 
 
 ## Also included:
-### 1. An.R script to produce our boxplot figures [here](https://github.com/mmacphe/Tyrannus_morphology/blob/main/Boxplots_Figures.R).
+### 1. An .R script to produce our boxplot figures [here](https://github.com/mmacphe/Tyrannus_morphology/blob/main/Boxplots_Figures.R).
 
 ### 2. An .R script to assess age and sex class influences on mean morphometric values [here](https://github.com/mmacphe/Tyrannus_morphology/blob/main/LinearModels_Demographic_Influence.R). 
 
