@@ -12,8 +12,20 @@ output:
 ### Copyright: This documentation is available under a [Creative Commons] () licence
 
 ## Modification History
-### See [ReadMe Tyrannus morphology] ()
+### See [ReadMe Tyrannus morphology] (https://github.com/mmacphe/Tyrannus_morphology/commits/main/ReadMe_Tyrannus_morphology.Rmd)
 
+## Purpose
+### Prepare a phylogeny composed of all currently recognized Tyrannus subspecies with which to conduct comparative phylogenetic principal components analyses and phylogenetic ANOVA to assess morphological patterns across migratory, partially migratory, and sedentary lineages. 
+
+## Preliminary Steps (not shown)
+### 1. Download the Harvey et al. 2021 suboscine UCE phylogeny [here](https://github.com/mgharvey/tyranni#tyranni)
+### 2. Extract the Tyrannus genus. This was the [MacPherson_Tyrannus_base.tre](https://github.com/mmacphe/Tyrannus_morphology/blob/main/MacPherson_Tyrannus_base.tre) file that is used in Step 1, below.
+
+## Steps:
+### 1. Follow [the 1_Tyrannus_phylogeny.R script](https://github.com/mmacphe/Tyrannus_morphology/blob/main/1_Tyrannus_phylogeny.R) to add in additional Tyrannus subspecies not present in the Harvey et al. 2021 UCE phylogeny. This creates the [Tyrannus_phylogeny.tre](https://github.com/mmacphe/Tyrannus_morphology/blob/main/Output%20Files/Tyrannus_phylogeny.tre) file used in subsequent comparative phylogenetic analyses.
+### 2. Follow [this 2_morphometric_data_processing.R script](https://github.com/mmacphe/Tyrannus_morphology/blob/main/2_morphometric_data_processing.R) to process measurements from voucher specimens into the formats needed for comparative phylogenetic analyses. This code requires the following files as inputs: [Tyrannus_voucher_table.csv](https://github.com/mmacphe/Tyrannus_morphology/blob/main/Tyrannus_voucher_table.csv), and [Tyrannus_phylogeny.tre](https://github.com/mmacphe/Tyrannus_morphology/blob/main/Output%20Files/Tyrannus_phylogeny.tre) (used to match OTU names in phylogeny to their names in the voucher table). This code creates the following files as outputs: [Tyrannus morphology data.csv](https://github.com/mmacphe/Tyrannus_morphology/blob/main/Output%20Files/Tyrannus%20morphology%20data.csv) (morphometrics for all individuals along with names that match up with the names on the phylogeny), [morphology_summary_table.csv](https://github.com/mmacphe/Tyrannus_morphology/blob/main/Output%20Files/morphology_summary_table.csv) (the mean ± standard deviation and sample size of each morphometric for each OTU), [].
+
+### Note: The .R files are all set up so that new runs save outputs to the source folder. All files created by the author are found in the [Output Files folder](https://github.com/mmacphe/Tyrannus_morphology/tree/main/Output%20Files).
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
