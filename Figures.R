@@ -243,3 +243,48 @@ ggdraw() +
 ###END/\/\/\/\/\/\/\/\/\/\/\###
 
 dev.off()
+
+### Build ancestral state reconstruction for wing chord length for supplementary material
+require(phytools)
+png(file="WC_ASR.png",width=7,height=5.5,units="in",res=500)
+
+### Read in phylogeny 
+phy<-read.tree('./Output Files/Tyrannus_phylogeny.tre')
+
+WC<-residuals$WC
+rownames(residuals)<-residuals$Row.names
+names(WC)<- rownames(residuals)
+
+obj<-contMap(phy, WC)
+n<-length(obj$cols) #get the length of the color ramp
+obj$cols[1:n]<-grey(0:(n-1)/(n-1)) #change the color ramp to a grey scale
+
+plot(obj, ftype="on", mar=c(5,5,5,5), legend=0.7*max(nodeHeights(phy), fsize=c(0.7,0.9)))
+
+format_tl<-phy$tip.label
+format_tl<-gsub("_"," ",format_tl)
+format_tl<-gsub("Tyrannus","T.",format_tl)
+
+text(x=rep(5.2,Ntip(phy)),y=1:Ntip(phy),label=format_tl,adj=c(0,0.5),font=3)
+
+dev.off()
+
+### Build ancestral state reconstruction for Kipp's Index for supplementary material
+png(file="KI_ASR.png",width=7,height=5.5,units="in",res=500)
+
+KI<-residuals$KI
+names(KI)<- rownames(residuals)
+
+obj2<-contMap(phy, KI)
+n<-length(obj2$cols) #get the length of the color ramp
+obj2$cols[1:n]<-grey(0:(n-1)/(n-1)) #change the color ramp to a grey scale
+
+plot(obj2, ftype="on", mar=c(5,5,5,5), legend=0.7*max(nodeHeights(phy), fsize=c(0.7,0.9)))
+
+format_tl<-phy$tip.label
+format_tl<-gsub("_"," ",format_tl)
+format_tl<-gsub("Tyrannus","T.",format_tl)
+
+text(x=rep(5.2,Ntip(phy)),y=1:Ntip(phy),label=format_tl,adj=c(0,0.5),font=3)
+
+dev.off()
