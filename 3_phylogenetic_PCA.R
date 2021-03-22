@@ -390,18 +390,6 @@ plot(bill_scores_df[,1],bill_scores_df[,2],bg=gsub("NA60",NA,paste0(coldf[bill_s
 
 points(bill_scores_avg[,1], bill_scores_avg[,2],pch=coldf[rownames(bill_scores_avg),]$pch,bg= coldf[rownames(bill_scores_avg),]$col,col=coldf[rownames(bill_scores_avg),]$outlinecolor,cex=2,lwd=coldf$outlinelwd)
 
-### Do not add these to the sex-specific .png's ###
-img1<-readPNG("T_savana.png")
-img2<-readPNG("T_caudifasciatus.png")
-img3<-readPNG("T_crassirostris.png")
-img4<-readPNG("T_cubensis_BOW.png")
-
-#specify the position of the image through bottom-left and top-right coords
-rasterImage(img1,-7,-3.25,-2,-1.5)
-rasterImage(img2, -3.5,1.75,0.5,3)
-rasterImage(img3, 9,-3.5,13,-2)
-rasterImage(img4, 10,1,15,2.5)
-
 box()
 title(main="Bill PPCA")
 
@@ -507,10 +495,6 @@ title(main="Feather PPCA zoomed in")
 body_scores_avg2<-body_scores_avg[-c(15,20,21,22,23,24),] 
 
 points(body_scores_avg2[,1], body_scores_avg2[,2],pch=coldf[rownames(body_scores_avg2),]$pch,bg= coldf[rownames(body_scores_avg2),]$col,col=coldf[rownames(body_scores_avg2),]$outlinecolor,cex=2,lwd=coldf[rownames(body_scores_avg2),]$outlinelwd)
-
-### Do not add these to the sex-specific .png's ###
-rasterImage(img2, 55,3,61.5,13)
-rasterImage(img3, 46.5,-30,53,-20)
 
 axis(1,mgp=c(0,0,0),tck=-0.025,cex.axis=0.45)
 axis(2,mgp=c(0,0.25,0),tck=-0.025,cex.axis=0.45)
