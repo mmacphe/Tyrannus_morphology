@@ -316,7 +316,7 @@ col_vec<-vector()
 pch_vec<-vector()
 for(i in 1:length(ssp_count)){
   col_vec<-c(col_vec,rep(sp_col2[i],ssp_count[i]))
-  pch_vec <-c(pch_vec,c(21:25,21:22)[1:ssp_count[i]])
+  pch_vec <-c(pch_vec,c(21:25,3:4)[1:ssp_count[i]])
 }
 coldf$col<-col_vec
 coldf$pch<-pch_vec
