@@ -356,7 +356,10 @@ layout.show(n=4)
 
 par(mar=c(2,0.5,0,14))
 
-plot(obj, ftype="off", mar=c(3,0,0,13), legend=0.7*max(nodeHeights(phy), fsize=c(0.7,0.9)))
+plot(obj, legend=FALSE, ftype="off", mar=c(5.1,0.4,0.4,13), fsize=c(0.7,0.9))
+add.color.bar(2.5,obj$cols,title="Kipp's Index",
+              lims=obj$lims,digits=3,prompt=FALSE,x=0.15,
+              y=2.5-0.08*(Ntip(obj$tree)-1),lwd=4,fsize=0.8,subtitle="")
 
 co<-c("black","gray40","gray70") #Vector of colours for migration strategy
 nodelabels(pie=st, piecol=co, cex=1.5, col="gray32") #plot the probabilities of each state at each node
@@ -377,8 +380,8 @@ text(x=4.7,y=-2.5,label="mya",cex=1,pch=22)
 
 ### Add legend ###
 table(coldf$Strategy)#Counts for each migratory strategy, used in legend
-points(x=rep(0.25,3),y=c(1,2,3),pch=21,bg="gray85",lwd=c(0.5,1.5,2.5),col=c("gray70","gray40","black"),cex=2)
-text(x=rep(0.5,3),y=c(1,2,3),label=c("sedentary (15)","partial migrant (5)","migratory (8)"),adj=c(0,0.5))
+points(x=rep(0.25,3),y=c(2,3,4),pch=21,bg="gray85",lwd=c(0.5,1.5,2.5),col=c("gray70","gray40","black"),cex=2)
+text(x=rep(0.5,3),y=c(2,3,4),label=c("sedentary (15)","partial migrant (5)","migratory (8)"),adj=c(0,0.5))
 
 ### Add figure label ###
 text(x=par("usr")[1]+diff(c(par("usr")[1],par("usr")[2]))*0.05,y=par("usr")[4]-diff(c(par("usr")[3],par("usr")[4]))*0.05,label=LETTERS[1],font=2,cex=1.5)
