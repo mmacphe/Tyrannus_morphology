@@ -48,7 +48,7 @@ png(file="Phenotype Residuals.png",width=7,height=5.5,units="in",res=500)
 ###########################
 ###END/\/\/\/\/\/\/\/\/\/\/\###
 
-responsevariable.labs<-c("Bill Length", "Bill Width", "Bill Depth", "Kipp's Index", "Wing Cord", "Tail Length")
+responsevariable.labs<-c("Bill Length", "Bill Width", "Bill Depth", "Kipp's Index", "Wing Length", "Tail Length")
 names(responsevariable.labs)<- c("BL", "BW", "BD", "KI", "WC", "TL")
 
 col<-c("black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70")
@@ -120,7 +120,7 @@ otu_cv_avg<-subset(otu_cv_avg, select=-c(Tarsus.Average)) #Remove tarsus from th
 
 col<-c("black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70")
 
-responsevariable.labs<-c("Bill Length", "Bill Width", "Bill Depth", "Kipp's Index", "Wing Cord", "Tail Length")
+responsevariable.labs<-c("Bill Length", "Bill Width", "Bill Depth", "Kipp's Index", "Wing Chord Length", "Tail Length")
 names(responsevariable.labs)<- c("BL.Average", "BW.Average", "BD.Average", "Kipp.s.Average", "WC.Average", "Tail")
 
 p<-otu_cv_avg %>%
