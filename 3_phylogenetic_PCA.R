@@ -357,8 +357,8 @@ layout.show(n=4)
 par(mar=c(2,0.5,0,14))
 
 plot(obj, legend=FALSE, ftype="off", mar=c(5.1,0.4,0.4,13), fsize=c(0.7,0.9))
-add.color.bar(2.5,obj$cols,title="Kipp's Index",
-              lims=obj$lims,digits=3,prompt=FALSE,x=0.15,
+add.color.bar(2.5,obj$cols,title="Kipp's Index (mm)",
+              lims=obj$lims,digits=0,prompt=FALSE,x=0.15,
               y=2.5-0.08*(Ntip(obj$tree)-1),lwd=4,fsize=0.8,subtitle="")
 
 co<-c("black","gray40","gray70") #Vector of colours for migration strategy
