@@ -293,11 +293,11 @@ fit.mkn[1:2]
 #Export marginal ancestral reconstruction at the notes of the tree
 st<-t(asr.marginal(lik.mkn.base,coef(fit.mkn)))
 
-BillPC2<-Tyrannus.data$BillPC2
-names(BillPC2)<- rownames(Tyrannus.data)
-View(BillPC2)
+KI<-Tyrannus.data$Kipp.s.Average
+names(KI)<- rownames(Tyrannus.data)
+View(KI)
 
-obj<-contMap(phy, BillPC2)
+obj<-contMap(phy, KI)
 n<-length(obj$cols) #get the length of the color ramp
 obj$cols[1:n]<-grey(0:(n-1)/(n-1)) #change the color ramp to a grey scale
 
