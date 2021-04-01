@@ -1,0 +1,319 @@
+Character 1 -- BL.Average
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+           Sum Sq  Mean Sq  F value Pr(>F)
+x        0.002039 0.001019 3.115647  0.218
+Residual 0.008180 0.000327                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000 -1.125469  1.364877
+partial    1.125469  0.000000  2.399614
+sedentary -1.364877 -2.399614  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.271     0.397
+partial       0.271   1.000     0.100
+sedentary     0.397   0.100     1.000
+---------
+
+#############
+
+Character 2 -- BW.Average
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+           Sum Sq  Mean Sq F value Pr(>F)
+x        0.001551 0.000775 3.02616  0.231
+Residual 0.006405 0.000256               
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000 -0.026585  2.115922
+partial    0.026585  0.000000  1.823210
+sedentary -2.115922 -1.823210  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.983     0.197
+partial       0.983   1.000     0.192
+sedentary     0.197   0.192     1.000
+---------
+
+#############
+
+Character 3 -- BD.Average
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+           Sum Sq  Mean Sq  F value Pr(>F)
+x        0.001013 0.000506 2.795399  0.248
+Residual 0.004530 0.000181                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000 -0.147753  1.968564
+partial    0.147753  0.000000  1.832046
+sedentary -1.968564 -1.832046  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.858     0.229
+partial       0.858   1.000     0.203
+sedentary     0.229   0.203     1.000
+---------
+
+#############
+
+Character 4 -- Tarsus.Average
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+           Sum Sq  Mean Sq  F value Pr(>F)
+x        0.000622 0.000311 4.848171  0.097
+Residual 0.001603 0.000064                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000 -0.250276  2.561142
+partial    0.250276  0.000000  2.447611
+sedentary -2.561142 -2.447611  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.801     0.108
+partial       0.801   1.000     0.085
+sedentary     0.108   0.085     1.000
+---------
+
+#############
+
+Character 5 -- Kipp.s.Average
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+           Sum Sq  Mean Sq  F value Pr(>F)
+x        0.000735 0.000367 0.911216  0.586
+Residual 0.010079 0.000403                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory  partial sedentary
+migratory  0.000000 1.085508  1.238311
+partial   -1.085508 0.000000 -0.148539
+sedentary -1.238311 0.148539  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.259     0.424
+partial       0.259   1.000     0.922
+sedentary     0.424   0.922     1.000
+---------
+
+#############
+
+Character 6 -- WC.Average
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+           Sum Sq  Mean Sq  F value Pr(>F)
+x        0.000102 0.000051 0.077683  0.952
+Residual 0.016455 0.000658                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000  0.177006  0.393482
+partial   -0.177006  0.000000  0.138182
+sedentary -0.393482 -0.138182  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.853     0.810
+partial       0.853   1.000     0.927
+sedentary     0.810   0.927     1.000
+---------
+
+#############
+
+Character 7 -- Tail
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+           Sum Sq  Mean Sq  F value Pr(>F)
+x        0.008764 0.004382 0.705339  0.677
+Residual 0.155317 0.006213                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory  partial sedentary
+migratory  0.000000 1.180874  0.481208
+partial   -1.180874 0.000000 -0.895686
+sedentary -0.481208 0.895686  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.250     0.776
+partial       0.250   1.000     0.543
+sedentary     0.776   0.543     1.000
+---------
+
+#############
+
+Character 8 -- CVBillPC1
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+             Sum Sq   Mean Sq  F value Pr(>F)
+x          5.815146  2.907573 0.138861  0.912
+Residual 523.468096 20.938724                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000  0.063054  0.484438
+partial   -0.063054  0.000000  0.341092
+sedentary -0.484438 -0.341092  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.954     0.764
+partial       0.954   1.000     0.801
+sedentary     0.764   0.801     1.000
+---------
+
+#############
+
+Character 9 -- CVBillPC2
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+           Sum Sq  Mean Sq  F value Pr(>F)
+x        18.18714 9.093571 4.669902  0.112
+Residual 48.68181 1.947272                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000 -0.594938 -2.892552
+partial    0.594938  0.000000 -1.795486
+sedentary  2.892552  1.795486  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.566     0.086
+partial       0.566   1.000     0.209
+sedentary     0.086   0.209     1.000
+---------
+
+#############
+
+Character 10 -- CVBodyPC1
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+            Sum Sq  Mean Sq  F value Pr(>F)
+x         4941.591 2470.796 0.817458  0.623
+Residual 75563.338 3022.534                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000 -0.850779   0.40007
+partial    0.850779  0.000000   1.27841
+sedentary -0.400070 -1.278410   0.00000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.403     0.789
+partial       0.403   1.000     0.347
+sedentary     0.789   0.347     1.000
+---------
+
+#############
+
+Character 11 -- CVBodyPC2
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+            Sum Sq  Mean Sq  F value Pr(>F)
+x         663.6245 331.8123 1.719694  0.417
+Residual 4823.7116 192.9485                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory  partial sedentary
+migratory  0.000000 0.175029 -1.510374
+partial   -0.175029 0.000000 -1.473708
+sedentary  1.510374 1.473708  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.872     0.355
+partial       0.872   1.000     0.306
+sedentary     0.355   0.306     1.000
+---------
+
+#############
+
