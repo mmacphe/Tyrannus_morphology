@@ -104,6 +104,7 @@ body_scores_avg<-t(sapply(body_scores_split,function(x) c(mean(na.omit(x[,1])),m
 
 body_scores_avg<-as.data.frame(body_scores_avg)
 morpho$BodyPC1<-body_scores_avg$V1
+
 morpho$BodyPC2<-body_scores_avg$V2
 
 ### Body PCA without T. forficatus or T. savana bc their tails are so long ###
