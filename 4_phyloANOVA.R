@@ -55,12 +55,20 @@ for(i in 1:length(response_var)){
 	phylANOVA_output[[i]]<-phylANOVA(phy, x=migration, y=phyl.resid_output[[i]]$resid[,1], p.adj="none")
 }
 
+##with p.adj="bonferroni" to account for multiple hypothesis testing
+for(i in 1:length(response_var)){
+  print(paste0("Character ",i," -- ",response_var[i]))#Report character
+  character_of_interest<-otu_avg[,response_var[i]] #Extract character of interest (coi)
+  names(character_of_interest)<-rownames(otu_avg) #Add names to vector of coi
+  phyl.resid_output[[i]]<-phyl.resid(phy,tarsus.length, character_of_interest,method="lambda") #Perform phylogenetic residuals
+  phylANOVA_output[[i]]<-phylANOVA(phy, x=migration, y=phyl.resid_output[[i]]$resid[,1], p.adj="bonferroni")
+}
 names(phyl.resid_output)<-response_var
 names(phylANOVA_output)<-response_var 
 
 ### Write out output ###
 sink("phylANOVA_output.txt")
-
+sink("phylANOVA_bonferonni_output.txt")
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
 ###/\/\/\/\/\/\/\/\/\/\/\###
