@@ -352,7 +352,7 @@ png(file="Tyrannus_phylogenetic_PCA.png",width=8.5,height=11,units="in",res=500)
 ###########################
 ###END/\/\/\/\/\/\/\/\/\/\/\###
 
-layout(matrix(c(1,1,1,5,2,3,4,5),nrow=4),widths=c(2.25,1,3.25))
+layout(matrix(c(1,1,1,5,2,3,4,5),nrow=4), widths=c(2.75,1,1,1,3.75))
 layout.show(n=5)
 
 par(mar=c(2,0.5,0,14))
@@ -537,26 +537,44 @@ text(x=par("usr")[1]+diff(c(par("usr")[1],par("usr")[2]))*0.075,y=par("usr")[4]-
 #par(mar=c(2,0.5,0,14))
 
 #require(magick)
-T_savana<-magick::image_read("50763510127_317508235f_o.jpg")
-T_caudifasciatus<-magick::image_read("T_caudifasciatus.png")
-T_crassirostris<-magick::image_read("50250535916_399b2a0dea_o.jpg")
-T_cubensis<-magick::image_read("Giant Kingbird 2 HR.jpg")
 
-# Resize images
-T_savana<-image_scale(T_savana, "200") # width: 150px
+# Crop images
+#img<-image_crop(example, "100x150+50")#crop out width:100px and height:150px starting +50px from the left
+
+T_savana<-magick::image_read("50763510127_317508235f_o.jpg")
+T_savana<-image_scale(T_savana, "200") # width: 200px
+T_savana<-image_crop(T_savana, "200x300+0+20")
 T_savana
-T_caudifasciatus<-image_scale(T_caudifasciatus,"400")
+
+T_caudifasciatus<-magick::image_read("T_caudifasciatus.png")
+T_caudifasciatus<-image_scale(T_caudifasciatus,"600")
+T_caudifasciatus<-image_crop(T_caudifasciatus, "300x280+120+10")
 T_caudifasciatus
-T_crassirostris<-image_scale(T_crassirostris,"200")
+
+T_crassirostris<-magick::image_read("50250535916_399b2a0dea_o.jpg")
+T_crassirostris<-image_scale(T_crassirostris,"275")
+T_crassirostris<-image_crop(T_crassirostris,"250x280+40+0")
 T_crassirostris
-T_cubensis<-image_scale(T_cubensis,"200")
+
+T_cubensis<-magick::image_read("Giant Kingbird 2 HR.jpg")
+T_cubensis<-image_scale(T_cubensis,"450")
+T_cubensis<-image_crop(T_cubensis,"210x280+190")
 T_cubensis
+
 photos<-image_append(c(T_savana, T_caudifasciatus, T_crassirostris, T_cubensis))
 
 par(mar=c(0,0,0,0))
 
 plot(photos)
 
-### Add the matching symbols from the tip.labels to each photo
+points(x=180, y=260, cex=2, pch=coldf[phy$tip.label,]$pch[26],bg=coldf[phy$tip.label,]$col[26], col=coldf[phy$tip.label,]$outlinecolor[26],lwd=coldf[phy$tip.label,]$outlinelwd[26],lty=3)
+points(x=480, y=260, cex=2, pch=coldf[phy$tip.label,]$pch[21],bg=coldf[phy$tip.label,]$col[21], col=coldf[phy$tip.label,]$outlinecolor[21],lwd=coldf[phy$tip.label,]$outlinelwd[21],lty=3)
+points(x=720, y=260, cex=2, pch=coldf[phy$tip.label,]$pch[14],bg=coldf[phy$tip.label,]$col[14], col=coldf[phy$tip.label,]$outlinecolor[14],lwd=coldf[phy$tip.label,]$outlinelwd[14],lty=3)
+points(x=930, y=260, cex=2, pch=coldf[phy$tip.label,]$pch[4],bg=coldf[phy$tip.label,]$col[4], col=coldf[phy$tip.label,]$outlinecolor[4],lwd=coldf[phy$tip.label,]$outlinelwd[4],lty=3)
+
+text(x=20, y=260, paste0("E"), font=2, cex=1.5)
+text(x=220, y=260, paste0("F"),font=2, cex=1.5)
+text(x=520, y=260, paste0("G"),font=2, cex=1.5)
+text(x=750, y=260, paste0("H"),font=2, cex=1.5)
 
 dev.off()
