@@ -352,7 +352,7 @@ png(file="Tyrannus_phylogenetic_PCA.png",width=8.5,height=11,units="in",res=500)
 ###########################
 ###END/\/\/\/\/\/\/\/\/\/\/\###
 
-layout(matrix(c(1,1,1,5,2,3,4,5),nrow=4),widths=c(2.25,3.25,1))
+layout(matrix(c(1,1,1,5,2,3,4,5),nrow=4),widths=c(2.25,1,3.25))
 layout.show(n=5)
 
 par(mar=c(2,0.5,0,14))
@@ -534,7 +534,29 @@ mtext(text=paste0("PC2 (",round(100*(diag(body_pca$Eval)[2]/sum(diag(body_pca$Ev
 text(x=par("usr")[1]+diff(c(par("usr")[1],par("usr")[2]))*0.075,y=par("usr")[4]-diff(c(par("usr")[3],par("usr")[4]))*0.1,label=LETTERS[4],font=2,cex=1.5)
 
 ### Bird Pictures Panel ###
-par(mar=c(2,0.5,0,14))
+#par(mar=c(2,0.5,0,14))
 
+#require(magick)
+T_savana<-magick::image_read("50763510127_317508235f_o.jpg")
+T_caudifasciatus<-magick::image_read("T_caudifasciatus.png")
+T_crassirostris<-magick::image_read("50250535916_399b2a0dea_o.jpg")
+T_cubensis<-magick::image_read("Giant Kingbird 2 HR.jpg")
+
+# Resize images
+T_savana<-image_scale(T_savana, "200") # width: 150px
+T_savana
+T_caudifasciatus<-image_scale(T_caudifasciatus,"400")
+T_caudifasciatus
+T_crassirostris<-image_scale(T_crassirostris,"200")
+T_crassirostris
+T_cubensis<-image_scale(T_cubensis,"200")
+T_cubensis
+photos<-image_append(c(T_savana, T_caudifasciatus, T_crassirostris, T_cubensis))
+
+par(mar=c(0,0,0,0))
+
+plot(photos)
+
+### Add the matching symbols from the tip.labels to each photo
 
 dev.off()
