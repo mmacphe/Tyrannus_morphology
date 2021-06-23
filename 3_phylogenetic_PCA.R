@@ -72,7 +72,7 @@ phy$tip.label
 phy$tip.label[!phy$tip.label %in% names(morpho_split)] #should return character(0)
 names(morpho_split)[! names(morpho_split) %in% phy$tip.label] #should return character (0)
 
-morpho_trim<-lapply(morpho_split,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Average", "WC.Average", "Tail", "Tarsus.Average", "name_num")])
+morpho_trim<-lapply(morpho_split,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "Kipp.s.Index", "WC.Average", "Tail", "Tarsus.Average", "name_num")])
 
 bill_mat<-matrix(as.numeric(as.matrix(do.call(rbind, lapply(morpho_trim,function(x) x[,1:3])))),nrow=nrow(do.call(rbind,morpho_trim))) 
 
@@ -294,7 +294,7 @@ fit.mkn[1:2]
 #Export marginal ancestral reconstruction at the notes of the tree
 st<-t(asr.marginal(lik.mkn.base,coef(fit.mkn)))
 
-KI<-Tyrannus.data$Kipp.s.Average
+KI<-Tyrannus.data$Kipp.s.Index
 names(KI)<- rownames(Tyrannus.data)
 View(KI)
 
@@ -337,7 +337,7 @@ coldf$outlinecolor<-c("gray70","gray40","black")[as.numeric(coldf$Strategy)]
 coldf$outlinecolor[coldf$pch %in% c(3,4)]<-coldf$col[coldf$pch %in% c(3,4)]
 coldf$col[coldf$pch %in% c(3,4)]<-NA
 
-png(file="Tyrannus_phylogenetic_PCA.png",width=6.5,height=5.5,units="in",res=500)
+png(file="Tyrannus_phylogenetic_PCA.png",width=8.5,height=11,units="in",res=500)
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -352,13 +352,13 @@ png(file="Tyrannus_phylogenetic_PCA.png",width=6.5,height=5.5,units="in",res=500
 ###########################
 ###END/\/\/\/\/\/\/\/\/\/\/\###
 
-layout(matrix(c(1,1,1,2,3,4),nrow=3),widths=c(2.25,1))
-layout.show(n=4)
+layout(matrix(c(1,1,1,5,2,3,4,5),nrow=4),widths=c(2.25,3.25,1))
+layout.show(n=5)
 
 par(mar=c(2,0.5,0,14))
 
 plot(obj, legend=FALSE, ftype="off", mar=c(5.1,0.4,0.4,13), fsize=c(0.7,0.9))
-add.color.bar(2.5,obj$cols,title="Kipp's Index (mm)",
+add.color.bar(2.5,obj$cols,title="Kipp's Index",
               lims=obj$lims,digits=0,prompt=FALSE,x=0.15,
               y=2.5-0.08*(Ntip(obj$tree)-1),lwd=4,fsize=0.8,subtitle="")
 
@@ -532,5 +532,9 @@ mtext(text=paste0("PC2 (",round(100*(diag(body_pca$Eval)[2]/sum(diag(body_pca$Ev
 
 ## Figure panel label ###
 text(x=par("usr")[1]+diff(c(par("usr")[1],par("usr")[2]))*0.075,y=par("usr")[4]-diff(c(par("usr")[3],par("usr")[4]))*0.1,label=LETTERS[4],font=2,cex=1.5)
+
+### Bird Pictures Panel ###
+par(mar=c(2,0.5,0,14))
+
 
 dev.off()
