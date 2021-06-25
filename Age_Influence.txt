@@ -1,0 +1,35 @@
+Character 1 -- BL.Average
+
+[1] 308.637
+#############
+
+Character 2 -- BW.Average
+
+[1] 104.2546
+#############
+
+Character 3 -- BD.Average
+
+[1] 187.3144
+#############
+
+Character 4 -- Tarsus.Average
+
+[1] -14.22605
+#############
+
+Character 5 -- Kipp.s.Distance
+
+[1] 322.5347
+#############
+
+Character 6 -- WC.Average
+
+[1] 150.5264
+#############
+
+Character 7 -- Tail
+
+[1] 485.3149
+#############
+
