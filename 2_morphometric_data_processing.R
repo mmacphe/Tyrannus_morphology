@@ -74,7 +74,7 @@ phy$tip.label[!phy$tip.label %in% names(morpho_split)] #Check that this returns 
 names(morpho_split)[! names(morpho_split) %in% phy$tip.label] #Check that this also returns "character(0)"
 
 ### Create summary output df for data frame
-morpho_trim<-lapply(morpho_split,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "Kipp.s.Index", "WC.Average", "Tail", "Tarsus.Average")])
+morpho_trim<-lapply(morpho_split,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "Kipp.s.Index", "WC.Average", "Tail", "Tarsus.Average","Mass")])
 
 ### Get average values for each morphometric
 otu_avg<-list()

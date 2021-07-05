@@ -72,3 +72,6 @@ for(i in 1:length(LM2_output)){
   cat("\n\n")
 }
 sink()
+
+#What we're trying to do is to test whether tarsus length is the best approximation of body mass.
+
