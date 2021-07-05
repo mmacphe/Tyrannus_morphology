@@ -1,105 +1,77 @@
 Character 1 -- BL.Average
 
-Global model call: lm(formula = morpho1[, response_var1[i]] ~ morpho1$tip.label * 
-    morpho1$Age, data = morpho1)
+Global model call: lm(formula = morpho1[, response_var[i]] ~ morpho1$Age, data = morpho1)
 ---
 Model selection table 
-  (Int) mr1$Age mr1$tip.lbl mr1$Age:mr1$tip.lbl df    logLik    AIC   delta weight
-4 15.33       +           +                     31 -1063.475 2189.0    0.00  0.974
-8 15.33       +           +                   + 59 -1039.097 2196.2    7.24  0.026
-3 15.33                   +                     29 -1103.538 2265.1   76.13  0.000
-2 16.79       +                                  4 -2283.140 4574.3 2385.33  0.000
-1 16.65                                          2 -2292.514 4589.0 2400.08  0.000
+  (Int) mr1$Age df    logLik  AIC delta weight
+2 16.83       +  3 -2283.992 4574  0.00  0.999
+1 16.65          2 -2292.514 4589 15.04  0.001
 Models ranked by AIC(x) 
 #############
 
 Character 2 -- BW.Average
 
-Global model call: lm(formula = morpho1[, response_var1[i]] ~ morpho1$tip.label * 
-    morpho1$Age, data = morpho1)
+Global model call: lm(formula = morpho1[, response_var[i]] ~ morpho1$Age, data = morpho1)
 ---
 Model selection table 
-  (Int) mr1$Age mr1$tip.lbl mr1$Age:mr1$tip.lbl df    logLik    AIC   delta weight
-4 8.707       +           +                     31  -549.018 1160.0    0.00  0.992
-3 8.707                   +                     29  -556.405 1170.8   10.77  0.005
-8 8.707       +           +                   + 59  -526.676 1171.4   11.32  0.003
-2 9.206       +                                  4 -1697.131 3402.3 2242.23  0.000
-1 9.168                                          2 -1700.964 3405.9 2245.89  0.000
+  (Int) mr1$Age df    logLik    AIC delta weight
+2 9.223       +  3 -1697.744 3401.5  0.00  0.902
+1 9.168          2 -1700.964 3405.9  4.44  0.098
 Models ranked by AIC(x) 
 #############
 
 Character 3 -- BD.Average
 
-Global model call: lm(formula = morpho1[, response_var1[i]] ~ morpho1$tip.label * 
-    morpho1$Age, data = morpho1)
+Global model call: lm(formula = morpho1[, response_var[i]] ~ morpho1$Age, data = morpho1)
 ---
 Model selection table 
-  (Int) mr1$Age mr1$tip.lbl mr1$Age:mr1$tip.lbl df    logLik    AIC   delta weight
-4 6.323       +           +                     31  -418.012  898.0    0.00      1
-8 6.323       +           +                   + 59  -398.958  915.9   17.89      0
-3 6.323                   +                     29  -447.752  953.5   55.48      0
-2 7.292       +                                  4 -1506.546 3021.1 2123.07      0
-1 7.226                                          2 -1514.267 3032.5 2134.51      0
+  (Int) mr1$Age df    logLik    AIC delta weight
+2 7.294       +  3 -1506.552 3019.1  0.00  0.999
+1 7.226          2 -1514.267 3032.5 13.43  0.001
 Models ranked by AIC(x) 
 #############
 
 Character 4 -- Tarsus.Average
 
-Global model call: lm(formula = morpho1[, response_var1[i]] ~ morpho1$tip.label * 
-    morpho1$Age, data = morpho1)
+Global model call: lm(formula = morpho1[, response_var[i]] ~ morpho1$Age, data = morpho1)
 ---
 Model selection table 
-  (Int) mr1$Age mr1$tip.lbl mr1$Age:mr1$tip.lbl df    logLik    AIC   delta weight
-3 17.64                   +                     29  -943.992 1946.0    0.00  0.583
-4 17.64       +           +                     31  -942.329 1946.7    0.67  0.417
-8 17.64       +           +                   + 59  -931.938 1981.9   35.89  0.000
-1 19.59                                          2 -1766.338 3536.7 1590.69  0.000
-2 19.60       +                                  4 -1765.782 3539.6 1593.58  0.000
+  (Int) mr1$Age df    logLik    AIC delta weight
+1 19.59          2 -1766.338 3536.7  0.00  0.624
+2 19.61       +  3 -1765.844 3537.7  1.01  0.376
 Models ranked by AIC(x) 
 #############
 
 Character 5 -- Kipp.s.Distance
 
-Global model call: lm(formula = morpho1[, response_var1[i]] ~ morpho1$tip.label * 
-    morpho1$Age, data = morpho1)
+Global model call: lm(formula = morpho1[, response_var[i]] ~ morpho1$Age, data = morpho1)
 ---
 Model selection table 
-  (Int) mr1$Age mr1$tip.lbl mr1$Age:mr1$tip.lbl df    logLik    AIC   delta weight
-8 28.51       +           +                   + 59 -2091.721 4301.4    0.00      1
-4 28.51       +           +                     31 -2128.821 4319.6   18.20      0
-3 28.51                   +                     29 -2219.378 4496.8  195.31      0
-2 32.93       +                                  4 -2853.027 5714.1 1412.61      0
-1 32.43                                          2 -2866.032 5736.1 1434.62      0
+  (Int) mr1$Age df    logLik    AIC delta weight
+2 32.73       +  3 -2859.574 5725.1  0.00  0.996
+1 32.43          2 -2866.032 5736.1 10.92  0.004
 Models ranked by AIC(x) 
 #############
 
 Character 6 -- WC.Average
 
-Global model call: lm(formula = morpho1[, response_var1[i]] ~ morpho1$tip.label * 
-    morpho1$Age, data = morpho1)
+Global model call: lm(formula = morpho1[, response_var[i]] ~ morpho1$Age, data = morpho1)
 ---
 Model selection table 
-  (Int) mr1$Age mr1$tip.lbl mr1$Age:mr1$tip.lbl df    logLik    AIC   delta weight
-4 105.4       +           +                     31 -2468.027 4998.1    0.00  0.999
-8 105.4       +           +                   + 59 -2447.618 5013.2   15.18  0.001
-3 105.4                   +                     29 -2557.275 5172.5  174.50  0.000
-2 115.2       +                                  4 -3190.221 6388.4 1390.39  0.000
-1 114.2                                          2 -3212.379 6428.8 1430.71  0.000
+  (Int) mr1$Age df    logLik    AIC delta weight
+2 114.9       +  3 -3195.690 6397.4  0.00      1
+1 114.2          2 -3212.379 6428.8 31.38      0
 Models ranked by AIC(x) 
 #############
 
 Character 7 -- Tail
 
-Global model call: lm(formula = morpho1[, response_var1[i]] ~ morpho1$tip.label * 
-    morpho1$Age, data = morpho1)
+Global model call: lm(formula = morpho1[, response_var[i]] ~ morpho1$Age, data = morpho1)
 ---
 Model selection table 
-   (Int) mr1$Age mr1$tip.lbl mr1$Age:mr1$tip.lbl df    logLik    AIC   delta weight
-8  91.22       +           +                   + 59 -3601.243 7320.5    0.00      1
-4  91.22       +           +                     31 -3813.046 7688.1  367.61      0
-3  91.22                   +                     29 -3885.228 7828.5  507.97      0
-2 111.90       +                                  4 -4616.896 9241.8 1921.31      0
-1 109.40                                          2 -4622.742 9249.5 1929.00      0
+  (Int) mr1$Age df    logLik    AIC delta weight
+2 111.0       +  3 -4619.510 9245.0  0.00  0.903
+1 109.4          2 -4622.742 9249.5  4.46  0.097
 Models ranked by AIC(x) 
 #############
 
