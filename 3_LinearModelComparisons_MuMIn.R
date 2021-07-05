@@ -35,8 +35,10 @@ LM1_output<-list() #Affect of Sex Class
 LM2_output<-list() #Affect of Age Class
 
 options(na.action = "na.fail")
-morpho1<-na.omit(morpho) #we have to remove all the NAs to run the dredge()
-response_var<-colnames(morpho1)[c(19,20,21,22,23,24,25)]
+morpho1<-subset(morpho, select=c(BL.Average,BW.Average,BD.Average,Tarsus.Average,Kipp.s.Distance,WC.Average,Tail,Age,Sex,Kipp.s.Index,tip.label)) #remove the Mass column for the first comparisons bc it is unnecessary for the next step and has NAs that will affect the outcome
+colnames(morpho1) #look at the column names to pick out the right ones for response_var
+morpho1<-na.omit(morpho1) #we have to remove all the NAs to run the dredge()
+response_var<-colnames(morpho1)[c(1,2,3,4,5,6,7)]
 
 for(i in 1:length(response_var)){
   print(paste0("Character",i," -- ",response_var[i]))#Report character
@@ -73,5 +75,19 @@ for(i in 1:length(LM2_output)){
 }
 sink()
 
-#What we're trying to do is to test whether tarsus length is the best approximation of body mass.
+# What we're trying to do is to test whether tarsus length is the best approximation of body mass.
+morpho2<-subset(morpho, select=c(Mass,BL.Average,BW.Average,BD.Average,Tarsus.Average,Kipp.s.Distance,WC.Average,Tail,Kipp.s.Index,tip.label)) #remove the Mass column for the first comparisons bc it is unnecessary for the next step and has NAs that will affect the outcome
+colnames(morpho2) #check the column names to make sure they're all there
+morpho2<-na.omit(morpho2) #we have to remove all the NAs to run the dredge(); leaves 190 observations
+birds.fullmodel_Tarsus<-lm(Mass~(BL.Average+BW.Average+BD.Average+Tarsus.Average+Kipp.s.Distance+WC.Average+Tail+Kipp.s.Index)*tip.label, data = morpho2)
 
+LM3_output<-dredge(birds.fullmodel_Tarsus, rank = "AIC")
+head(LM3_output,25) #the top 25 models
+nrow(LM3_output[LM3_output$delta<7, ]) #models with delta AIC < 7 (returns [1] 49)
+w<-Weights(LM3_output)
+w
+
+#Refit best linear model
+bestmodel<-get.models(LM3_output, 1)[[1]]
+z<-lm(bestmodel,data=morpho2)
+summary(z) #the best model has tarsus length as the most important factor (p=0.000448)

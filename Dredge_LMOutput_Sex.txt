@@ -3,9 +3,9 @@ Character 1 -- BL.Average
 Global model call: lm(formula = morpho1[, response_var[i]] ~ morpho1$Sex, data = morpho1)
 ---
 Model selection table 
-  (Int) mr1$Sex df    logLik  AIC delta weight
-1 16.65          2 -2292.514 4589  0.00   0.73
-2 16.66       +  3 -2292.508 4591  1.99   0.27
+  (Int) mr1$Sex df    logLik    AIC delta weight
+1 16.49          2 -2475.212 4954.4  0.00  0.723
+2 16.53       +  3 -2475.173 4956.3  1.92  0.277
 Models ranked by AIC(x) 
 #############
 
@@ -15,8 +15,8 @@ Global model call: lm(formula = morpho1[, response_var[i]] ~ morpho1$Sex, data =
 ---
 Model selection table 
   (Int) mr1$Sex df    logLik    AIC delta weight
-2 9.324       +  3 -1698.334 3402.7  0.00  0.836
-1 9.168          2 -1700.964 3405.9  3.26  0.164
+2 9.269       +  3 -1831.583 3669.2  0.00  0.873
+1 9.109          2 -1834.515 3673.0  3.86  0.127
 Models ranked by AIC(x) 
 #############
 
@@ -26,8 +26,8 @@ Global model call: lm(formula = morpho1[, response_var[i]] ~ morpho1$Sex, data =
 ---
 Model selection table 
   (Int) mr1$Sex df    logLik    AIC delta weight
-2 7.349       +  3 -1511.732 3029.5  0.00  0.823
-1 7.226          2 -1514.267 3032.5  3.07  0.177
+2 7.315       +  3 -1621.589 3249.2  0.00  0.915
+1 7.177          2 -1624.961 3253.9  4.74  0.085
 Models ranked by AIC(x) 
 #############
 
@@ -37,8 +37,8 @@ Global model call: lm(formula = morpho1[, response_var[i]] ~ morpho1$Sex, data =
 ---
 Model selection table 
   (Int) mr1$Sex df    logLik    AIC delta weight
-1 19.59          2 -1766.338 3536.7     0  0.731
-2 19.59       +  3 -1766.337 3538.7     2  0.269
+1 19.53          2 -1893.088 3790.2   0.0  0.721
+2 19.55       +  3 -1893.039 3792.1   1.9  0.279
 Models ranked by AIC(x) 
 #############
 
@@ -48,8 +48,8 @@ Global model call: lm(formula = morpho1[, response_var[i]] ~ morpho1$Sex, data =
 ---
 Model selection table 
   (Int) mr1$Sex df    logLik    AIC delta weight
-2 31.09       +  3 -2852.362 5710.7  0.00      1
-1 32.43          2 -2866.032 5736.1 25.34      0
+2 31.27       +  3 -3062.106 6130.2     0      1
+1 32.65          2 -3077.605 6159.2    29      0
 Models ranked by AIC(x) 
 #############
 
@@ -59,8 +59,8 @@ Global model call: lm(formula = morpho1[, response_var[i]] ~ morpho1$Sex, data =
 ---
 Model selection table 
   (Int) mr1$Sex df    logLik    AIC delta weight
-2 112.4       +  3 -3200.559 6407.1  0.00      1
-1 114.2          2 -3212.379 6428.8 21.64      0
+2 112.3       +  3 -3430.724 6867.4  0.00      1
+1 114.1          2 -3442.620 6889.2 21.79      0
 Models ranked by AIC(x) 
 #############
 
@@ -69,9 +69,9 @@ Character 7 -- Tail
 Global model call: lm(formula = morpho1[, response_var[i]] ~ morpho1$Sex, data = morpho1)
 ---
 Model selection table 
-  (Int) mr1$Sex df    logLik    AIC delta weight
-2 101.3       +  3 -4613.945 9233.9  0.00      1
-1 109.4          2 -4622.742 9249.5 15.59      0
+  (Int) mr1$Sex df    logLik     AIC delta weight
+2 101.6       +  3 -4991.095  9988.2  0.00  0.999
+1 109.5          2 -4999.607 10003.2 15.03  0.001
 Models ranked by AIC(x) 
 #############
 
