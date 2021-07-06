@@ -48,7 +48,7 @@ options(na.action = "na.fail")
 morpho1<-subset(morpho, select=c(BL.Average,BW.Average,BD.Average,Tarsus.Average,Kipp.s.Distance,WC.Average,Tail,Age,Sex,Kipp.s.Index,tip.label)) #remove the Mass column for the first comparisons bc it is unnecessary for the next step and has NAs that will affect the outcome
 colnames(morpho1) #look at the column names to pick out the right ones for response_var
 morpho1<-na.omit(morpho1) #we have to remove all the NAs to run the dredge()
-response_var<-colnames(morpho1)[c(1,2,3,4,5,6,7,10)]
+#response_var<-colnames(morpho1)[c(1,2,3,4,5,6,7,10)]
 
 
 comp_data<-as.mulTree(data=morpho1, tree=phy, taxa="tip.label")
@@ -235,15 +235,36 @@ sink()
 morpho2<-subset(morpho, select=c(Mass,BL.Average,BW.Average,BD.Average,Tarsus.Average,Kipp.s.Distance,WC.Average,Tail,Kipp.s.Index,tip.label)) #remove the Mass column for the first comparisons bc it is unnecessary for the next step and has NAs that will affect the outcome
 colnames(morpho2) #check the column names to make sure they're all there
 morpho2<-na.omit(morpho2) #we have to remove all the NAs to run the dredge(); leaves 190 observations
-birds.fullmodel_Tarsus<-lm(Mass~(BL.Average+BW.Average+BD.Average+Tarsus.Average+Kipp.s.Distance+WC.Average+Tail+Kipp.s.Index)*tip.label, data = morpho2)
+#birds.fullmodel_Tarsus<-lm(Mass~(BL.Average+BW.Average+BD.Average+Tarsus.Average+Kipp.s.Distance+WC.Average+Tail+Kipp.s.Index)*tip.label, data = morpho2)
 
-LM3_output<-dredge(birds.fullmodel_Tarsus, rank = "AIC")
-head(LM3_output,25) #the top 25 models
-nrow(LM3_output[LM3_output$delta<7, ]) #models with delta AIC < 7 (returns [1] 49)
-w<-Weights(LM3_output)
-w
+#LM3_output<-dredge(birds.fullmodel_Tarsus, rank = "AIC")
+#head(LM3_output,25) #the top 25 models
+#nrow(LM3_output[LM3_output$delta<7, ]) #models with delta AIC < 7 (returns [1] 49)
+#w<-Weights(LM3_output)
+#w
 
-#Refit best linear model
-bestmodel<-get.models(LM3_output, 1)[[1]]
-z<-lm(bestmodel,data=morpho2)
-summary(z) #the best model has tarsus length as the most important factor (p=0.000448)
+##Refit best linear model
+#bestmodel<-get.models(LM3_output, 1)[[1]]
+#z<-lm(bestmodel,data=morpho2)
+#summary(z) #the best model has tarsus length as the most important factor (p=0.000448)
+
+#Using mulTree
+comp_data<-as.mulTree(data=morpho2, tree=phy, taxa="tip.label")
+
+my_formula<-Mass~BL.Average+BW.Average+BD.Average+Tarsus.Average+Kipp.s.Distance+WC.Average+Tail
+
+my_parameters<-c(100000,10,1000) #The MCMC parameters (generations, sampling, burnin). Used default settings from https://github.com/TGuillerme/mulTree/blob/master/doc/mulTree-manual.pdf
+
+my_priors<-list(R=list(V=1/2,nu=0.002),G=list(G1=list(V=1/2,nu=0.002)))
+
+## Run the MCMCglmm on the comp_data object
+LM<-mulTree(mulTree.data=comp_data, formula=my_formula,priors=my_priors,parameters=my_parameters,output="Tarsus_Mass",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+Tarsus_Mass<-read.mulTree("Tarsus_Mass",model=TRUE)
+#summarise results
+summary_Tarsus_Mass<-summary(Tarsus_Mass)
+summary_Tarsus_Mass
+
+### Write out output ###
+sink("MCMCglmm_LMOutput_Tarsus_Mass.txt")
+print(summary_Tarsus_Mass)
+sink()
