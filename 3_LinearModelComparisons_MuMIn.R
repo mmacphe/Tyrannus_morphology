@@ -30,6 +30,162 @@ write.csv(morpho_Females, file="Voucher_Table_Females.csv")
 morpho_Males<-morpho[!morpho$Sex=="Female",]
 write.csv(morpho_Males, file="Voucher_Table_Males.csv")
 
+###############################################
+#####/\/\/\/\/\/\/TRY MCMCGLM/\/\/\/\/\/\/\####
+###############################################
+library(MCMCglmm)
+library(caper) #for comparative.data() but doesn't allow duplicate 'row names'(i.e., individuals from the same taxon)
+
+## Installing the package mulTree
+if(!require(devtools)) install.packages("devtools")
+library(devtools)
+install_github("TGuillerme/mulTree", ref = "release")
+library(mulTree)
+
+phy<-read.tree('./Output Files/Tyrannus_phylogeny.tre')
+
+options(na.action = "na.fail")
+morpho1<-subset(morpho, select=c(BL.Average,BW.Average,BD.Average,Tarsus.Average,Kipp.s.Distance,WC.Average,Tail,Age,Sex,Kipp.s.Index,tip.label)) #remove the Mass column for the first comparisons bc it is unnecessary for the next step and has NAs that will affect the outcome
+colnames(morpho1) #look at the column names to pick out the right ones for response_var
+morpho1<-na.omit(morpho1) #we have to remove all the NAs to run the dredge()
+response_var<-colnames(morpho1)[c(1,2,3,4,5,6,7,10)]
+
+
+comp_data<-as.mulTree(data=morpho1, tree=phy, taxa="tip.label")
+
+my_formula_Sex_BL<-BL.Average~Sex
+my_formula_Sex_BW<-BW.Average~Sex
+my_formula_Sex_BD<-BD.Average~Sex
+my_formula_Sex_Tarsus<-Tarsus.Average~Sex
+my_formula_Sex_KippsD<-Kipp.s.Distance~Sex
+my_formula_Sex_WC<-WC.Average~Sex
+my_formula_Sex_Tail<-Tail~Sex
+my_formula_Sex_KI<-Kipp.s.Index~Sex
+
+my_parameters<-c(100000,10,1000) #The MCMC parameters (generations, sampling, burnin). Used default settings from https://github.com/TGuillerme/mulTree/blob/master/doc/mulTree-manual.pdf
+
+my_priors<-list(R=list(V=1/2,nu=0.002),G=list(G1=list(V=1/2,nu=0.002)))
+
+## Run the MCMCglmm on the comp_data object
+LM_Sex_BL<-mulTree(mulTree.data=comp_data, formula=my_formula_Sex_BL,priors=my_priors,parameters=my_parameters,output="Sex_BL",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+LM_Sex_BW<-mulTree(mulTree.data=comp_data, formula=my_formula_Sex_BW,priors=my_priors,parameters=my_parameters,output="Sex_BW",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+LM_Sex_BD<-mulTree(mulTree.data=comp_data, formula=my_formula_Sex_BD,priors=my_priors,parameters=my_parameters,output="Sex_BD",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+LM_Sex_Tarsus<-mulTree(mulTree.data=comp_data, formula=my_formula_Sex_Tarsus,priors=my_priors,parameters=my_parameters,output="Sex_Tarsus",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+LM_Sex_KippsD<-mulTree(mulTree.data=comp_data, formula=my_formula_Sex_KippsD,priors=my_priors,parameters=my_parameters,output="Sex_KippsD",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+LM_Sex_WC<-mulTree(mulTree.data=comp_data, formula=my_formula_Sex_WC,priors=my_priors,parameters=my_parameters,output="Sex_WC",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+LM_Sex_Tail<-mulTree(mulTree.data=comp_data, formula=my_formula_Sex_Tail,priors=my_priors,parameters=my_parameters,output="Sex_Tail",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+LM_Sex_KI<-mulTree(mulTree.data=comp_data, formula=my_formula_Sex_KI,priors=my_priors,parameters=my_parameters,output="Sex_KI",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+
+#Read each single, specific model
+Sex_BL<-read.mulTree("Sex_BL",model=TRUE)
+#summarise results
+summary_Sex_BL<-summary(Sex_BL)
+
+Sex_BW<-read.mulTree("Sex_BW",model=TRUE)
+#summarise results
+summary_Sex_BW<-summary(Sex_BW)
+
+Sex_BD<-read.mulTree("Sex_BD",model=TRUE)
+#summarise results
+summary_Sex_BD<-summary(Sex_BD)
+
+Sex_Tarsus<-read.mulTree("Sex_Tarsus",model=TRUE)
+#summarise results
+summary_Sex_Tarsus<-summary(Sex_Tarsus)
+
+Sex_KippsD<-read.mulTree("Sex_KippsD",model=TRUE)
+#summarise results
+summary_Sex_KippsD<-summary(Sex_KippsD)
+
+Sex_WC<-read.mulTree("Sex_WC",model=TRUE)
+#summarise results
+summary_Sex_WC<-summary(Sex_WC)
+
+Sex_Tail<-read.mulTree("Sex_Tail",model=TRUE)
+#summarise results
+summary_Sex_Tail<-summary(Sex_Tail)
+
+Sex_KI<-read.mulTree("Sex_KI",model=TRUE)
+#summarise results
+summary_Sex_KI<-summary(Sex_KI)
+
+LM1_output<-list(summary_Sex_BL, summary_Sex_BW, summary_Sex_BD, summary_Sex_Tarsus,
+                 summary_Sex_KippsD, summary_Sex_WC, summary_Sex_Tail, summary_Sex_KI) #Affect of Sex Class
+
+### Write out output ###
+sink("MCMCglmm_LMOutput_Sex.txt")
+for(i in 1:length(LM1_output)){
+  print(LM1_output[[i]])
+  cat("########################################################")
+}
+sink()
+
+#Repeat for Age classes
+my_formula_Age_BL<-BL.Average~Age
+my_formula_Age_BW<-BW.Average~Age
+my_formula_Age_BD<-BD.Average~Age
+my_formula_Age_Tarsus<-Tarsus.Average~Age
+my_formula_Age_KippsD<-Kipp.s.Distance~Age
+my_formula_Age_WC<-WC.Average~Age
+my_formula_Age_Tail<-Tail~Age
+my_formula_Age_KI<-Kipp.s.Index~Age
+
+LM_Age_BL<-mulTree(mulTree.data=comp_data, formula=my_formula_Age_BL,priors=my_priors,parameters=my_parameters,output="Age_BL",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+LM_Age_BW<-mulTree(mulTree.data=comp_data, formula=my_formula_Age_BW,priors=my_priors,parameters=my_parameters,output="Age_BW",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+LM_Age_BD<-mulTree(mulTree.data=comp_data, formula=my_formula_Age_BD,priors=my_priors,parameters=my_parameters,output="Age_BD",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+LM_Age_Tarsus<-mulTree(mulTree.data=comp_data, formula=my_formula_Age_Tarsus,priors=my_priors,parameters=my_parameters,output="Age_Tarsus",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+LM_Age_KippsD<-mulTree(mulTree.data=comp_data, formula=my_formula_Age_KippsD,priors=my_priors,parameters=my_parameters,output="Age_KippsD",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+LM_Age_WC<-mulTree(mulTree.data=comp_data, formula=my_formula_Age_WC,priors=my_priors,parameters=my_parameters,output="Age_WC",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+LM_Age_Tail<-mulTree(mulTree.data=comp_data, formula=my_formula_Age_Tail,priors=my_priors,parameters=my_parameters,output="Age_Tail",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+LM_Age_KI<-mulTree(mulTree.data=comp_data, formula=my_formula_Age_KI,priors=my_priors,parameters=my_parameters,output="Age_KI",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
+
+Age_BL<-read.mulTree("Age_BL",model=TRUE)
+#summarise results
+summary_Age_BL<-summary(Age_BL)
+
+Age_BW<-read.mulTree("Age_BW",model=TRUE)
+#summarise results
+summary_Age_BW<-summary(Age_BW)
+
+Age_BD<-read.mulTree("Age_BD",model=TRUE)
+#summarise results
+summary_Age_BD<-summary(Age_BD)
+
+Age_Tarsus<-read.mulTree("Age_Tarsus",model=TRUE)
+#summarise results
+summary_Age_Tarsus<-summary(Age_Tarsus)
+
+Age_KippsD<-read.mulTree("Age_KippsD",model=TRUE)
+#summarise results
+summary_Age_KippsD<-summary(Age_KippsD)
+
+Age_WC<-read.mulTree("Age_WC",model=TRUE)
+#summarise results
+summary_Age_WC<-summary(Age_WC)
+
+Age_Tail<-read.mulTree("Age_Tail",model=TRUE)
+#summarise results
+summary_Age_Tail<-summary(Age_Tail)
+
+Age_KI<-read.mulTree("Age_KI",model=TRUE)
+#summarise results
+summary_Age_KI<-summary(Age_KI)
+
+LM2_output<-list(summary_Age_BL, summary_Age_BW, summary_Age_BD, summary_Age_Tarsus,
+                 summary_Age_KippsD, summary_Age_WC, summary_Age_Tail, summary_Age_KI) #Affect of Age Class
+
+### Write out output ###
+sink("MCMCglmm_LMOutput_Age.txt")
+for(i in 1:length(LM2_output)){
+  print(LM2_output[[i]])
+  cat("########################################################")
+}
+sink()
+
+#################################################
+#####/\/\/\/\/\/\/TRIED MCMCglmm/\/\/\/\/\/\/\####
+#################################################
+
 #Create empty list to store output of each for loop iteration
 LM1_output<-list() #Affect of Sex Class
 LM2_output<-list() #Affect of Age Class

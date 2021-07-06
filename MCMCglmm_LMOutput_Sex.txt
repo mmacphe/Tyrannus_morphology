@@ -1,0 +1,193 @@
+
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 2426.279 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal     16.09    8.201    26.47     9900
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units     0.753   0.6881   0.8266     9900
+
+ Location effects: BL.Average ~ Sex 
+
+            post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+(Intercept)  15.68938 12.08612 19.43497     9900 <1e-04 ***
+SexMale       0.10384 -0.01238  0.21531     9627 0.0737 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 1440.625 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal     4.389    2.249    7.032    10329
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units    0.2639   0.2394   0.2876     9900
+
+ Location effects: BW.Average ~ Sex 
+
+            post.mean l-95% CI u-95% CI eff.samp   pMCMC    
+(Intercept)   8.81242  6.94877 10.73047     9900 < 1e-04 ***
+SexMale      -0.09594 -0.16098 -0.02813     9900 0.00404 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 1000.036 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal     3.493    1.714    5.486    10189
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units    0.1649   0.1504   0.1808     9900
+
+ Location effects: BD.Average ~ Sex 
+
+            post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+(Intercept)   6.94182  5.24333  8.62064     9900 <1e-04 ***
+SexMale      -0.10758 -0.16215 -0.05632     9558 <1e-04 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 2098.781 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal     5.115    2.521    8.157     9900
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units     0.532   0.4844   0.5822     9900
+
+ Location effects: Tarsus.Average ~ Sex 
+
+            post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+(Intercept)  19.13925 17.12689 21.24760     9900 <1e-04 ***
+SexMale      -0.04344 -0.13298  0.05755     9900  0.369    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 4652.079 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal     23.46    11.32    38.07    10845
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units     8.074    7.318    8.809     9900
+
+ Location effects: Kipp.s.Distance ~ Sex 
+
+            post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+(Intercept)    30.492   26.061   35.074     9900 <1e-04 ***
+SexMale         2.683    2.305    3.054    10200 <1e-04 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 5365.672 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal     123.6    62.04    199.2     9900
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units     17.25    15.74    18.88     9900
+
+ Location effects: WC.Average ~ Sex 
+
+            post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+(Intercept)   108.563   98.118  118.407     9900 <1e-04 ***
+SexMale         3.992    3.453    4.549     9621 <1e-04 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 8327.784 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal      1730      890     2758     9900
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units     404.6    368.4    441.1     9900
+
+ Location effects: Tail ~ Sex 
+
+            post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+(Intercept)   121.852   83.675  159.366     9900 <1e-04 ***
+SexMale        11.818    9.185   14.435    10525 <1e-04 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 3779.575 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal     11.66    5.864    19.07     9900
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units     3.189    2.893    3.476     9587
+
+ Location effects: Kipp.s.Index ~ Sex 
+
+            post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+(Intercept)    28.096   24.938   31.171     9900 <1e-04 ***
+SexMale         1.304    1.068    1.540     9900 <1e-04 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################

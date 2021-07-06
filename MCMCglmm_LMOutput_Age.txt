@@ -1,0 +1,193 @@
+
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 2342.702 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal     16.11     8.13    26.18     9900
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units    0.6887   0.6272   0.7517    10600
+
+ Location effects: BL.Average ~ Age 
+
+            post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+(Intercept)   15.8261  12.3204  19.5045     9900 <1e-04 ***
+AgeJuvenile   -0.7980  -0.9690  -0.6307     9900 <1e-04 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 1436.514 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal     4.416    2.179    7.086     9596
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units    0.2625   0.2405   0.2881     9900
+
+ Location effects: BW.Average ~ Age 
+
+            post.mean l-95% CI u-95% CI eff.samp    pMCMC    
+(Intercept)   8.78022  6.89298 10.75348     9364  < 1e-04 ***
+AgeJuvenile  -0.17864 -0.28386 -0.07763     9900 0.000404 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 952.8165 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal     3.488     1.81    5.661     9900
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units    0.1567   0.1426   0.1714     9900
+
+ Location effects: BD.Average ~ Age 
+
+            post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+(Intercept)    6.8872   5.1644   8.5910     9900 <1e-04 ***
+AgeJuvenile   -0.3231  -0.4008  -0.2440     9900 <1e-04 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 2098.12 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal     5.167    2.631    8.351    10220
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units     0.531   0.4833   0.5803    10640
+
+ Location effects: Tarsus.Average ~ Age 
+
+            post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+(Intercept)  19.08531 16.94783 21.10515     9900 <1e-04 ***
+AgeJuvenile   0.08650 -0.06072  0.23240     9900  0.238    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 4653.162 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal     23.95    11.94    38.43     9900
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units     8.091    7.334    8.809     9900
+
+ Location effects: Kipp.s.Distance ~ Age 
+
+            post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+(Intercept)    32.580   28.199   37.086    10416 <1e-04 ***
+AgeJuvenile    -4.070   -4.626   -3.489     9900 <1e-04 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 5384.635 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal       113     56.4    183.6     9900
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units     17.59    16.06    19.28     8775
+
+ Location effects: WC.Average ~ Age 
+
+            post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+(Intercept)   111.627  102.138  121.326     9900 <1e-04 ***
+AgeJuvenile    -5.838   -6.673   -5.008     9900 <1e-04 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 8272.034 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal      1820    894.7     2902     9900
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units     381.3      345    415.7     9900
+
+ Location effects: Tail ~ Age 
+
+            post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+(Intercept)    131.40    89.86   170.09     9900 <1e-04 ***
+AgeJuvenile    -23.30   -27.17   -19.41     9296 <1e-04 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################
+ Iterations = 1001:99991
+ Thinning interval  = 10
+ Sample size  = 9900 
+
+ DIC: 3773.811 
+
+ G-structure:  ~animal
+
+       post.mean l-95% CI u-95% CI eff.samp
+animal     12.68    6.298     20.5     8825
+
+ R-structure:  ~units
+
+      post.mean l-95% CI u-95% CI eff.samp
+units     3.169    2.868    3.453    10382
+
+ Location effects: Kipp.s.Index ~ Age 
+
+            post.mean l-95% CI u-95% CI eff.samp  pMCMC    
+(Intercept)    29.142   26.119   32.678     9900 <1e-04 ***
+AgeJuvenile    -2.018   -2.378   -1.674     9900 <1e-04 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+########################################################
