@@ -8,7 +8,7 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 phy<-read.tree('./Output Files/Tyrannus_phylogeny.tre')
 
 ### Bring in morphology dataset with average morphology values for each OTU and PC scores
-otu_avg<-read.csv('./Output Files/Tyrannus morphology + PCA avg.csv', row.names = 1)
+otu_avg<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Adults.csv', row.names = 1)
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -31,7 +31,7 @@ View(otu_avg)
 phy$tip.label[!phy$tip.label %in% otu_avg$species]
 
 ### phylANOVA on OTU morphometric means while controlling for body size ###
-response_var<-colnames(otu_avg)[c(3,4,5,7,8,9)]
+response_var<-colnames(otu_avg)[c(4,5,6,8,9,10)]
 
 ### Set up predictor variable for phylANOVA ###
 migration<-otu_avg$Strategy
@@ -55,20 +55,12 @@ for(i in 1:length(response_var)){
 	phylANOVA_output[[i]]<-phylANOVA(phy, x=migration, y=phyl.resid_output[[i]]$resid[,1], p.adj="none")
 }
 
-##with p.adj="bonferroni" to account for multiple hypothesis testing
-for(i in 1:length(response_var)){
-  print(paste0("Character ",i," -- ",response_var[i]))#Report character
-  character_of_interest<-otu_avg[,response_var[i]] #Extract character of interest (coi)
-  names(character_of_interest)<-rownames(otu_avg) #Add names to vector of coi
-  phyl.resid_output[[i]]<-phyl.resid(phy,tarsus.length, character_of_interest,method="lambda") #Perform phylogenetic residuals
-  phylANOVA_output[[i]]<-phylANOVA(phy, x=migration, y=phyl.resid_output[[i]]$resid[,1], p.adj="bonferroni")
-}
 names(phyl.resid_output)<-response_var
 names(phylANOVA_output)<-response_var 
 
 ### Write out output ###
 sink("phylANOVA_output.txt")
-sink("phylANOVA_bonferonni_output.txt")
+
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
 ###/\/\/\/\/\/\/\/\/\/\/\###
@@ -91,11 +83,53 @@ for(i in 1:length(phylANOVA_output)){
 }
 sink()
 
-### Conduct the phylogenetic ANOVA for PC scores that are not size-corrected ###
+### Conduct the phylogenetic ANVOA with p.adj="bonferroni" to account for multiple hypothesis testing
+## Create empty list to store output of each for loop iteration
+phyl.resid_output<-list()
+phylANOVA_output<-list() 
+
+for(i in 1:length(response_var)){
+  print(paste0("Character ",i," -- ",response_var[i]))#Report character
+  character_of_interest<-otu_avg[,response_var[i]] #Extract character of interest (coi)
+  names(character_of_interest)<-rownames(otu_avg) #Add names to vector of coi
+  phyl.resid_output[[i]]<-phyl.resid(phy,tarsus.length, character_of_interest,method="lambda") #Perform phylogenetic residuals
+  phylANOVA_output[[i]]<-phylANOVA(phy, x=migration, y=phyl.resid_output[[i]]$resid[,1], p.adj="bonferroni")
+}
+names(phyl.resid_output)<-response_var
+names(phylANOVA_output)<-response_var 
+
+### Write out output ###
+sink("phylANOVA_bonferonni_output.txt")
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+### Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#sink("phylANOVA_bonferonni_Females.txt")
+### OR
+#sink("phylANOVA_bonferonni_Males.txt")
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
+for(i in 1:length(phylANOVA_output)){
+  cat(paste0("Character ",i," -- ",response_var[i]))
+  cat("\n\n")
+  print(phylANOVA_output[[i]])
+  cat("#############")
+  cat("\n\n")
+}
+sink()
+
+###################################################################################
+### Conduct the phylogenetic ANOVA for metrics that do not need to be size-corrected ###
 phy$tip.label[!phy$tip.label %in% rownames(otu_avg)]
-response_var2<-colnames(otu_avg)[c(11,12,13,14)]
+response_var2<-colnames(otu_avg)[c(11,13,14)]
 
 phylANOVA_PCoutput<-list() 
+
 for(i in 1:length(response_var2)){
   print(paste0("Character ",i," -- ",response_var2[i]))#Report character
   character_of_interest<-otu_avg[,response_var2[i]] #Extract character of interest (coi)
@@ -106,7 +140,7 @@ for(i in 1:length(response_var2)){
 names(phylANOVA_PCoutput)<-response_var2 
 
 ### Write out output ###
-sink("phylANOVA_output_PCscores.txt")
+sink("phylANOVA_output_nosizecorrectionneeded.txt")
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -130,8 +164,46 @@ for(i in 1:length(phylANOVA_PCoutput)){
 }
 sink()
 
-### Repeat for CV data: Bring in cv_summary_table_v4
-otu_cv_avg<-read.csv('./Output Files/cv_summary.csv', row.names = 1) 
+## Conduct the phylogenetic ANVOA on metrics that do not need to be size-corrected with p.adj="bonferroni" to account for multiple hypothesis testing
+phylANOVA_PCoutput<-list() 
+
+for(i in 1:length(response_var2)){
+  print(paste0("Character ",i," -- ",response_var2[i]))#Report character
+  character_of_interest<-otu_avg[,response_var2[i]] #Extract character of interest (coi)
+  names(character_of_interest)<-rownames(otu_avg) #Add names to vector of coi
+  phylANOVA_PCoutput[[i]]<-phylANOVA(tree=phy, x=migration, y=character_of_interest, p.adj="bonferroni") 
+}
+
+names(phylANOVA_PCoutput)<-response_var2 
+
+### Write out output ###
+sink("phylANOVA_output_bonferroni_nosizecorrectionneeded.txt")
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+### Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#sink("phylANOVA_output_bonferroni_PCscores_Females.txt")
+### OR
+#sink("phylANOVA_output_bonferroni_PCscores_Males.txt")
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
+for(i in 1:length(phylANOVA_PCoutput)){
+  cat(paste0("Character ",i," -- ",response_var2[i]))
+  cat("\n\n")
+  print(phylANOVA_PCoutput[[i]])
+  cat("#############")
+  cat("\n\n")
+}
+sink()
+
+########################################################
+### Repeat for CV data
+otu_cv_avg<-read.csv('./Output Files/cv_summary_Adults.csv', row.names = 1) 
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -153,7 +225,7 @@ View(otu_cv_avg)
 ### Check that tree$tip.label is the same as otu_avg
 phy$tip.label[!phy$tip.label %in% otu_cv_avg$species]
 
-response_var3<-colnames(otu_cv_avg)[c(3,4,5,6,7,8,9,11,12,13,14)]
+response_var3<-colnames(otu_cv_avg)[c(4,5,6,7,8,9,10,11,13,14)]
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -208,6 +280,45 @@ for(i in 1:length(phylANOVA_CVoutput)){
 }
 sink()
 
+#Do phylogenetic ANOVA again on CV values with bonferonni correction for multiple hypothesis testing
+phylANOVA_CVoutput<-list() 
+
+### Conduct the phylogenetic ANOVA on coefficients of variation ###
+for(i in 1:length(response_var3)){
+  print(paste0("Character ",i," -- ",response_var3[i]))#Report character
+  character_of_interest<-otu_cv_avg[,response_var3[i]] #Extract character of interest (coi)
+  names(character_of_interest)<-rownames(otu_cv_avg) #Add names to vector of coi
+  phylANOVA_CVoutput[[i]]<-phylANOVA(phy, x=migration, y=character_of_interest, p.adj="bonferroni")
+}
+
+names(phylANOVA_CVoutput)<-response_var3
+
+### Write out output ###
+sink("phylANOVA_cv_bonferroni_output.txt")
+
+###NOTE/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###/\/\/\/\/\/\/\/\/\/\/\###
+
+#Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
+#sink("phylANOVA_cv_bonferroni_output_Females.txt")
+### OR
+#sink("phylANOVA_cv_bonferroni_output_Males.txt")
+
+###/\/\/\/\/\/\/\/\/\/\/\###
+###########################
+###END/\/\/\/\/\/\/\/\/\/\/\###
+
+for(i in 1:length(phylANOVA_CVoutput)){
+  cat(paste0("Character ",i," -- ",response_var3[i]))
+  cat("\n\n")
+  print(phylANOVA_CVoutput[[i]])
+  cat("#############")
+  cat("\n\n")
+}
+sink()
+
+
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
 ###/\/\/\/\/\/\/\/\/\/\/\###
@@ -259,8 +370,8 @@ phyl_resid2<-as.data.frame(phyl.resid_output$BW.Average, row.names=phy$tip.label
 phyl_resid$BW<-phyl_resid2$resid
 phyl_resid3<-as.data.frame(phyl.resid_output$BD.Average, row.names=phy$tip.label)
 phyl_resid$BD<-phyl_resid3$resid
-phyl_resid4<-as.data.frame(phyl.resid_output$Kipp.s.Average, row.names=phy$tip.label)
-phyl_resid$KI<-phyl_resid4$resid
+phyl_resid4<-as.data.frame(phyl.resid_output$Kipp.s.Distance, row.names=phy$tip.label)
+phyl_resid$KD<-phyl_resid4$resid
 phyl_resid5<-as.data.frame(phyl.resid_output$WC.Average, row.names=phy$tip.label)
 phyl_resid$WC<-phyl_resid5$resid
 phyl_resid6<-as.data.frame(phyl.resid_output$Tail, row.names=phy$tip.label)

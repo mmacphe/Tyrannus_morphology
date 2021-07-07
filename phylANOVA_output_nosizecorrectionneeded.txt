@@ -1,0 +1,87 @@
+Character 1 -- Kipp.s.Index
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+           Sum Sq  Mean Sq  F value Pr(>F)
+x        123.0435 61.52175 3.884102  0.132
+Residual 395.9844 15.83938                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000  1.904908  2.715064
+partial   -1.904908  0.000000  0.198846
+sedentary -2.715064 -0.198846  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.053     0.075
+partial       0.053   1.000     0.889
+sedentary     0.075   0.889     1.000
+---------
+
+#############
+
+Character 2 -- BillPC1
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+            Sum Sq   Mean Sq  F value Pr(>F)
+x         10.39321  5.196605 0.234009  0.887
+Residual 555.17261 22.206904                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000 -0.071277 -0.624608
+partial    0.071277  0.000000 -0.450850
+sedentary  0.624608  0.450850  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.940     0.711
+partial       0.940   1.000     0.762
+sedentary     0.711   0.762     1.000
+---------
+
+#############
+
+Character 3 -- BillPC2
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+           Sum Sq  Mean Sq  F value Pr(>F)
+x        13.79073 6.895364 8.774648  0.025
+Residual 19.64570 0.785828                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000 -0.645960 -3.906075
+partial    0.645960  0.000000 -2.598415
+sedentary  3.906075  2.598415  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.524     0.016
+partial       0.524   1.000     0.058
+sedentary     0.016   0.058     1.000
+---------
+
+#############
+
