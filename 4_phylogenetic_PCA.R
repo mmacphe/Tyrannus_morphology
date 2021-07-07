@@ -291,11 +291,11 @@ fit.mkn[1:2]
 #Export marginal ancestral reconstruction at the notes of the tree
 st<-t(asr.marginal(lik.mkn.base,coef(fit.mkn)))
 
-KI<-Tyrannus.data$Kipp.s.Index
-names(KI)<- rownames(Tyrannus.data)
-View(KI)
+KD<-Tyrannus.data$Kipp.s.Distance
+names(KD)<- rownames(Tyrannus.data)
+View(KD)
 
-obj<-contMap(phy, KI)
+obj<-contMap(phy, KD)
 n<-length(obj$cols) #get the length of the color ramp
 obj$cols[1:n]<-grey(0:(n-1)/(n-1)) #change the color ramp to a grey scale
 
@@ -355,7 +355,7 @@ layout.show(n=5)
 par(mar=c(2,0.5,0,14))
 
 plot(obj, legend=FALSE, ftype="off", mar=c(5.1,0.4,0.4,13), fsize=c(0.7,0.9))
-add.color.bar(2.5,obj$cols,title="Kipp's Index",
+add.color.bar(2.5,obj$cols,title="Kipp's Distance",
               lims=obj$lims,digits=0,prompt=FALSE,x=0.15,
               y=2.5-0.08*(Ntip(obj$tree)-1),lwd=4,fsize=0.8,subtitle="")
 

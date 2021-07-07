@@ -10,8 +10,8 @@ require(gridGraphics)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 ### Bring in morphology datasets with average morphology values for each OTU and PC scores
-otu_avg<-read.csv('./Output Files/Tyrannus morphology + PCA avg.csv', row.names = 1)
-otu_cv_avg<-read.csv('./Output Files/cv_summary.csv', row.names = 1) 
+otu_avg<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Adults.csv', row.names = 1)
+otu_cv_avg<-read.csv('./Output Files/cv_summary_Adults.csv', row.names = 1) 
 residuals<-read.csv('./Output Files/phylANOVA_tarsus-corrected_residuals.csv', row.names = 1)
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
@@ -48,8 +48,8 @@ png(file="Phenotype Residuals.png",width=7,height=5.5,units="in",res=500)
 ###########################
 ###END/\/\/\/\/\/\/\/\/\/\/\###
 
-responsevariable.labs<-c("Bill Length", "Bill Width", "Bill Depth", "Kipp's Index", "Wing Length", "Tail Length")
-names(responsevariable.labs)<- c("BL", "BW", "BD", "KI", "WC", "TL")
+responsevariable.labs<-c("Bill Length", "Bill Width", "Bill Depth", "Kipp's Distance", "Wing Length", "Tail Length")
+names(responsevariable.labs)<- c("BL", "BW", "BD", "KD", "WC", "TL")
 
 col<-c("black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70")
 
@@ -120,8 +120,8 @@ otu_cv_avg<-subset(otu_cv_avg, select=-c(Tarsus.Average)) #Remove tarsus from th
 
 col<-c("black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70")
 
-responsevariable.labs<-c("Bill Length", "Bill Width", "Bill Depth", "Kipp's Index", "Wing Length", "Tail Length")
-names(responsevariable.labs)<- c("BL.Average", "BW.Average", "BD.Average", "Kipp.s.Average", "WC.Average", "Tail")
+responsevariable.labs<-c("Bill Length", "Bill Width", "Bill Depth", "Kipp's Distance", "Wing Length", "Tail Length")
+names(responsevariable.labs)<- c("BL.Average", "BW.Average", "BD.Average", "Kipp.s.Distance", "WC.Average", "Tail")
 
 p<-otu_cv_avg %>%
   pivot_longer(BL.Average:Tail, names_to="responsevariable", values_to = "variation") %>% 
@@ -203,13 +203,13 @@ png(file="PPC scores boxplots.png",width=7,height=5.5,units="in",res=500)
 ###########################
 ###END/\/\/\/\/\/\/\/\/\/\/\###
 
-responsevariable.labs<-c("Bill PPC1", "Bill PPC2", "Feather PPC1", "Feather PPC2")
-names(responsevariable.labs)<- c("BillPC1", "BillPC2", "BodyPC1", "BodyPC2")
+responsevariable.labs<-c("Bill PPC1", "Bill PPC2")
+names(responsevariable.labs)<- c("BillPC1", "BillPC2")
 
-col<-c("black","gray40","gray70","black","gray40","gray70","black","gray40","gray70","black","gray40","gray70")
+col<-c("black","gray40","gray70","black","gray40","gray70")
 
 p<-otu_avg %>%
-  pivot_longer(BillPC1:BodyPC2, names_to="responsevariable", values_to = "value") %>% 
+  pivot_longer(BillPC1:BillPC2, names_to="responsevariable", values_to = "value") %>% 
   ggplot(aes(y=value, x=Strategy)) +
   geom_boxplot(color=col) +
   facet_wrap(vars(responsevariable), ncol=2, labeller=labeller(responsevariable = responsevariable.labs), scales="free_y") +
@@ -224,11 +224,10 @@ p<-otu_avg %>%
 draw_plot(plot, x = 0, y = 0, width = 1, height = 1)
 ggdraw() +  
   draw_plot(p,0,0,1,1) +
-  draw_plot_label(c("A", "B", "C", "D"), c(0.085,0.565,0.085,0.565), c(0.99,0.99,0.53,0.53), size=15) + #main plot identifiers 
+  draw_plot_label(c("A", "B"), c(0.085,0.565), c(0.99,0.99), size=15) + #main plot identifiers 
   draw_plot_label(c("A", "A", "A"), c(0.156, 0.287, 0.420), c(0.93, 0.93, 0.93), size=10) + #letters for plot A
-  draw_plot_label(c("A", "A", "B"), c(0.635, 0.766, 0.9), c(0.93, 0.93, 0.93), size=10) + #letters for plot B
-  draw_plot_label(c("A", "A", "A"), c(0.156, 0.287, 0.420), c(0.471, 0.471, 0.471), size=10) + #letters for plot C
-  draw_plot_label(c("A", "A", "A"), c(0.635, 0.766, 0.9), c(0.471, 0.471, 0.471), size=10) #letters for plot D
+  draw_plot_label(c("A", "A", "B"), c(0.635, 0.766, 0.9), c(0.93, 0.93, 0.93), size=10) #letters for plot B
+
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -274,13 +273,33 @@ text(x=rep(5.2,Ntip(phy)),y=1:Ntip(phy),label=format_tl,adj=c(0,0.5),font=3)
 
 dev.off()
 
-### Build ancestral state reconstruction for Kipp's Index for supplementary material
-png(file="KI_ASR.png",width=7,height=5.5,units="in",res=500)
+### Build ancestral state reconstruction for Kipp's distance for supplementary material
+png(file="KD_ASR.png",width=7,height=5.5,units="in",res=500)
 
-KI<-residuals$KI
-names(KI)<- rownames(residuals)
+KD<-residuals$KD
+names(KD)<- rownames(residuals)
 
-obj2<-contMap(phy, KI)
+obj2<-contMap(phy, KD)
+n<-length(obj2$cols) #get the length of the color ramp
+obj2$cols[1:n]<-grey(0:(n-1)/(n-1)) #change the color ramp to a grey scale
+
+plot(obj2, ftype="on", mar=c(5,5,5,5), legend=0.7*max(nodeHeights(phy), fsize=c(0.7,0.9)))
+
+format_tl<-phy$tip.label
+format_tl<-gsub("_"," ",format_tl)
+format_tl<-gsub("Tyrannus","T.",format_tl)
+
+text(x=rep(5.2,Ntip(phy)),y=1:Ntip(phy),label=format_tl,adj=c(0,0.5),font=3)
+
+dev.off()
+
+### Build ancestral state reconstruction for Bill PC2 for supplementary material
+png(file="BillPPC2_ASR.png",width=7,height=5.5,units="in",res=500)
+
+BillPC2<-otu_avg$BillPC2
+names(BillPC2)<- rownames(otu_avg)
+
+obj2<-contMap(phy, BillPC2)
 n<-length(obj2$cols) #get the length of the color ramp
 obj2$cols[1:n]<-grey(0:(n-1)/(n-1)) #change the color ramp to a grey scale
 
