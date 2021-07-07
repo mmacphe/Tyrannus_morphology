@@ -8,7 +8,7 @@ require(png)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 ### Read in average morphology data from .csv ###
-morpho<-read.csv('./Output Files/Tyrannus_data.csv', row.names=2)
+morpho<-read.csv('./Output Files/Tyrannus_Adults_data.csv', row.names=2)
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -37,7 +37,7 @@ bill_pca
 diag(bill_pca$Eval)/sum(bill_pca$Eval)*100
 
 ### Bring in morphology data set for all individuals to add points onto figure
-morpho_whole<-read.csv('./Output Files/Tyrannus morphology data.csv', row.names = 1)
+morpho_whole<-read.csv('./Output Files/Tyrannus Adults morphology data.csv', row.names = 1)
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -54,9 +54,6 @@ morpho_whole<-read.csv('./Output Files/Tyrannus morphology data.csv', row.names 
 
 ### Match tip.labels with phylogeny tip.labels ###
 morpho_whole$tip.label
-names(table(morpho_whole$tip.label))
-
-morpho_whole$tip.label<-gsub(" ","_",morpho_whole$tip.label)
 names(table(morpho_whole$tip.label))
 
 phy$tip.label
@@ -110,7 +107,7 @@ morpho$BodyPC2<-body_scores_avg$V2
 ### Body PCA without T. forficatus or T. savana bc their tails are so long ###
 phy_trim<-drop.tip(phy,c(grep("forficatus",phy$tip.label),grep("savana",phy$tip.label)))
 otu_avg_trim<-morpho[rownames(morpho) %in% phy_trim$tip.label,]
-body_pca_trim<-phyl.pca(phy_trim,otu_avg_trim[,6:8],method="lambda")
+body_pca_trim<-phyl.pca(phy_trim,otu_avg_trim[,7:9],method="lambda")
 body_pca_trim
 
 ### Find the % variance explained by each eigenvector 
@@ -126,7 +123,7 @@ body_scores_split_trim<-split(body_scores_trim_df, body_scores_trim_df$otu)
 body_scores_trim_avg<-t(sapply(body_scores_split_trim,function(x) c(mean(na.omit(x[,1])),mean(na.omit(x[,2])))))
 
 ### Write.csv of morpho that includes all OTUs ###
-write.csv(morpho, file="Tyrannus morphology + PCA avg.csv")
+write.csv(morpho, file="Tyrannus morphology + PCA avg_Adults.csv")
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -142,7 +139,7 @@ write.csv(morpho, file="Tyrannus morphology + PCA avg.csv")
 ###END/\/\/\/\/\/\/\/\/\/\/\###
 
 ### Bring in cv summary dataset 
-cv_summary<-read.csv('./Output Files/cv_summary_table.csv', row.names = 2)
+cv_summary<-read.csv('./Output Files/cv_summary_Adults_table.csv', row.names = 2)
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -207,7 +204,7 @@ CVbody_scores_cv<-as.data.frame(CVbody_scores_cv)
 cv_summary$CVBodyPC1<-CVbody_scores_cv$V1
 cv_summary$CVBodyPC2<-CVbody_scores_cv$V2
 
-write.csv(cv_summary, file="cv_summary.csv")
+write.csv(cv_summary, file="cv_summary_Adults.csv")
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -248,7 +245,7 @@ is.binary(phy)
 
 ### Migration strategy
 ### Load the dataset to save as a factor (continuous var as vector below)
-Tyrannus.data<-read.csv('./Output Files/Tyrannus morphology + PCA avg.csv', row.names = 1)
+Tyrannus.data<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Adults.csv', row.names = 1)
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -337,7 +334,7 @@ coldf$outlinecolor<-c("gray70","gray40","black")[as.numeric(coldf$Strategy)]
 coldf$outlinecolor[coldf$pch %in% c(3,4)]<-coldf$col[coldf$pch %in% c(3,4)]
 coldf$col[coldf$pch %in% c(3,4)]<-NA
 
-png(file="Tyrannus_phylogenetic_PCA.png",width=7.5,height=8,units="in",res=500)
+png(file="Tyrannus_phylogenetic_PCA_Adults.png",width=7.5,height=8,units="in",res=500)
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################

@@ -234,6 +234,7 @@ sink()
 ### Make morphology datasets that do not include juveniles
 ### Remove juvenile individuals
 morpho_Adults<-morpho[!morpho$Age=="Juvenile",]
+write.csv(morpho_Adults,file="Tyrannus Adults morphology data.csv")
 
 ### Split the morphology data sets up into categories by tip.label
 morpho_Adults$tip.label
