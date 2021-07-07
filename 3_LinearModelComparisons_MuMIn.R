@@ -236,23 +236,33 @@ sink()
 morpho_Adults<-morpho[!morpho$Age=="Juvenile",]
 write.csv(morpho_Adults,file="Tyrannus Adults morphology data.csv")
 
+morpho_Females_Adults<-morpho_Females[!morpho_Females$Age=="Juvenile",]
+write.csv(morpho_Females_Adults,file="Tyrannus Adults Females morphology data.csv")
+
+morpho_Males_Adults<-morpho_Males[!morpho_Males$Age=="Juvenile",]
+write.csv(morpho_Males_Adults,file="Tyrannus Adults Males morphology data.csv")
+
 ### Split the morphology data sets up into categories by tip.label
 morpho_Adults$tip.label
 names(table(morpho_Adults$tip.label))
 
 morpho_split<-split(morpho_Adults,morpho_Adults$tip.label)
-#names(morpho_split)<-gsub(" ","_",names(morpho_split))
-names(morpho_split) 
+morpho_split_Females<-split(morpho_Females_Adults,morpho_Females_Adults$tip.label)
+morpho_split_Males<-split(morpho_Males_Adults,morpho_Males_Adults$tip.label)
 
 ### Read in phylogeny 
 phy<-read.tree('./Output Files/Tyrannus_phylogeny.tre')
 
 phy$tip.label[!phy$tip.label %in% names(morpho_split)] #Check that this returns "character(0)"
-names(morpho_split)[! names(morpho_split) %in% phy$tip.label] #Check that this also returns "character(0)"
+phy$tip.label[!phy$tip.label %in% names(morpho_split_Females)] #Check that this returns "character(0)"
+phy$tip.label[!phy$tip.label %in% names(morpho_split_Males)] #Check that this returns "character(0)"
 
+names(morpho_split)[! names(morpho_split) %in% phy$tip.label] #Check that this also returns "character(0)"
 
 ### Create summary output df for data frame
 morpho_trim<-lapply(morpho_split,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "Kipp.s.Index", "WC.Average", "Tail", "Tarsus.Average","Mass")])
+morpho_trim_Females<-lapply(morpho_split_Females,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "Kipp.s.Index", "WC.Average", "Tail", "Tarsus.Average","Mass")])
+morpho_trim_Males<-lapply(morpho_split_Males,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "Kipp.s.Index", "WC.Average", "Tail", "Tarsus.Average","Mass")])
 
 ### Get average values for each morphometric
 otu_avg<-list()
@@ -267,38 +277,77 @@ for(i in 1:length(morpho_trim)){
   otu_n[[i]]<-apply(morpho_trim[[i]],2,function(x) length(which(!is.na(x))))
 }
 
+#Follow below for Females
+for(i in 1:length(morpho_trim_Females)){
+  otu_avg[[i]]<-apply(morpho_trim_Females[[i]],2,function(x) mean(na.omit(as.numeric(x))))
+  otu_sd[[i]]<-apply(morpho_trim_Females[[i]],2,function(x) sd(na.omit(as.numeric(x))))
+  otu_cv[[i]]<-otu_sd[[i]]/otu_avg[[i]]
+  otu_n[[i]]<-apply(morpho_trim_Females[[i]],2,function(x) length(which(!is.na(x))))
+}
+
+#Follow below for Males
+for(i in 1:length(morpho_trim_Males)){
+  otu_avg[[i]]<-apply(morpho_trim_Males[[i]],2,function(x) mean(na.omit(as.numeric(x))))
+  otu_sd[[i]]<-apply(morpho_trim_Males[[i]],2,function(x) sd(na.omit(as.numeric(x))))
+  otu_cv[[i]]<-otu_sd[[i]]/otu_avg[[i]]
+  otu_n[[i]]<-apply(morpho_trim_Males[[i]],2,function(x) length(which(!is.na(x))))
+}
+
 otu_avg_df<-do.call(rbind,otu_avg)
 otu_sd_df<-do.call(rbind,otu_sd)
 otu_cv_df<-do.call(rbind,otu_cv)
 otu_n_df<-do.call(rbind,otu_n)
 
 rownames(otu_avg_df)<-names(morpho_split)
+rownames(otu_avg_df)<-names(morpho_split_Females)
+rownames(otu_avg_df)<-names(morpho_split_Males)
 
 ### Write out .csv file with mean and SD for each OTU for table in manuscript
 morphology_summary<-data.frame(matrix(paste(round(otu_avg_df,2)," ± ",round(otu_sd_df,2),"\n(",otu_n_df,")",sep=""),ncol=ncol(otu_avg_df)))
 colnames(morphology_summary)<-colnames(otu_avg_df)
+
 rownames(morphology_summary)<-names(morpho_split)
+rownames(morphology_summary)<-names(morpho_split_Females)
+rownames(morphology_summary)<-names(morpho_split_Males)
+
 write.csv(morphology_summary,file="Adults_morphology_summary_table.csv")
+write.csv(morphology_summary,file="Females_Adults_morphology_summary_table.csv")
+write.csv(morphology_summary,file="Males_Adults_morphology_summary_table.csv")
 
 ### Write out .csv file just with the mean for each OTU to be used in further analyses
 Tyrannus_OTU_averages<-data.frame(matrix(paste(round(otu_avg_df,2)),ncol=ncol(otu_avg_df)))
 colnames(Tyrannus_OTU_averages)<-colnames(otu_avg_df)
+
 rownames(Tyrannus_OTU_averages)<-names(morpho_split)
+rownames(Tyrannus_OTU_averages)<-names(morpho_split_Females)
+rownames(Tyrannus_OTU_averages)<-names(morpho_split_Males)
+
 
 ### Add migratory strategy as a column in the Tyrannus OTU averages .csv ###
 migratory_data<-read.csv("Tyrannus_subspecies_MigrationStrategies.csv",row.names=1)
 migratory_data[rownames(Tyrannus_OTU_averages),]
 Tyrannus_data<-merge(Tyrannus_OTU_averages, migratory_data, by=0)
+
 write.csv(Tyrannus_data, file="Tyrannus_Adults_data.csv")
+write.csv(Tyrannus_data, file="Tyrannus_Females_Adults_data.csv")
+write.csv(Tyrannus_data, file="Tyrannus_Males_Adults_data.csv")
 
 ### Write out .csv file with coefficient of variation for each OTU to be used in further analyses
 cv_summary<-otu_cv_df
+
 rownames(cv_summary)<-names(morpho_split)
+rownames(cv_summary)<-names(morpho_split_Females)
+rownames(cv_summary)<-names(morpho_split_Males)
+
 cv_summary<-as.data.frame(cv_summary)
 migratory_data[rownames(cv_summary),]
 CV_data<-merge(cv_summary, migratory_data, by=0)
-write.csv(CV_data, file = "cv_summary_Adults_table.csv")
 
+write.csv(CV_data, file = "cv_summary_Adults_table.csv")
+write.csv(CV_data, file = "cv_summary_Females_Adults_table.csv")
+write.csv(CV_data, file = "cv_summary_Males_Adults_table.csv")
+
+###################################################################################################
 ### What we're trying to do now is to test whether tarsus length is the best approximation of body mass.
 morpho2<-subset(morpho, select=c(Mass,BL.Average,BW.Average,BD.Average,Tarsus.Average,Kipp.s.Distance,WC.Average,Tail,Kipp.s.Index,tip.label)) #remove the Mass column for the first comparisons bc it is unnecessary for the next step and has NAs that will affect the outcome
 colnames(morpho2) #check the column names to make sure they're all there
