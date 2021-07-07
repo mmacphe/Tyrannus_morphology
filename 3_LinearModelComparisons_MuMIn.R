@@ -255,11 +255,13 @@ my_formula<-Mass~BL.Average+BW.Average+BD.Average+Tarsus.Average+Kipp.s.Distance
 
 my_parameters<-c(100000,10,1000) #The MCMC parameters (generations, sampling, burnin). Used default settings from https://github.com/TGuillerme/mulTree/blob/master/doc/mulTree-manual.pdf
 
-my_priors<-list(R=list(V=1/2,nu=0.002),G=list(G1=list(V=1/2,nu=0.002)))
+#my_priors<-list(R=list(V=1/2,nu=0.002),G=list(G1=list(V=1/2,nu=0.002))) #tutorial values from mulTree
+my_priors<-list(R=list(V=1,nu=0),G=list(G1=list(V=1,nu=0))) #defaults from MCMCglmm that are not automatically specified in mulTree. Defaults listed at https://cran.r-project.org/web/packages/MCMCglmm/MCMCglmm.pdf
 
 ## Run the MCMCglmm on the comp_data object
-LM<-mulTree(mulTree.data=comp_data, formula=my_formula,priors=my_priors,parameters=my_parameters,output="Tarsus_Mass",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
-Tarsus_Mass<-read.mulTree("Tarsus_Mass",model=TRUE)
+LM<-mulTree(mulTree.data=comp_data, formula=my_formula, priors=my_priors, parameters=my_parameters,output="Tarsus_Mass_MCMC",chains=1) #chains=1 bc only 1 tree and not multiple trees. ESS = effective sample size; default is 1000.
+
+Tarsus_Mass<-read.mulTree("Tarsus_Mass_MCMC",model=TRUE)
 #summarise results
 summary_Tarsus_Mass<-summary(Tarsus_Mass)
 summary_Tarsus_Mass
