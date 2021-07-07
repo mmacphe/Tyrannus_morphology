@@ -50,7 +50,6 @@ colnames(morpho1) #look at the column names to pick out the right ones for respo
 morpho1<-na.omit(morpho1) #we have to remove all the NAs to run the dredge()
 #response_var<-colnames(morpho1)[c(1,2,3,4,5,6,7,10)]
 
-
 comp_data<-as.mulTree(data=morpho1, tree=phy, taxa="tip.label")
 
 my_formula_Sex_BL<-BL.Average~Sex
@@ -120,7 +119,7 @@ for(i in 1:length(LM1_output)){
 }
 sink()
 
-#Repeat for Age classes
+### Repeat for Age classes
 my_formula_Age_BL<-BL.Average~Age
 my_formula_Age_BW<-BW.Average~Age
 my_formula_Age_BD<-BD.Average~Age
@@ -186,52 +185,120 @@ sink()
 #####/\/\/\/\/\/\/TRIED MCMCglmm/\/\/\/\/\/\/\####
 #################################################
 
-#Create empty list to store output of each for loop iteration
-LM1_output<-list() #Affect of Sex Class
-LM2_output<-list() #Affect of Age Class
+##Create empty list to store output of each for loop iteration
+#LM1_output<-list() #Affect of Sex Class
+#LM2_output<-list() #Affect of Age Class
 
-options(na.action = "na.fail")
-morpho1<-subset(morpho, select=c(BL.Average,BW.Average,BD.Average,Tarsus.Average,Kipp.s.Distance,WC.Average,Tail,Age,Sex,Kipp.s.Index,tip.label)) #remove the Mass column for the first comparisons bc it is unnecessary for the next step and has NAs that will affect the outcome
-colnames(morpho1) #look at the column names to pick out the right ones for response_var
-morpho1<-na.omit(morpho1) #we have to remove all the NAs to run the dredge()
-response_var<-colnames(morpho1)[c(1,2,3,4,5,6,7)]
+#options(na.action = "na.fail")
+#morpho1<-subset(morpho, select=c(BL.Average,BW.Average,BD.Average,Tarsus.Average,Kipp.s.Distance,WC.Average,Tail,Age,Sex,Kipp.s.Index,tip.label)) #remove the Mass column for the first comparisons bc it is unnecessary for the next step and has NAs that will affect the outcome
+#colnames(morpho1) #look at the column names to pick out the right ones for response_var
+#morpho1<-na.omit(morpho1) #we have to remove all the NAs to run the dredge()
+#response_var<-colnames(morpho1)[c(1,2,3,4,5,6,7)]
 
-for(i in 1:length(response_var)){
-  print(paste0("Character",i," -- ",response_var[i]))#Report character
-  character_of_interest<-morpho1[,response_var[i]] #Extract character of interest (coi)
-  names(character_of_interest)<-morpho1$tip.label #Add names to vector of coi 
-  birds.fullmodel_Sex<-lm(morpho1[,response_var[i]]~morpho1$Sex, data = morpho1)
-  birds.fullmodel_Age<-lm(morpho1[,response_var[i]]~morpho1$Age, data = morpho1)
-  LM1_output[[i]]<-dredge(birds.fullmodel_Sex, rank = "AIC")
-  LM2_output[[i]]<-dredge(birds.fullmodel_Age, rank = "AIC")
+#for(i in 1:length(response_var)){
+#  print(paste0("Character",i," -- ",response_var[i]))#Report character
+#  character_of_interest<-morpho1[,response_var[i]] #Extract character of interest (coi)
+#  names(character_of_interest)<-morpho1$tip.label #Add names to vector of coi 
+#  birds.fullmodel_Sex<-lm(morpho1[,response_var[i]]~morpho1$Sex, data = morpho1)
+#  birds.fullmodel_Age<-lm(morpho1[,response_var[i]]~morpho1$Age, data = morpho1)
+#  LM1_output[[i]]<-dredge(birds.fullmodel_Sex, rank = "AIC")
+#  LM2_output[[i]]<-dredge(birds.fullmodel_Age, rank = "AIC")
+#}
+
+#names(LM1_output)<-response_var 
+#names(LM2_output)<-response_var
+
+#### Write out output ###
+#sink("Dredge_LMOutput_Sex.txt")
+#for(i in 1:length(LM1_output)){
+#  cat(paste0("Character ",i," -- ",response_var[i]))
+#  cat("\n\n")
+#  print(LM1_output[[i]])
+#  cat("#############")
+#  cat("\n\n")
+#}
+#sink()
+
+
+#sink("Dredge_LMOutput_Age.txt")
+#for(i in 1:length(LM2_output)){
+#  cat(paste0("Character ",i," -- ",response_var[i]))
+#  cat("\n\n")
+#  print(LM2_output[[i]])
+#  cat("#############")
+#  cat("\n\n")
+#}
+#sink()
+
+
+### Make morphology datasets that do not include juveniles
+### Remove juvenile individuals
+morpho_Adults<-morpho[!morpho$Age=="Juvenile",]
+
+### Split the morphology data sets up into categories by tip.label
+morpho_Adults$tip.label
+names(table(morpho_Adults$tip.label))
+
+morpho_split<-split(morpho_Adults,morpho_Adults$tip.label)
+#names(morpho_split)<-gsub(" ","_",names(morpho_split))
+names(morpho_split) 
+
+### Read in phylogeny 
+phy<-read.tree('./Output Files/Tyrannus_phylogeny.tre')
+
+phy$tip.label[!phy$tip.label %in% names(morpho_split)] #Check that this returns "character(0)"
+names(morpho_split)[! names(morpho_split) %in% phy$tip.label] #Check that this also returns "character(0)"
+
+
+### Create summary output df for data frame
+morpho_trim<-lapply(morpho_split,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "Kipp.s.Index", "WC.Average", "Tail", "Tarsus.Average","Mass")])
+
+### Get average values for each morphometric
+otu_avg<-list()
+otu_sd<-list()
+otu_cv<-list()
+otu_n<-list()
+
+for(i in 1:length(morpho_trim)){
+  otu_avg[[i]]<-apply(morpho_trim[[i]],2,function(x) mean(na.omit(as.numeric(x))))
+  otu_sd[[i]]<-apply(morpho_trim[[i]],2,function(x) sd(na.omit(as.numeric(x))))
+  otu_cv[[i]]<-otu_sd[[i]]/otu_avg[[i]]
+  otu_n[[i]]<-apply(morpho_trim[[i]],2,function(x) length(which(!is.na(x))))
 }
 
-names(LM1_output)<-response_var 
-names(LM2_output)<-response_var
+otu_avg_df<-do.call(rbind,otu_avg)
+otu_sd_df<-do.call(rbind,otu_sd)
+otu_cv_df<-do.call(rbind,otu_cv)
+otu_n_df<-do.call(rbind,otu_n)
 
-### Write out output ###
-sink("Dredge_LMOutput_Sex.txt")
-for(i in 1:length(LM1_output)){
-  cat(paste0("Character ",i," -- ",response_var[i]))
-  cat("\n\n")
-  print(LM1_output[[i]])
-  cat("#############")
-  cat("\n\n")
-}
-sink()
+rownames(otu_avg_df)<-names(morpho_split)
 
+### Write out .csv file with mean and SD for each OTU for table in manuscript
+morphology_summary<-data.frame(matrix(paste(round(otu_avg_df,2)," ± ",round(otu_sd_df,2),"\n(",otu_n_df,")",sep=""),ncol=ncol(otu_avg_df)))
+colnames(morphology_summary)<-colnames(otu_avg_df)
+rownames(morphology_summary)<-names(morpho_split)
+write.csv(morphology_summary,file="Adults_morphology_summary_table.csv")
 
-sink("Dredge_LMOutput_Age.txt")
-for(i in 1:length(LM2_output)){
-  cat(paste0("Character ",i," -- ",response_var[i]))
-  cat("\n\n")
-  print(LM2_output[[i]])
-  cat("#############")
-  cat("\n\n")
-}
-sink()
+### Write out .csv file just with the mean for each OTU to be used in further analyses
+Tyrannus_OTU_averages<-data.frame(matrix(paste(round(otu_avg_df,2)),ncol=ncol(otu_avg_df)))
+colnames(Tyrannus_OTU_averages)<-colnames(otu_avg_df)
+rownames(Tyrannus_OTU_averages)<-names(morpho_split)
 
-# What we're trying to do is to test whether tarsus length is the best approximation of body mass.
+### Add migratory strategy as a column in the Tyrannus OTU averages .csv ###
+migratory_data<-read.csv("Tyrannus_subspecies_MigrationStrategies.csv",row.names=1)
+migratory_data[rownames(Tyrannus_OTU_averages),]
+Tyrannus_data<-merge(Tyrannus_OTU_averages, migratory_data, by=0)
+write.csv(Tyrannus_data, file="Tyrannus_Adults_data.csv")
+
+### Write out .csv file with coefficient of variation for each OTU to be used in further analyses
+cv_summary<-otu_cv_df
+rownames(cv_summary)<-names(morpho_split)
+cv_summary<-as.data.frame(cv_summary)
+migratory_data[rownames(cv_summary),]
+CV_data<-merge(cv_summary, migratory_data, by=0)
+write.csv(CV_data, file = "cv_summary_Adults_table.csv")
+
+### What we're trying to do now is to test whether tarsus length is the best approximation of body mass.
 morpho2<-subset(morpho, select=c(Mass,BL.Average,BW.Average,BD.Average,Tarsus.Average,Kipp.s.Distance,WC.Average,Tail,Kipp.s.Index,tip.label)) #remove the Mass column for the first comparisons bc it is unnecessary for the next step and has NAs that will affect the outcome
 colnames(morpho2) #check the column names to make sure they're all there
 morpho2<-na.omit(morpho2) #we have to remove all the NAs to run the dredge(); leaves 190 observations

@@ -30,7 +30,7 @@ phy<-read.tree('./Output Files/Tyrannus_phylogeny.tre')
 phy$tip.label[!phy$tip.label %in% rownames(morpho)]
 
 ### Bill Phylogenetic PCA ###
-bill_pca<-phyl.pca(phy,morpho[,2:4],method="lambda")
+bill_pca<-phyl.pca(phy,morpho[,3:5],method="lambda")
 bill_pca
 
 ### Find the % variance explained by each eigenvector 
@@ -88,7 +88,7 @@ morpho$BillPC1<-bill_scores_avg$V1
 morpho$BillPC2<-bill_scores_avg$V2
 
 ### Flight Feather Phylogenetic PCA ###
-body_pca<-phyl.pca(phy,morpho[,6:8],method="lambda")
+body_pca<-phyl.pca(phy,morpho[,7:9],method="lambda")
 body_pca
 
 ### Find the % variance explained by each eigenvector 
@@ -158,7 +158,7 @@ cv_summary<-read.csv('./Output Files/cv_summary_table.csv', row.names = 2)
 ###END/\/\/\/\/\/\/\/\/\/\/\###
 
 ### Coefficient of Variation (CV) Bill Phylogenetic PCA ###
-CVbill_pca<-phyl.pca(phy,cv_summary[,2:4],method="lambda")
+CVbill_pca<-phyl.pca(phy,cv_summary[,3:5],method="lambda")
 CVbill_pca
 
 ### Find the % variance explained by each eigenvector 
@@ -177,7 +177,7 @@ cv_summary$CVBillPC1<-CVbill_scores_cv$V1
 cv_summary$CVBillPC2<-CVbill_scores_cv$V2
 
 ### CV Flight Feather Phylogenetic PCA ###
-CVbody_pca<-phyl.pca(phy,cv_summary[,6:8],method="lambda")
+CVbody_pca<-phyl.pca(phy,cv_summary[,7:9],method="lambda")
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -226,7 +226,7 @@ write.csv(cv_summary, file="cv_summary.csv")
 ### CV Body PCA without T. forficatus or T. savana bc their tails are so long ###
 phy_trim<-drop.tip(phy,c(grep("forficatus",phy$tip.label),grep("savana",phy$tip.label)))
 otu_cv_trim<-cv_summary[rownames(cv_summary) %in% phy_trim$tip.label,]
-CVbody_pca_trim<-phyl.pca(phy_trim,otu_cv_trim[,6:8],method="lambda")
+CVbody_pca_trim<-phyl.pca(phy_trim,otu_cv_trim[,7:9],method="lambda")
 CVbody_pca_trim
 
 ### Find the % variance explained by each eigenvector 
@@ -337,7 +337,7 @@ coldf$outlinecolor<-c("gray70","gray40","black")[as.numeric(coldf$Strategy)]
 coldf$outlinecolor[coldf$pch %in% c(3,4)]<-coldf$col[coldf$pch %in% c(3,4)]
 coldf$col[coldf$pch %in% c(3,4)]<-NA
 
-png(file="Tyrannus_phylogenetic_PCA.png",width=8.5,height=11,units="in",res=500)
+png(file="Tyrannus_phylogenetic_PCA.png",width=7.5,height=8,units="in",res=500)
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -536,7 +536,7 @@ text(x=par("usr")[1]+diff(c(par("usr")[1],par("usr")[2]))*0.075,y=par("usr")[4]-
 ### Bird Pictures Panel ###
 #par(mar=c(2,0.5,0,14))
 
-#require(magick)
+require(magick)
 
 # Crop images
 #img<-image_crop(example, "100x150+50")#crop out width:100px and height:150px starting +50px from the left
