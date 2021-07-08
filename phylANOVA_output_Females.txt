@@ -1,0 +1,174 @@
+Character 1 -- BL.Average
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+             Sum Sq  Mean Sq  F value Pr(>F)
+x          0.917779 0.458890 0.066539  0.962
+Residual 172.414148 6.896566                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000 -0.335723 -0.044616
+partial    0.335723  0.000000  0.332803
+sedentary  0.044616 -0.332803  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000    0.74     0.974
+partial       0.740    1.00     0.830
+sedentary     0.974    0.83     1.000
+---------
+
+#############
+
+Character 2 -- BW.Average
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+           Sum Sq  Mean Sq  F value Pr(>F)
+x        15.71204 7.856018 2.647661  0.265
+Residual 74.17886 2.967155                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000 -0.238531  1.861555
+partial    0.238531  0.000000  1.841541
+sedentary -1.861555 -1.841541  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.802     0.254
+partial       0.802   1.000     0.198
+sedentary     0.254   0.198     1.000
+---------
+
+#############
+
+Character 3 -- BD.Average
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+           Sum Sq  Mean Sq  F value Pr(>F)
+x        10.38583 5.192914 2.954874  0.234
+Residual 43.93516 1.757406                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000  0.499525  2.309411
+partial   -0.499525  0.000000  1.406438
+sedentary -2.309411 -1.406438  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.603     0.151
+partial       0.603   1.000     0.316
+sedentary     0.151   0.316     1.000
+---------
+
+#############
+
+Character 4 -- Kipp.s.Distance
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+           Sum Sq   Mean Sq  F value Pr(>F)
+x        338.1703 169.08516 8.365774  0.009
+Residual 505.2885  20.21154                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000  2.028705  4.090357
+partial   -2.028705  0.000000  1.228139
+sedentary -4.090357 -1.228139  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.046     0.005
+partial       0.046   1.000     0.380
+sedentary     0.005   0.380     1.000
+---------
+
+#############
+
+Character 5 -- WC.Average
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+           Sum Sq   Mean Sq F value Pr(>F)
+x        1085.311 542.65550 8.61729  0.015
+Residual 1574.322  62.97287               
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory   partial sedentary
+migratory  0.000000  0.545518  3.835318
+partial   -0.545518  0.000000  2.649313
+sedentary -3.835318 -2.649313  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.575     0.012
+partial       0.575   1.000     0.047
+sedentary     0.012   0.047     1.000
+---------
+
+#############
+
+Character 6 -- Tail
+
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+            Sum Sq  Mean Sq  F value Pr(>F)
+x         3056.435 1528.217 0.995004  0.545
+Residual 38397.275 1535.891                
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "none"
+
+Pairwise t-values:
+          migratory  partial sedentary
+migratory  0.000000 0.940274 -0.439294
+partial   -0.940274 0.000000 -1.410464
+sedentary  0.439294 1.410464  0.000000
+
+Pairwise corrected P-values:
+          migratory partial sedentary
+migratory     1.000   0.341     0.774
+partial       0.341   1.000     0.295
+sedentary     0.774   0.295     1.000
+---------
+
+#############
+
