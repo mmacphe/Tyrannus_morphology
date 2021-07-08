@@ -3,9 +3,9 @@ Character 1 -- Tail
 ANOVA table: Phylogenetic ANOVA
 
 Response: y
-           Sum Sq  Mean Sq  F value Pr(>F)
-x        0.003523 0.001762 0.588288  0.702
-Residual 0.071863 0.002994                
+           Sum Sq  Mean Sq F value Pr(>F)
+x        0.002578 0.001289 0.88806  0.585
+Residual 0.033380 0.001451               
 
 P-value based on simulation.
 ---------
@@ -14,16 +14,101 @@ Pairwise posthoc test using method = "none"
 
 Pairwise t-values:
           migratory  partial sedentary
-migratory  0.000000 1.083492  0.491540
-partial   -1.083492 0.000000 -0.767452
-sedentary -0.491540 0.767452  0.000000
+migratory  0.000000 1.315345  0.829006
+partial   -1.315345 0.000000 -0.717059
+sedentary -0.829006 0.717059  0.000000
 
 Pairwise corrected P-values:
           migratory partial sedentary
-migratory     1.000   0.266     0.753
-partial       0.266   1.000     0.559
-sedentary     0.753   0.559     1.000
+migratory     1.000   0.173     0.606
+partial       0.173   1.000     0.592
+sedentary     0.606   0.592     1.000
 ---------
 
 #############
 
+character(0)
+[1] "Character 1 -- BL.Average"
+[1] "Character 2 -- BW.Average"
+[1] "Character 3 -- BD.Average"
+[1] "Character 4 -- Kipp.s.Distance"
+[1] "Character 5 -- WC.Average"
+[1] "Character 6 -- Tail"
+character(0)
+[1] "Character 1 -- Kipp.s.Index"
+[1] "Character 2 -- BillPC1"
+[1] "Character 3 -- BillPC2"
+character(0)
+[1] "Character 1 -- BL.Average"
+[1] "Character 2 -- BW.Average"
+[1] "Character 3 -- BD.Average"
+[1] "Character 4 -- Tarsus.Average"
+[1] "Character 5 -- Kipp.s.Distance"
+[1] "Character 6 -- WC.Average"
+[1] "Character 7 -- Kipp.s.Index"
+[1] "Character 8 -- CVBillPC1"
+[1] "Character 9 -- CVBillPC2"
+character(0)
+[1] "Character 1 -- WC.Average"
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.11", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.447", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.880", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.1335", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.1790", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.2225", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
