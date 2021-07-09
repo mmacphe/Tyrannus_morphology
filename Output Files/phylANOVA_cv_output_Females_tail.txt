@@ -112,3 +112,137 @@ stat_identity: na.rm = FALSE
 position_identity 
 RStudioGD 
         2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.2398", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.2831", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.3264", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.3721", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.3894", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.4067", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.4240", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.4413", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.4586", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.4759", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.4932", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.5105", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+geom_draw_grob: grob = list(x = function (x, y, ...) 
+UseMethod("plot"), prefix = NULL, device = function (width, height) 
+{
+    grDevices::pdf(NULL, width = width, height = height)
+    grDevices::dev.control("enable")
+}, name = "GRID.echogrob.5536", gp = NULL, vp = NULL, children = list(), childrenOrder = character(0)), xmin = 0, xmax = 1, ymin = 0, ymax = 1, scale = 1, clip = inherit, halign = 0.5, valign = 0.5
+stat_identity: na.rm = FALSE
+position_identity 
+RStudioGD 
+        2 
+RStudioGD 
+        2 
