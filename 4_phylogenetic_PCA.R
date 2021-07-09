@@ -15,9 +15,9 @@ morpho<-read.csv('./Output Files/Tyrannus_Adults_data.csv', row.names=2)
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
-morpho<-read.csv('./Output Files/Tyrannus_Females_Adults_data.csv', row.names=2)
+#morpho<-read.csv('./Output Files/Tyrannus_Females_Adults_data.csv', row.names=2)
 #OR
-#morpho<-read.csv('./Output Files/Tyrannus_Males_Adults_data.csv', row.names=2)
+morpho<-read.csv('./Output Files/Tyrannus_Males_Adults_data.csv', row.names=2)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -44,9 +44,9 @@ morpho_whole<-read.csv('./Output Files/Tyrannus Adults morphology data.csv', row
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
-morpho_whole<-read.csv('./Output Files/Tyrannus Adults Females morphology data.csv', row.names=1)
+#morpho_whole<-read.csv('./Output Files/Tyrannus Adults Females morphology data.csv', row.names=1)
 #OR
-#morpho_whole<-read.csv('./Output Files/Tyrannus morphology data_Males.csv', row.names=1)
+morpho_whole<-read.csv('./Output Files/Tyrannus Adults morphology data.csv', row.names=1)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -130,9 +130,9 @@ write.csv(morpho, file="Tyrannus morphology + PCA avg_Adults.csv")
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
-write.csv(morpho, file="Tyrannus morphology + PCA avg_Females_Adults.csv")
+#write.csv(morpho, file="Tyrannus morphology + PCA avg_Females_Adults.csv")
 #OR
-#write.csv(morpho, file="Tyrannus morphology + PCA avg_Males.csv")
+write.csv(morpho, file="Tyrannus morphology + PCA avg_Males_Adults.csv")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -146,9 +146,9 @@ cv_summary<-read.csv('./Output Files/cv_summary_Adults_table.csv', row.names = 2
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
-cv_summary<-read.csv('./Output Files/cv_summary_Females_Adults_table.csv', row.names = 2)
+#cv_summary<-read.csv('./Output Files/cv_summary_Females_Adults_table.csv', row.names = 2)
 #OR
-#cv_summary<-read.csv('./Output Files/cv_summary_table_Males.csv', row.names = 2)
+cv_summary<-read.csv('./Output Files/cv_summary_Males_Adults_table.csv', row.names = 2)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -181,7 +181,7 @@ CVbody_pca<-phyl.pca(phy,cv_summary[,7:9],method="lambda")
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 #Note: If assessing females, use one of the following lines of code instead of the above line, then proceed.
-CVbody_pca<-phyl.pca(phy,na.omit(cv_summary[,6:8]),method="lambda") #there is a missing value in the tail column
+#CVbody_pca<-phyl.pca(phy,na.omit(cv_summary[,6:8]),method="lambda") #there is a missing value in the tail column
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -211,9 +211,9 @@ write.csv(cv_summary, file="cv_summary_Adults.csv")
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
-write.csv(cv_summary, file="cv_summary_Females_Adults.csv")
+#write.csv(cv_summary, file="cv_summary_Females_Adults.csv")
 #OR
-#write.csv(cv_summary, file="cv_summary_Males.csv")
+write.csv(cv_summary, file="cv_summary_Males_Adults.csv")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -252,9 +252,9 @@ Tyrannus.data<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Adults.csv
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
-Tyrannus.data<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Females_Adults.csv', row.names = 1)
+#Tyrannus.data<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Females_Adults.csv', row.names = 1)
 #OR
-#Tyrannus.data<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Males.csv', row.names = 1)
+Tyrannus.data<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Males_Adults.csv', row.names = 1)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -341,9 +341,9 @@ png(file="Tyrannus_phylogenetic_PCA_Adults.png",width=7.5,height=8,units="in",re
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
-png(file="Tyrannus_phylogenetic_PCA_Females_Adults.png",width=7.5,height=8,units="in",res=500)
+#png(file="Tyrannus_phylogenetic_PCA_Females_Adults.png",width=7.5,height=8,units="in",res=500)
 #OR
-#png(file="Tyrannus_phylogenetic_PCA_Males.png",width=6.5,height=5.5,units="in",res=500)
+png(file="Tyrannus_phylogenetic_PCA_Males_Adults.png",width=6.5,height=5.5,units="in",res=500)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -407,10 +407,10 @@ mtext(at=-2.75, text=paste0("short, wide, deep"), side=2, line=0.7, cex=0.45)
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above lines, then proceed.
-mtext(at=-4, text=paste0("short, narrow, shallow"), side=1, line=0.5, cex=0.45)
-mtext(at=11, text=paste0("long, wide, deep"), side=1, line=0.5, cex=0.45)
-mtext(at=1.75, text=paste0("long, narrow, shallow"), side=2, line=0.7, cex=0.45)
-mtext(at=-2, text=paste0("short, wide, deep"), side=2, line=0.7, cex=0.45)
+#mtext(at=-4, text=paste0("short, narrow, shallow"), side=1, line=0.5, cex=0.45)
+#mtext(at=11, text=paste0("long, wide, deep"), side=1, line=0.5, cex=0.45)
+#mtext(at=1.75, text=paste0("long, narrow, shallow"), side=2, line=0.7, cex=0.45)
+#mtext(at=-2, text=paste0("short, wide, deep"), side=2, line=0.7, cex=0.45)
 #OR
 #mtext(at=-3, text=paste0("short, narrow, shallow"), side=1, line=0.5, cex=0.45)
 #mtext(at=11, text=paste0("long, wide, deep"), side=1, line=0.5, cex=0.45)
@@ -441,9 +441,9 @@ rect(xleft= 22.49359,ybottom=-29.45303,xright= 58.11388,ytop= 18.04108,lty=3) ##
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
-rect(xleft= 12.29256,ybottom=-30.44410,xright= 45.24831,ytop= 12.25531,lty=3) ### see range body scores avg 2 below to set these properly
+#rect(xleft= 12.29256,ybottom=-30.44410,xright= 45.24831,ytop= 12.25531,lty=3) ### see range body scores avg 2 below to set these properly
 #OR
-#rect(xleft= 28.43172,ybottom=-27.89040,xright= 64.27720,ytop= 19.31986,lty=3) ### see range body scores avg 2 below to set these properly
+rect(xleft= 31.12105,ybottom=-27.00028,xright= 66.87721,ytop= 18.12568,lty=3) ### see range body scores avg 2 below to set these properly
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -467,10 +467,10 @@ mtext(at=10, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above lines, then proceed.
-mtext(at=-125, text=paste0("long feathers"), side=1, line=0.7, cex=0.45)
-mtext(at=25, text=paste0("short feathers"), side=1, line=0.7, cex=0.45)
-mtext(at=-25, text=paste0("long feathers"), side=2, line=0.7, cex=0.45)
-mtext(at=10, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)#OR
+#mtext(at=-125, text=paste0("long feathers"), side=1, line=0.7, cex=0.45)
+#mtext(at=25, text=paste0("short feathers"), side=1, line=0.7, cex=0.45)
+#mtext(at=-25, text=paste0("long feathers"), side=2, line=0.7, cex=0.45)
+#mtext(at=10, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)#OR
 #OR
 #mtext(at=-160, text=paste0("long feathers"), side=1, line=0.7, cex=0.45)
 #mtext(at=50, text=paste0("short feathers"), side=1, line=0.7, cex=0.45)
@@ -510,10 +510,10 @@ mtext(at=7.75, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above lines, then proceed.
-mtext(at=14, text=paste0("long feathers"), side=1, line=0.5, cex=0.45)
-mtext(at=40, text=paste0("short feathers"), side=1, line=0.5, cex=0.45)
-mtext(at=-25, text=paste0("long feathers"), side=2, line=0.7, cex=0.45)
-mtext(at=5, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)
+#mtext(at=14, text=paste0("long feathers"), side=1, line=0.5, cex=0.45)
+#mtext(at=40, text=paste0("short feathers"), side=1, line=0.5, cex=0.45)
+#mtext(at=-25, text=paste0("long feathers"), side=2, line=0.7, cex=0.45)
+#mtext(at=5, text=paste0("short feathers"), side=2, line=0.7, cex=0.45)
 #OR
 #mtext(at=32.5, text=paste0("long feathers"), side=1, line=0.5, cex=0.45)
 #mtext(at=57.5, text=paste0("short feathers"), side=1, line=0.5, cex=0.45)
