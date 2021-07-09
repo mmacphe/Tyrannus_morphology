@@ -276,6 +276,10 @@ names(Migration)<-rownames(Tyrannus.data)
 char1<-as.numeric(Migration)
 names(char1)<-names(Migration)
 
+### check tree is ultrametric ###
+is.ultrametric(phy) #TRUE
+#phy<-force.ultrametric(phy,method="nnls")
+
 #Create mkn model. Use equal probabilites for all states at the root
 lik.mn<-make.mkn(phy,char1,k=3, control=list(root=ROOT.EQUI))
 #Look at the different parameters of the model
