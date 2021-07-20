@@ -8,7 +8,6 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 ### Read in morphological data set
 morpho <- read.csv("Tyrannus_voucher_table.csv")
 colnames(morpho)[23]<-"Kipp.s.Distance" #rename Kipp.s.Average column for clarity
-morpho$Kipp.s.Index<-((morpho$Kipp.s.Distance/morpho$WC.Average)*100) #calculate and add Kipp's Index column
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -74,7 +73,7 @@ phy$tip.label[!phy$tip.label %in% names(morpho_split)] #Check that this returns 
 names(morpho_split)[! names(morpho_split) %in% phy$tip.label] #Check that this also returns "character(0)"
 
 ### Create summary output df for data frame
-morpho_trim<-lapply(morpho_split,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "Kipp.s.Index", "WC.Average", "Tail", "Tarsus.Average","Mass")])
+morpho_trim<-lapply(morpho_split,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "WC.Average", "Tail", "Tarsus.Average","Mass")])
 
 ### Get average values for each morphometric
 otu_avg<-list()
