@@ -69,7 +69,7 @@ phy$tip.label
 phy$tip.label[!phy$tip.label %in% names(morpho_split)] #should return character(0)
 names(morpho_split)[! names(morpho_split) %in% phy$tip.label] #should return character (0)
 
-morpho_trim<-lapply(morpho_split,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "Kipp.s.Index", "WC.Average", "Tail", "Tarsus.Average", "name_num")])
+morpho_trim<-lapply(morpho_split,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "WC.Average", "Tail", "Tarsus.Average", "name_num")])
 
 bill_mat<-matrix(as.numeric(as.matrix(do.call(rbind, lapply(morpho_trim,function(x) x[,1:3])))),nrow=nrow(do.call(rbind,morpho_trim))) 
 
