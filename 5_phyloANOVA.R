@@ -17,7 +17,7 @@ otu_avg<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Adults.csv', row
 ### Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #otu_avg<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Females_Adults.csv', row.names = 1)
 ### OR
-otu_avg<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Males_Adults.csv', row.names = 1)
+#otu_avg<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Males_Adults.csv', row.names = 1)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -68,7 +68,7 @@ sink("phylANOVA_output.txt")
 ### Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #sink("phylANOVA_output_Females.txt")
 ### OR
-sink("phylANOVA_output_Males.txt")
+#sink("phylANOVA_output_Males.txt")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -108,7 +108,7 @@ sink("phylANOVA_bonferonni_output.txt")
 ### Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #sink("phylANOVA_bonferonni_Females.txt")
 ### OR
-sink("phylANOVA_bonferonni_Males.txt")
+#sink("phylANOVA_bonferonni_Males.txt")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -126,7 +126,7 @@ sink()
 ###################################################################################
 ### Conduct the phylogenetic ANOVA for metrics that do not need to be size-corrected ###
 phy$tip.label[!phy$tip.label %in% rownames(otu_avg)]
-response_var2<-colnames(otu_avg)[c(11,13,14)]
+response_var2<-colnames(otu_avg)[c(12,13)]
 
 phylANOVA_PCoutput<-list() 
 
@@ -149,7 +149,7 @@ sink("phylANOVA_output_nosizecorrectionneeded.txt")
 ### Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #sink("phylANOVA_output_PCscores_Females.txt")
 ### OR
-sink("phylANOVA_output_PCscores_Males.txt")
+#sink("phylANOVA_output_PCscores_Males.txt")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -186,7 +186,7 @@ sink("phylANOVA_output_bonferroni_nosizecorrectionneeded.txt")
 ### Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #sink("phylANOVA_output_bonferroni_PCscores_Females.txt")
 ### OR
-sink("phylANOVA_output_bonferroni_PCscores_Males.txt")
+#sink("phylANOVA_output_bonferroni_PCscores_Males.txt")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -212,7 +212,7 @@ otu_cv_avg<-read.csv('./Output Files/cv_summary_Adults.csv', row.names = 1)
 ### Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #otu_cv_avg<-read.csv('./Output Files/cv_summary_Females_Adults.csv', row.names = 1) 
 ### OR
-otu_cv_avg<-read.csv('./Output Files/cv_summary_Males_Adults.csv', row.names = 1) 
+#otu_cv_avg<-read.csv('./Output Files/cv_summary_Males_Adults.csv', row.names = 1) 
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -225,14 +225,14 @@ View(otu_cv_avg)
 ### Check that tree$tip.label is the same as otu_avg
 phy$tip.label[!phy$tip.label %in% otu_cv_avg$species]
 
-response_var3<-colnames(otu_cv_avg)[c(4,5,6,7,8,9,10,11,13,14)]
+response_var3<-colnames(otu_cv_avg)[c(4,5,6,7,8,9,10,12,13)]
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
 ###/\/\/\/\/\/\/\/\/\/\/\###
 
 ### Note: If assessing females, use one of the following lines of code instead of the above line, then proceed.
-response_var3<-colnames(otu_cv_avg)[c(4,5,6,7,8,9,11,13,14)] #run anova for tails separately (see below) for females bc T. s sanctamartae has NA
+#response_var3<-colnames(otu_cv_avg)[c(4,5,6,7,8,9,10,11,13,14)] #run anova for tails separately (see below) for females bc T. s sanctamartae has NA
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -265,7 +265,7 @@ sink("phylANOVA_cv_output.txt")
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #sink("phylANOVA_cv_output_Females.txt")
 ### OR
-sink("phylANOVA_cv_output_Males.txt")
+#sink("phylANOVA_cv_output_Males.txt")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -303,7 +303,7 @@ sink("phylANOVA_cv_bonferroni_output.txt")
 #Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #sink("phylANOVA_cv_bonferroni_output_Females.txt")
 ### OR
-sink("phylANOVA_cv_bonferroni_output_Males.txt")
+#sink("phylANOVA_cv_bonferroni_output_Males.txt")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -397,7 +397,7 @@ write.csv(residuals, "phylANOVA_tarsus-corrected_residuals.csv")
 ### Note: If assessing sexes separately, use one of the following lines of code instead of the above line, then proceed.
 #write.csv(residuals, "phylANOVA_tarsus-corrected_residuals_Females.csv")
 ### OR
-write.csv(residuals, "phylANOVA_tarsus-corrected_residuals_Males.csv")
+#write.csv(residuals, "phylANOVA_tarsus-corrected_residuals_Males.csv")
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
