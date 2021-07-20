@@ -45,7 +45,7 @@ library(mulTree)
 phy<-read.tree('./Output Files/Tyrannus_phylogeny.tre')
 
 options(na.action = "na.fail")
-morpho1<-subset(morpho, select=c(BL.Average,BW.Average,BD.Average,Tarsus.Average,Kipp.s.Distance,WC.Average,Tail,Age,Sex,Kipp.s.Index,tip.label)) #remove the Mass column for the first comparisons bc it is unnecessary for the next step and has NAs that will affect the outcome
+morpho1<-subset(morpho, select=c(BL.Average,BW.Average,BD.Average,Tarsus.Average,Kipp.s.Distance,WC.Average,Tail,Age,Sex,tip.label)) #remove the Mass column for the first comparisons bc it is unnecessary for the next step and has NAs that will affect the outcome
 colnames(morpho1) #look at the column names to pick out the right ones for response_var
 morpho1<-na.omit(morpho1) #we have to remove all the NAs to run the dredge()
 #response_var<-colnames(morpho1)[c(1,2,3,4,5,6,7,10)]
@@ -59,7 +59,6 @@ my_formula_Sex_Tarsus<-Tarsus.Average~Sex
 my_formula_Sex_KippsD<-Kipp.s.Distance~Sex
 my_formula_Sex_WC<-WC.Average~Sex
 my_formula_Sex_Tail<-Tail~Sex
-my_formula_Sex_KI<-Kipp.s.Index~Sex
 
 my_parameters<-c(100000,10,1000) #The MCMC parameters (generations, sampling, burnin). Used default settings from https://github.com/TGuillerme/mulTree/blob/master/doc/mulTree-manual.pdf
 
@@ -73,7 +72,6 @@ LM_Sex_Tarsus<-mulTree(mulTree.data=comp_data, formula=my_formula_Sex_Tarsus,pri
 LM_Sex_KippsD<-mulTree(mulTree.data=comp_data, formula=my_formula_Sex_KippsD,priors=my_priors,parameters=my_parameters,output="Sex_KippsD",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
 LM_Sex_WC<-mulTree(mulTree.data=comp_data, formula=my_formula_Sex_WC,priors=my_priors,parameters=my_parameters,output="Sex_WC",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
 LM_Sex_Tail<-mulTree(mulTree.data=comp_data, formula=my_formula_Sex_Tail,priors=my_priors,parameters=my_parameters,output="Sex_Tail",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
-LM_Sex_KI<-mulTree(mulTree.data=comp_data, formula=my_formula_Sex_KI,priors=my_priors,parameters=my_parameters,output="Sex_KI",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
 
 #Read each single, specific model
 Sex_BL<-read.mulTree("Sex_BL",model=TRUE)
@@ -104,12 +102,8 @@ Sex_Tail<-read.mulTree("Sex_Tail",model=TRUE)
 #summarise results
 summary_Sex_Tail<-summary(Sex_Tail)
 
-Sex_KI<-read.mulTree("Sex_KI",model=TRUE)
-#summarise results
-summary_Sex_KI<-summary(Sex_KI)
-
 LM1_output<-list(summary_Sex_BL, summary_Sex_BW, summary_Sex_BD, summary_Sex_Tarsus,
-                 summary_Sex_KippsD, summary_Sex_WC, summary_Sex_Tail, summary_Sex_KI) #Affect of Sex Class
+                 summary_Sex_KippsD, summary_Sex_WC, summary_Sex_Tail) #Affect of Sex Class
 
 ### Write out output ###
 sink("MCMCglmm_LMOutput_Sex.txt")
@@ -127,7 +121,6 @@ my_formula_Age_Tarsus<-Tarsus.Average~Age
 my_formula_Age_KippsD<-Kipp.s.Distance~Age
 my_formula_Age_WC<-WC.Average~Age
 my_formula_Age_Tail<-Tail~Age
-my_formula_Age_KI<-Kipp.s.Index~Age
 
 LM_Age_BL<-mulTree(mulTree.data=comp_data, formula=my_formula_Age_BL,priors=my_priors,parameters=my_parameters,output="Age_BL",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
 LM_Age_BW<-mulTree(mulTree.data=comp_data, formula=my_formula_Age_BW,priors=my_priors,parameters=my_parameters,output="Age_BW",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
@@ -136,7 +129,6 @@ LM_Age_Tarsus<-mulTree(mulTree.data=comp_data, formula=my_formula_Age_Tarsus,pri
 LM_Age_KippsD<-mulTree(mulTree.data=comp_data, formula=my_formula_Age_KippsD,priors=my_priors,parameters=my_parameters,output="Age_KippsD",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
 LM_Age_WC<-mulTree(mulTree.data=comp_data, formula=my_formula_Age_WC,priors=my_priors,parameters=my_parameters,output="Age_WC",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
 LM_Age_Tail<-mulTree(mulTree.data=comp_data, formula=my_formula_Age_Tail,priors=my_priors,parameters=my_parameters,output="Age_Tail",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
-LM_Age_KI<-mulTree(mulTree.data=comp_data, formula=my_formula_Age_KI,priors=my_priors,parameters=my_parameters,output="Age_KI",ESS=50,chains=1) #chains=1 bc only 1 tree and not multiple trees
 
 Age_BL<-read.mulTree("Age_BL",model=TRUE)
 #summarise results
@@ -166,12 +158,8 @@ Age_Tail<-read.mulTree("Age_Tail",model=TRUE)
 #summarise results
 summary_Age_Tail<-summary(Age_Tail)
 
-Age_KI<-read.mulTree("Age_KI",model=TRUE)
-#summarise results
-summary_Age_KI<-summary(Age_KI)
-
 LM2_output<-list(summary_Age_BL, summary_Age_BW, summary_Age_BD, summary_Age_Tarsus,
-                 summary_Age_KippsD, summary_Age_WC, summary_Age_Tail, summary_Age_KI) #Affect of Age Class
+                 summary_Age_KippsD, summary_Age_WC, summary_Age_Tail) #Affect of Age Class
 
 ### Write out output ###
 sink("MCMCglmm_LMOutput_Age.txt")
@@ -260,9 +248,9 @@ phy$tip.label[!phy$tip.label %in% names(morpho_split_Males)] #Check that this re
 names(morpho_split)[! names(morpho_split) %in% phy$tip.label] #Check that this also returns "character(0)"
 
 ### Create summary output df for data frame
-morpho_trim<-lapply(morpho_split,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "Kipp.s.Index", "WC.Average", "Tail", "Tarsus.Average","Mass")])
-morpho_trim_Females<-lapply(morpho_split_Females,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "Kipp.s.Index", "WC.Average", "Tail", "Tarsus.Average","Mass")])
-morpho_trim_Males<-lapply(morpho_split_Males,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "Kipp.s.Index", "WC.Average", "Tail", "Tarsus.Average","Mass")])
+morpho_trim<-lapply(morpho_split,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "WC.Average", "Tail", "Tarsus.Average","Mass")])
+morpho_trim_Females<-lapply(morpho_split_Females,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "WC.Average", "Tail", "Tarsus.Average","Mass")])
+morpho_trim_Males<-lapply(morpho_split_Males,function(x) x[colnames(x) %in% c("BL.Average","BW.Average","BD.Average", "Kipp.s.Distance", "WC.Average", "Tail", "Tarsus.Average","Mass")])
 
 ### Get average values for each morphometric
 otu_avg<-list()
@@ -349,7 +337,7 @@ write.csv(CV_data, file = "cv_summary_Males_Adults_table.csv")
 
 ###################################################################################################
 ### What we're trying to do now is to test whether tarsus length is the best approximation of body mass.
-morpho2<-subset(morpho, select=c(Mass,BL.Average,BW.Average,BD.Average,Tarsus.Average,Kipp.s.Distance,WC.Average,Tail,Kipp.s.Index,tip.label)) #remove the Mass column for the first comparisons bc it is unnecessary for the next step and has NAs that will affect the outcome
+morpho2<-subset(morpho, select=c(Mass,BL.Average,BW.Average,BD.Average,Tarsus.Average,Kipp.s.Distance,WC.Average,Tail,tip.label)) #remove the Mass column for the first comparisons bc it is unnecessary for the next step and has NAs that will affect the outcome
 colnames(morpho2) #check the column names to make sure they're all there
 morpho2<-na.omit(morpho2) #we have to remove all the NAs to run the dredge(); leaves 190 observations
 #birds.fullmodel_Tarsus<-lm(Mass~(BL.Average+BW.Average+BD.Average+Tarsus.Average+Kipp.s.Distance+WC.Average+Tail+Kipp.s.Index)*tip.label, data = morpho2)

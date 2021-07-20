@@ -3,28 +3,28 @@
  Thinning interval  = 10
  Sample size  = 9900 
 
- DIC: 1165.373 
+ DIC: 1165.261 
 
  G-structure:  ~animal
 
        post.mean  l-95% CI u-95% CI eff.samp
-animal     16.49 4.424e-05    39.32     4742
+animal     16.76 8.683e-05    40.12     4935
 
  R-structure:  ~units
 
       post.mean l-95% CI u-95% CI eff.samp
-units     24.75    19.41    30.13     8346
+units     24.75    19.37    30.23     6086
 
  Location effects: Mass ~ BL.Average + BW.Average + BD.Average + Tarsus.Average + Kipp.s.Distance + WC.Average + Tail 
 
-                post.mean  l-95% CI  u-95% CI eff.samp    pMCMC    
-(Intercept)     -32.22466 -52.36911 -11.99885     9900 0.000606 ***
-BL.Average       -0.24725  -1.05719   0.63945     9607 0.562626    
-BW.Average        0.45261  -1.01487   1.91629     9900 0.534747    
-BD.Average        2.37521   0.41125   4.54880     9571 0.021818 *  
-Tarsus.Average    1.47194   0.55919   2.36575     9900 0.002020 ** 
-Kipp.s.Distance  -0.45693  -0.89972  -0.02845     5003 0.044040 *  
-WC.Average        0.38458   0.14648   0.63505     8079 0.001818 ** 
-Tail             -0.00454  -0.04374   0.03801     7603 0.821212    
+                 post.mean   l-95% CI   u-95% CI eff.samp   pMCMC   
+(Intercept)     -32.289919 -52.500286 -12.506147     9900 0.00141 **
+BL.Average       -0.241294  -1.080122   0.629779     9900 0.56747   
+BW.Average        0.459847  -0.929861   1.949067     9900 0.52747   
+BD.Average        2.343121   0.115344   4.288704     9900 0.02747 * 
+Tarsus.Average    1.475464   0.550451   2.351812     9900 0.00121 **
+Kipp.s.Distance  -0.462534  -0.909081  -0.039239     3156 0.04101 * 
+WC.Average        0.386329   0.141364   0.633221     7425 0.00162 **
+Tail             -0.004398  -0.044506   0.037721     6773 0.81778   
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
