@@ -51,4 +51,4 @@ tyrannus_mod$edge.length[tyrannus_mod$edge.length==0]<-0.001
 plot(tyrannus_mod)
 
 ### Write out phylogeny ###
-write.tree(tyrannus_mod,file="Tyrannus_phylogeny_0.93.tre")
+write.tree(tyrannus_mod,file="Tyrannus_phylogeny_0.5.tre")
