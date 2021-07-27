@@ -6,6 +6,8 @@ require(phytools)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 phy<-read.tree('./Output Files/Tyrannus_phylogeny.tre')
+#phy<-read.tree('./Output Files/Tyrannus_phylogeny_0.2.tre')
+#phy<-read.tree('./Output Files/Tyrannus_phylogeny_0.93.tre')
 
 ### Bring in morphology dataset with average morphology values for each OTU and PC scores
 otu_avg<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Adults.csv', row.names = 1)
@@ -60,6 +62,8 @@ names(phylANOVA_output)<-response_var
 
 ### Write out output ###
 sink("phylANOVA_output.txt")
+#sink("phylANOVA_output_0.2.txt")
+#sink("phylANOVA_output_0.93.txt")
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -141,6 +145,8 @@ names(phylANOVA_PCoutput)<-response_var2
 
 ### Write out output ###
 sink("phylANOVA_output_nosizecorrectionneeded.txt")
+#sink("phylANOVA_output_nosizecorrectionneeded_0.2.txt")
+#sink("phylANOVA_output_nosizecorrectionneeded_0.93.txt")
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -257,6 +263,8 @@ names(phylANOVA_CVoutput)<-response_var3
 
 ### Write out output ###
 sink("phylANOVA_cv_output.txt")
+#sink("phylANOVA_cv_output_0.2.txt")
+#sink("phylANOVA_cv_output_0.93.txt")
 
 ###NOTE/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
