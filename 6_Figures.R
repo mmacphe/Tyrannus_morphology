@@ -23,9 +23,9 @@ residuals<-read.csv('./Output Files/phylANOVA_tarsus-corrected_residuals.csv', r
 #otu_cv_avg<-read.csv('./Output Files/cv_summary_Females_Adults.csv', row.names = 1) 
 #residuals<-read.csv('./Output Files/phylANOVA_tarsus-corrected_residuals_Females.csv', row.names = 1)
 ### OR
-otu_avg<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Males_Adults.csv', row.names = 1)
-otu_cv_avg<-read.csv('./Output Files/cv_summary_Males_Adults.csv', row.names = 1) 
-residuals<-read.csv('./Output Files/phylANOVA_tarsus-corrected_residuals_Males.csv', row.names = 1)
+#otu_avg<-read.csv('./Output Files/Tyrannus morphology + PCA avg_Males_Adults.csv', row.names = 1)
+#otu_cv_avg<-read.csv('./Output Files/cv_summary_Males_Adults.csv', row.names = 1) 
+#residuals<-read.csv('./Output Files/phylANOVA_tarsus-corrected_residuals_Males.csv', row.names = 1)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -42,7 +42,7 @@ png(file="Phenotype Residuals.png",width=7,height=5.5,units="in",res=500)
 ### Note: If assessing sexes separately, use the following lines of code instead of the above 3 lines, then proceed.
 #png(file="Phenotype Residuals_Females.png",width=7,height=5.5,units="in",res=500)
 ### OR
-png(file="Phenotype Residuals_Males.png",width=7,height=5.5,units="in",res=500)
+#png(file="Phenotype Residuals_Males.png",width=7,height=5.5,units="in",res=500)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -110,7 +110,7 @@ png(file="Phenotype Variation.png",width=7,height=5.5,units="in",res=500)
 ### Note: If assessing sexes separately, use the following lines of code instead of the above 3 lines, then proceed.
 #png(file="Phenotype Variation_Females.png",width=7,height=5.5,units="in",res=500)
 ### OR
-png(file="Phenotype Variation_Males.png",width=7,height=5.5,units="in",res=500)
+#png(file="Phenotype Variation_Males.png",width=7,height=5.5,units="in",res=500)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -161,7 +161,7 @@ png(file="Phenotype Residuals and Variation.png", width=7, height=5.5, units = "
 ### Note: If assessing sexes separately, use the following lines of code instead of the above 3 lines, then proceed.
 #png(file="Phenotype Residuals and Variation_Females.png", width=7, height=5.5, units = "in", res=500)
 ### OR
-png(file="Phenotype Residuals and Variation_Males.png", width=7, height=5.5, units = "in", res=500)
+#png(file="Phenotype Residuals and Variation_Males.png", width=7, height=5.5, units = "in", res=500)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -176,7 +176,7 @@ rl<-lapply(list("./Output Files/Phenotype Residuals.png", "./Output Files/Phenot
 ### Note: If assessing sexes separately, use the following lines of code instead of the above 3 lines, then proceed.
 #rl<-lapply(list("./Output Files/Phenotype Residuals_Females.png", "./Output Files/Phenotype Variation_Females.png"), png::readPNG)
 ### OR
-rl<-lapply(list("./Output Files/Phenotype Residuals_Males.png", "./Output Files/Phenotype Variation_Males.png"), png::readPNG)
+#rl<-lapply(list("./Output Files/Phenotype Residuals_Males.png", "./Output Files/Phenotype Variation_Males.png"), png::readPNG)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
@@ -197,7 +197,7 @@ png(file="PPC scores boxplots.png",width=7,height=2.75,units="in",res=500)
 ### Note: If assessing sexes separately, use the following lines of code instead of the above 3 lines, then proceed.
 #png(file="PPC scores boxplots_Females.png",width=7,height=2.75,units="in",res=500)
 ### OR
-png(file="PPC scores boxplots_Males.png",width=7,height=2.75,units="in",res=500)
+#png(file="PPC scores boxplots_Males.png",width=7,height=2.75,units="in",res=500)
 
 ###/\/\/\/\/\/\/\/\/\/\/\###
 ###########################
